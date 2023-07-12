@@ -103,69 +103,55 @@
                     <h2 class="h2 section-title">Calcular Apuesta</h2>
                     <p class="section-text">TEXTO DE EJEMPLO ACA IRIA LO QUE SE RE CANTE EL CULO</p>
 
-                    <form action="">
+                    <div class="input">
+
+                        <select name="csvSelect" id="csvSelect" class="main-select select-liga" onchange="leerArchivoCSV()">
+                            <option disabled selected>Selecciona una Liga ... </option>
+                            <option value="liga-profesional.csv" >Liga Profesional de Fútbol</option>
+                            <option value="primera-nacional.csv">Primera Nacional</option>
+                            <option value="primera-b-metropolitana.csv">Primera B Metropolitana</option>
+                            <option value="#">Liga Profesional de Fútbol (Reserva)</option>
+                            <option value="#">Primera Nacional (Reserva)</option>
+                            <option value="#">Primera B Metropolitana (Reserva)</option>
+                        </select>
+
+                    </div>
+
+                    <div class="input-doble select-local">
 
                         <div class="input">
 
-                            <select name="csvSelect" id="csvSelect" class="main-select select-liga">
-                                <option value="#" disabled >Selecciona una Liga ... </option>
-                                <option value="#" >Liga Profesional de Fútbol</option>
-                                <option value="#">Primera Nacional</option>
-                                <option value="#">Primera B Metropolitana</option>
-                                <option value="#">Liga Profesional de Fútbol (Reserva)</option>
-                                <option value="#">Primera Nacional (Reserva)</option>
-                                <option value="#">Primera B Metropolitana (Reserva)</option>
+                            <select name="equipoLocal" id="equipoLocal" class="second-select">
+                                <option selected disabled>Selecciona al Equipo Local ...</option>
                             </select>
-
+                            
                         </div>
 
-                        <div class="input-doble select-local">
-
-                            <div class="input">
-
-                                <select name="equipoLocal" id="equipoLocal" class="second-select">
-                                    <option value="#" selected disabled>Selecciona al Equipo Local ...</option>
-                                    <option value="SanLorenzo">San Lorenzo</option>
-                                    <option value="RiverPlate">River Plate</option>
-                                    <option value="BocaJuniors">Boca Juniors</option>
-                                    <option value="CentralCordobaSDE">Central Córdoba (SdE)</option>
-                                    <option value="Independiente">Independiente</option>
-                                </select>
-                                
-                            </div>
-
-                            <div class="input cuota">
-                                <input type="number" name="numero" id="numero" min="1" placeholder="CUOTA" class="cuota-local" required>
-                            </div>
-
+                        <div class="input cuota">
+                            <input type="number" name="numero" id="numero" min="1" placeholder="CUOTA" class="cuota-local" required>
                         </div>
 
-                        <div class="input-doble select-visitante">
+                    </div>
 
-                            <div class="input">
+                    <div class="input-doble select-visitante">
 
-                                <select name="equipoVisitante" id="equipoVisitante" class="second-select" >
-                                    <option value="#" selected disabled>Selecciona al Equipo Visitante ...</option>
-                                    <option value="SanLorenzo">San Lorenzo</option>
-                                    <option value="RiverPlate">River Plate</option>
-                                    <option value="BocaJuniors">Boca Juniors</option>
-                                    <option value="CentralCordobaSDE">Central Córdoba (SdE)</option>
-                                    <option value="Independiente">Independiente</option>
-                                </select>
-                                
-                            </div>
+                        <div class="input">
 
-                            <div class="input cuota">
-                                <input type="number" name="numero" id="numero" min="1" placeholder="CUOTA" class="cuota-visitante" required>
-                            </div>
-
+                            <select name="equipoVisitante" id="equipoVisitante" class="third-select">
+                                <option value="#" selected disabled>Selecciona al Equipo Visitante ...</option>
+                            </select>
+                            
                         </div>
 
-                        <div class="input button">
-                            <input type="submit" value="Calcular Apuesta">
+                        <div class="input cuota">
+                            <input type="number" name="numero" id="numero" min="1" placeholder="CUOTA" class="cuota-visitante" required>
                         </div>
 
-                    </form>
+                    </div>
+
+                    <div class="input button">
+                        <input type="submit" value="Calcular Apuesta">
+                    </div>
 
                     <table class="winDrawNoBet" id="winDrawNoBet">
 
@@ -481,6 +467,7 @@
 
     <!-- JAVASCRIPT -->
     <script src="assets/js/main.js"></script>
+    <!-- <script src="assets/js/calculator.js"></script> -->
     
 </body>
 </html>
