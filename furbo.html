@@ -107,10 +107,11 @@
 
                         <select name="csvSelect" id="csvSelect" class="main-select select-liga" onchange="leerArchivoCSV()">
                             <option disabled selected>Selecciona una Liga ... </option>
-                            <option value="liga-profesional.csv" >Liga Profesional de Fútbol</option>
-                            <option value="primera-nacional.csv">Primera Nacional</option>
-                            <option value="primera-b-metropolitana.csv">Primera B Metropolitana</option>
-                            <option value="#">Liga Profesional de Fútbol (Reserva)</option>
+                            <option value="csv/liga-profesional.csv" >Liga Profesional de Fútbol</option>
+                            <option value="csv/primera-nacional-A.csv">Primera Nacional (Zona A)</option>
+                            <option value="csv/primera-nacional-B.csv">Primera Nacional (Zona B)</option>
+                            <option value="csv/primera-metropolitana.csv">Primera B Metropolitana</option>
+                            <option value="csv/torneo-proyeccion.csv">Liga Profesional de Fútbol (Reserva)</option>
                             <option value="#">Primera Nacional (Reserva)</option>
                             <option value="#">Primera B Metropolitana (Reserva)</option>
                         </select>
@@ -150,12 +151,12 @@
                     </div>
 
                     <div class="input button">
-                        <input type="submit" value="Calcular Apuesta">
+                        <input type="submit" value="Calcular Apuesta" onclick="mostrarDatosTabla()">
                     </div>
 
                     <table class="winDrawNoBet" id="winDrawNoBet">
 
-                        <caption>Apuesta WIN DRAW NO BET o Handicap 0.0</caption>
+                        <caption>WIN DRAW NO BET o Handicap 0.0</caption>
 
                         <thead>
 
@@ -177,7 +178,7 @@
                                 <td id="nombreLocal">EQUIPO LOCAL</td>
                                 <td id="nombreVisitante">EQUIPO VISITANTE</td>
                                 <td id="aQuienDNB">NOMBRE EQUIPO</td>
-                                <td id="StakeDNB">10</td>
+                                <td id="stakeDNB">10</td>
 
                             </tr>
 
@@ -189,7 +190,7 @@
 
                         <table class="overGoals" id="overGoals">
 
-                            <caption>Apuesta Over/Under Goles</caption>
+                            <caption>Over/Under 2 Goles</caption>
     
                             <thead>
     
@@ -225,7 +226,7 @@
 
                     <table class="bothTeamsToScore" id="bothTeamsToScore">
 
-                        <caption>Apuesta BTTS Yes/No</caption>
+                        <caption>BTTS Yes/No</caption>
 
                         <thead>
 
@@ -259,7 +260,7 @@
 
                         <table class="correctScore" id="correctScore">
 
-                            <caption>Apuesta Correct Score</caption>
+                            <caption>Correct Score</caption>
     
                             <thead>
     
