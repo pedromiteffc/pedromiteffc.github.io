@@ -59,3 +59,18 @@ function procesarCSV(csv)
     }
 
 }
+
+function mostrarDatosTabla()
+{
+    const equipoLocalSelect = document.getElementById('equipoLocal')
+    const equipoVisitanteSelect = document.getElementById('equipoVisitante')
+    const nombreLocal = document.getElementById('nombreLocal')
+    const nombreVisitante = document.getElementById('nombreVisitante')
+
+    const equipoLocalValue = equipoLocalSelect.value
+    const equipoVisitanteValue = equipoVisitanteSelect.value
+
+    nombreLocal.textContent = equipoLocalValue
+    nombreVisitante.textContent = equipoVisitanteValue
+
+}
