@@ -1,0 +1,250 @@
+06/1820:00,Barcelona,1,2,Universidad Catolica,3,15
+06/1817:30,Deportivo Cuenca,3,2,Emelec,5,15
+06/1720:00,Mushuc Runa,2,2,LDU Quito,4,15
+06/1717:30,Gualaceo,2,1,Guayaquil City,3,15
+06/1715:00,Cumbaya,2,1,Libertad,3,15
+06/1621:00,Independiente del Valle,3,4,El Nacional,7,15
+06/1221:00,Emelec,0,0,Gualaceo,0,14
+06/1120:00,Orense,0,2,Independiente del Valle,2,14
+06/1117:30,Guayaquil City,1,2,Barcelona,3,14
+06/1115:00,Delfin,2,0,Aucas,2,14
+06/1020:00,El Nacional,3,1,Deportivo Cuenca,4,14
+06/1017:30,LDU Quito,0,0,Cumbaya,0,14
+06/1015:00,Libertad,1,0,Tecnico Universitario,1,14
+06/0921:00,Universidad Catolica,3,2,Mushuc Runa,5,14
+06/0521:00,Deportivo Cuenca,4,0,Delfin,4,13
+06/0420:00,Gualaceo,3,4,El Nacional,7,13
+06/0417:30,Tecnico Universitario,3,0,Guayaquil City,3,13
+06/0415:00,Cumbaya,0,1,Universidad Catolica,1,13
+06/0320:00,Barcelona,1,3,Emelec,4,13
+06/0317:00,Mushuc Runa,3,1,Orense,4,13
+06/0221:30,LDU Quito,4,2,Libertad,6,13
+06/0219:00,Independiente del Valle,2,0,Aucas,2,13
+05/2921:00,Emelec,0,0,Guayaquil City,0,12
+05/2820:00,El Nacional,4,1,Barcelona,5,12
+05/2817:30,Independiente del Valle,2,3,LDU Quito,5,12
+05/2815:00,Aucas,0,2,Deportivo Cuenca,2,12
+05/2720:00,Delfin,1,0,Gualaceo,1,12
+05/2717:30,Orense,1,0,Cumbaya,1,12
+05/2715:00,Tecnico Universitario,1,0,Mushuc Runa,1,12
+05/2621:00,Libertad,2,2,Universidad Catolica,4,12
+05/2120:00,Guayaquil City,3,1,El Nacional,4,11
+05/2117:30,Cumbaya,0,1,Delfin,1,11
+05/2115:00,Gualaceo,1,1,Libertad,2,11
+05/2020:00,Universidad Catolica,3,2,Emelec,5,11
+05/2017:30,Deportivo Cuenca,1,2,Independiente del Valle,3,11
+05/2015:00,Mushuc Runa,0,0,Aucas,0,11
+05/1922:00,Barcelona,2,0,Orense,2,11
+05/1919:30,LDU Quito,2,1,Tecnico Universitario,3,11
+05/1521:00,Tecnico Universitario,0,0,Cumbaya,0,10
+05/1420:00,Emelec,1,1,LDU Quito,2,10
+05/1417:30,Independiente del Valle,4,0,Guayaquil City,4,10
+05/1415:00,Delfin,0,0,Universidad Catolica,0,10
+05/1320:00,Libertad,2,2,Barcelona,4,10
+05/1317:30,Aucas,1,0,Gualaceo,1,10
+05/1315:00,El Nacional,3,1,Orense,4,10
+05/1221:00,Deportivo Cuenca,3,0,Mushuc Runa,3,10
+05/0821:00,LDU Quito,1,1,Delfin,2,9
+05/0720:00,Barcelona,5,1,Aucas,6,9
+05/0717:30,Cumbaya,0,0,Emelec,0,9
+05/0715:00,Mushuc Runa,0,1,El Nacional,1,9
+05/0620:00,Gualaceo,1,2,Independiente del Valle,3,9
+05/0617:30,Guayaquil City,1,1,Libertad,2,9
+05/0615:00,Universidad Catolica,1,0,Deportivo Cuenca,1,9
+05/0521:00,Orense,2,1,Tecnico Universitario,3,9
+04/3020:00,Delfin,2,0,El Nacional,2,8
+04/3017:30,Libertad,0,0,Orense,0,8
+04/3015:00,Cumbaya,1,1,Mushuc Runa,2,8
+04/2920:00,Tecnico Universitario,2,2,Barcelona,4,8
+04/2917:30,Universidad Catolica,0,4,LDU Quito,4,8
+04/2915:00,Deportivo Cuenca,1,2,Gualaceo,3,8
+04/2822:00,Emelec,2,3,Independiente del Valle,5,8
+04/2819:30,Aucas,1,0,Guayaquil City,1,8
+04/2421:00,Aucas,2,1,Cumbaya,3,7
+04/2320:00,Mushuc Runa,0,0,Emelec,0,7
+04/2317:30,Barcelona,2,1,Deportivo Cuenca,3,7
+04/2315:00,El Nacional,4,2,Libertad,6,7
+04/2220:00,Orense,2,1,LDU Quito,3,7
+04/2217:30,Independiente del Valle,1,0,Tecnico Universitario,1,7
+04/2215:00,Gualaceo,1,0,Universidad Catolica,1,7
+04/2121:00,Guayaquil City,2,1,Delfin,3,7
+04/1721:00,Universidad Catolica,1,1,Orense,2,6
+04/1714:00,Emelec,1,2,El Nacional,3,6
+04/1617:30,Delfin,3,0,Mushuc Runa,3,6
+04/1615:00,Cumbaya,1,0,Gualaceo,1,6
+04/1520:00,LDU Quito,0,1,Barcelona,1,6
+04/1517:00,Deportivo Cuenca,4,1,Guayaquil City,5,6
+04/1514:30,Tecnico Universitario,0,1,Aucas,1,6
+04/1421:00,Libertad,0,0,Independiente del Valle,0,6
+04/1021:00,Barcelona,4,1,Cumbaya,5,5
+04/0920:00,Aucas,2,1,Emelec,3,5
+04/0917:30,Guayaquil City,1,2,LDU Quito,3,5
+04/0915:00,Mushuc Runa,2,1,Libertad,3,5
+04/0820:00,Independiente del Valle,3,0,Delfin,3,5
+04/0817:30,El Nacional,1,2,Universidad Catolica,3,5
+04/0815:00,Gualaceo,1,1,Tecnico Universitario,2,5
+04/0721:00,Orense,2,0,Deportivo Cuenca,2,5
+04/0221:00,Orense,3,2,Guayaquil City,5,4
+04/0218:30,Cumbaya,2,0,El Nacional,2,4
+04/0216:00,Tecnico Universitario,3,0,Deportivo Cuenca,3,4
+04/0121:00,Delfin,3,2,Emelec,5,4
+04/0118:30,Barcelona,1,0,Mushuc Runa,1,4
+04/0116:00,Libertad,2,2,Aucas,4,4
+03/3122:00,LDU Quito,6,1,Gualaceo,7,4
+03/3119:30,Universidad Catolica,2,3,Independiente del Valle,5,4
+03/2021:00,Deportivo Cuenca,1,0,Cumbaya,1,3
+03/1921:00,Emelec,1,0,Tecnico Universitario,1,3
+03/1918:30,El Nacional,0,2,LDU Quito,2,3
+03/1916:00,Aucas,4,1,Universidad Catolica,5,3
+03/1821:00,Independiente del Valle,1,0,Barcelona,1,3
+03/1818:30,Guayaquil City,4,1,Mushuc Runa,5,3
+03/1816:00,Delfin,3,2,Libertad,5,3
+03/1721:00,Gualaceo,2,1,Orense,3,3
+03/0621:00,Cumbaya,1,0,Independiente del Valle,1,2
+03/0521:00,Orense,2,1,Emelec,3,2
+03/0518:30,Universidad Catolica,3,0,Guayaquil City,3,2
+03/0516:00,Mushuc Runa,2,1,Gualaceo,3,2
+03/0421:00,Barcelona,5,0,Delfin,5,2
+03/0418:30,LDU Quito,1,1,Aucas,2,2
+03/0416:00,El Nacional,3,2,Tecnico Universitario,5,2
+03/0321:00,Libertad,3,1,Deportivo Cuenca,4,2
+02/2721:00,Delfin,1,1,Orense,2,1
+02/2621:00,Emelec,2,0,Libertad,2,1
+02/2618:30,Aucas,0,2,El Nacional,2,1
+02/2616:00,Tecnico Universitario,4,1,Universidad Catolica,5,1
+02/2521:00,Gualaceo,2,1,Barcelona,3,1
+02/2518:30,Guayaquil City,1,1,Cumbaya,2,1
+02/2516:00,Independiente del Valle,3,1,Mushuc Runa,4,1
+02/2421:00,Deportivo Cuenca,2,0,LDU Quito,2,1
+11/1320:00,Aucas,0,0,Barcelona,0,1
+11/0618:00,Barcelona,0,1,Aucas,1,1
+10/2320:00,Guayaquil City,1,1,Orense,2,15
+10/2320:00,Delfin,2,1,Universidad Catolica,3,15
+10/2320:00,Aucas,3,0,Gualaceo,3,15
+10/2317:30,Independiente del Valle,1,0,9 de Octubre,1,15
+10/2220:00,Cumbaya,1,1,Barcelona,2,15
+10/2217:30,Emelec,3,1,Tecnico Universitario,4,15
+10/2215:00,Macara,0,5,LDU Quito,5,15
+10/2121:00,Deportivo Cuenca,3,1,Mushuc Runa,4,15
+10/1721:00,Tecnico Universitario,3,1,Macara,4,14
+10/1721:00,9 de Octubre,0,1,Cumbaya,1,14
+10/1620:00,UniversidadCatólica,2,0,Emelec,2,14
+10/1620:00,Mushuc Runa,0,1,Independiente del Valle,1,14
+10/1620:00,Barcelona,0,2,Aucas,2,14
+10/1520:00,Orense,1,0,Deportivo Cuenca,1,14
+10/1520:00,LDU Quito,2,0,Guayaquil City,2,14
+10/1520:00,Gualaceo,2,1,Delfin,3,14
+10/1021:00,Independiente del Valle,0,1,Tecnico Universitario,1,13
+10/0920:00,Emelec,0,0,Orense,0,13
+10/0917:30,Aucas,0,0,Mushuc Runa,0,13
+10/0915:00,Guayaquil City,1,0,Gualaceo,1,13
+10/0820:00,Deportivo Cuenca,2,1,Barcelona,3,13
+10/0817:30,Macara,3,1,9 de Octubre,4,13
+10/0815:00,Cumbaya,0,0,Universidad Catolica,0,13
+10/0721:00,Delfin,3,0,LDU Quito,3,13
+10/0321:00,Tecnico Universitario,1,0,Deportivo Cuenca,1,12
+10/0220:00,Barcelona,1,1,Guayaquil City,2,12
+10/0217:30,Cumbaya,0,0,Aucas,0,12
+10/0215:00,Orense,1,1,Delfin,2,12
+10/0122:00,Mushuc Runa,0,0,Emelec,0,12
+10/0119:45,9 de Octubre,2,2,LDU Quito,4,12
+09/3021:00,Gualaceo,0,1,Universidad Catolica,1,12
+09/2520:00,Emelec,3,1,Deportivo Cuenca,4,7
+09/2517:30,Delfin,0,0,Mushuc Runa,0,7
+09/2421:00,Independiente del Valle,1,0,Macara,1,12
+09/2418:30,Universidad Catolica,3,0,9 de Octubre,3,7
+09/1921:00,Guayaquil City,4,1,Mushuc Runa,5,11
+09/1914:00,Emelec,1,3,Barcelona,4,11
+09/1817:30,Aucas,5,2,Tecnico Universitario,7,11
+09/1815:00,Universidad Catolica,2,0,Orense,2,11
+09/1720:00,LDU Quito,2,2,Independiente del Valle,4,11
+09/1717:30,Delfin,3,1,9 de Octubre,4,11
+09/1715:00,Macara,1,1,Gualaceo,2,11
+09/1621:00,Deportivo Cuenca,1,1,Cumbaya,2,11
+09/1221:00,Tecnico Universitario,1,1,Universidad Catolica,2,10
+09/1121:00,9 de Octubre,1,0,Deportivo Cuenca,1,10
+09/1118:30,Aucas,1,1,Emelec,2,10
+09/1116:00,Independiente del Valle,2,0,Delfin,2,10
+09/1021:00,Barcelona,5,3,Macara,8,10
+09/1018:30,Cumbaya,3,0,Guayaquil City,3,10
+09/1016:00,Orense,4,1,Gualaceo,5,10
+09/0921:00,Mushuc Runa,1,2,LDU Quito,3,10
+09/0521:00,Delfin,0,0,Tecnico Universitario,0,9
+09/0421:00,Universidad Catolica,1,2,Aucas,3,9
+09/0418:30,LDU Quito,1,2,Orense,3,9
+09/0416:00,Macara,3,0,Mushuc Runa,3,9
+09/0321:00,Gualaceo,2,1,Barcelona,3,9
+09/0318:30,Guayaquil City,1,1,9 de Octubre,2,9
+09/0316:00,Deportivo Cuenca,2,1,Independiente del Valle,3,9
+09/0221:00,Emelec,1,0,Cumbaya,1,9
+08/2921:00,Tecnico Universitario,2,0,Orense,2,8
+08/2821:00,Barcelona,1,1,LDU Quito,2,8
+08/2818:30,Independiente del Valle,1,2,Universidad Catolica,3,8
+08/2816:00,Mushuc Runa,2,0,Gualaceo,2,8
+08/2722:00,9 de Octubre,0,3,Emelec,3,8
+08/2719:30,Aucas,2,1,Guayaquil City,3,8
+08/2717:00,Cumbaya,2,1,Delfin,3,8
+08/2621:00,Deportivo Cuenca,1,1,Macara,2,8
+08/2221:00,Guayaquil City,0,1,Independiente del Valle,1,7
+08/2022:00,Macara,1,1,Aucas,2,7
+08/2019:30,LDU Quito,1,0,Cumbaya,1,7
+08/2017:00,Orense,1,2,Barcelona,3,7
+08/1921:00,Gualaceo,0,3,Tecnico Universitario,3,7
+08/1521:00,Deportivo Cuenca,3,2,Delfin,5,6
+08/1420:00,LDU Quito,2,0,Emelec,2,6
+08/1417:30,Tecnico Universitario,3,1,Guayaquil City,4,6
+08/1415:00,Cumbaya,1,0,Macara,1,6
+08/1322:00,Barcelona,0,0,Universidad Catolica,0,6
+08/1319:30,9 de Octubre,1,2,Aucas,3,6
+08/1317:00,Independiente del Valle,2,0,Gualaceo,2,6
+08/1221:00,Mushuc Runa,1,1,Orense,2,6
+08/0821:00,Gualaceo,1,0,9 de Octubre,1,5
+08/0721:00,Barcelona,4,1,Mushuc Runa,5,5
+08/0718:30,Universidad Catolica,0,2,Deportivo Cuenca,2,5
+08/0716:00,Aucas,1,1,LDU Quito,2,5
+08/0622:00,Delfin,0,3,Emelec,3,5
+08/0619:30,Guayaquil City,0,0,Macara,0,5
+08/0617:00,Orense,1,2,Independiente del Valle,3,5
+08/0521:00,Tecnico Universitario,3,3,Cumbaya,6,5
+08/0121:00,9 de Octubre,0,0,Orense,0,4
+07/3121:00,Emelec,2,1,Gualaceo,3,4
+07/3118:30,Macara,1,3,Universidad Catolica,4,4
+07/3116:00,Cumbaya,1,1,Mushuc Runa,2,4
+07/3022:00,Independiente del Valle,1,1,Barcelona,2,4
+07/3019:30,LDU Quito,2,0,Tecnico Universitario,2,4
+07/3017:00,Delfin,1,3,Guayaquil City,4,4
+07/2921:00,Deportivo Cuenca,1,2,Aucas,3,4
+07/2521:00,Macara,1,2,Delfin,3,3
+07/2421:00,Barcelona,2,2,9 de Octubre,4,3
+07/2418:30,Universidad Catolica,4,0,LDU Quito,4,3
+07/2416:00,Mushuc Runa,0,0,Tecnico Universitario,0,3
+07/2322:00,Guayaquil City,0,0,Emelec,0,3
+07/2319:30,Aucas,5,0,Independiente del Valle,5,3
+07/2317:00,Orense,3,1,Cumbaya,4,3
+07/2221:00,Gualaceo,0,0,Deportivo Cuenca,0,3
+07/1821:00,Delfin,0,0,Aucas,0,2
+07/1721:00,Emelec,2,3,Independiente del Valle,5,2
+07/1718:30,Guayaquil City,2,0,Universidad Catolica,2,2
+07/1716:00,Mushuc Runa,3,1,9 de Octubre,4,2
+07/1622:00,Tecnico Universitario,0,2,Barcelona,2,2
+07/1619:30,LDU Quito,1,1,Deportivo Cuenca,2,2
+07/1617:00,Orense,1,1,Macara,2,2
+07/1521:00,Cumbaya,1,2,Gualaceo,3,2
+07/1121:00,Deportivo Cuenca,1,0,Guayaquil City,1,1
+07/1021:00,Barcelona,0,1,Delfin,1,1
+07/1018:30,Macara,1,3,Emelec,4,1
+07/1016:00,Independiente del Valle,2,0,Cumbaya,2,1
+07/0922:00,Gualaceo,0,1,LDU Quito,1,1
+07/0919:30,9 de Octubre,2,0,Tecnico Universitario,2,1
+07/0917:00,Aucas,2,0,Orense,2,1
+07/0821:00,Universidad Catolica,2,1,Mushuc Runa,3,1
+29,LDU Quito,3,2,Macara,5,15
+29,Universidad Catolica,4,2,Delfin,6,15
+29,9 de Octubre,1,1,Independiente del Valle,2,15
+29,Barcelona,4,0,Cumbaya,4,15
+28,Tecnico Universitario,1,1,Emelec,2,15
+28,Orense,0,1,Guayaquil City,1,15
+28,Mushuc Runa,1,0,Deportivo Cuenca,1,15
+27,Gualaceo,1,4,Aucas,5,15
+23,Deportivo Cuenca,1,1,Orense,2,14
+22,Independiente del Valle,0,1,Mushuc Runa,1,14
