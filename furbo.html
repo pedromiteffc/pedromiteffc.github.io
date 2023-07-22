@@ -39,23 +39,31 @@
                     </li>
 
                     <li>
-                        <a href="furbo.html" class="navbar-link">Predicciones</a>
+                        <a href="furbo.html" class="navbar-link">Fútbol Argentino</a>
                     </li>
 
                     <li>
-                        <a href="#" class="navbar-link">Posiciones</a>
+                        <a href="americas.html" class="navbar-link">America</a>
                     </li>
 
                     <li>
-                        <a href="#" class="navbar-link">Proximos Partidos</a>
+                        <a href="europeo.html" class="navbar-link">Europa</a>
+                    </li>
+
+                    <li>
+                        <a href="asiatico.html" class="navbar-link">Asia</a>
+                    </li>
+
+                    <li>
+                        <a href="oceania.html" class="navbar-link">Oceanía</a>
                     </li>
 
                 </ul>
 
-                <div class="header-actions">
+                <!-- <div class="header-actions">
                     <a href="#" class="header-action-link">Mi Cuenta</a>
                     <a href="#" class="header-action-link">Cerrar Sesión</a>
-                </div>
+                </div> -->
 
             </nav>
 
@@ -101,19 +109,18 @@
                 <div class="container">
 
                     <h2 class="h2 section-title">Calcular Apuesta</h2>
-                    <p class="section-text">TEXTO DE EJEMPLO ACA IRIA LO QUE SE RE CANTE EL CULO</p>
+                    <p class="section-text">FUTBOL ARGENTINO</p>
 
                     <div class="input">
 
                         <select name="csvSelect" id="csvSelect" class="main-select select-liga" onchange="leerArchivoCSV()">
                             <option disabled selected>Selecciona una Liga ... </option>
-                            <option value="csv/liga-profesional.csv" >Liga Profesional de Fútbol</option>
-                            <option value="csv/primera-nacional-A.csv">Primera Nacional (Zona A)</option>
-                            <option value="csv/primera-nacional-B.csv">Primera Nacional (Zona B)</option>
-                            <option value="csv/primera-metropolitana.csv">Primera B Metropolitana</option>
-                            <option value="csv/torneo-proyeccion.csv">Liga Profesional de Fútbol (Reserva)</option>
-                            <option value="#">Primera Nacional (Reserva)</option>
-                            <option value="#">Primera B Metropolitana (Reserva)</option>
+                            <option value="csv/ar/liga-profesional.csv" >Liga Profesional de Fútbol</option>
+                            <option value="csv/ar/primera-nacional-A.csv">Primera Nacional (Zona A)</option>
+                            <option value="csv/ar/primera-nacional-B.csv">Primera Nacional (Zona B)</option>
+                            <option value="csv/ar/primera-metropolitana.csv">Primera B Metropolitana</option>
+                            <option value="csv/ar/primera-c.csv">Primera C</option>
+                            <option value="csv/ar/torneo-proyeccion.csv">Torneo Proyección</option>
                         </select>
 
                     </div>
@@ -151,7 +158,7 @@
                     </div>
 
                     <div class="input button">
-                        <input type="submit" value="Calcular Apuesta" onclick="mostrarDatosTabla()">
+                        <input type="submit" value="Calcular Apuesta" onclick="calcularDatos()">
                     </div>
 
                     <div class="table-container">
@@ -162,13 +169,11 @@
     
                             <thead>
     
-                                <tr>
-                                    
+                                <tr> 
                                     <th>Equipo Local</th>
                                     <th>Equipo Visitante</th>
                                     <th>Apuesta A</th>
                                     <th>STAKE</th>
-    
                                 </tr>
     
                             </thead>
@@ -176,12 +181,10 @@
                             <tbody>
     
                                 <tr>
-    
                                     <td id="nombreLocal">EQUIPO LOCAL</td>
                                     <td id="nombreVisitante">EQUIPO VISITANTE</td>
                                     <td id="aQuienDNB">NOMBRE EQUIPO</td>
                                     <td id="stakeDNB">10</td>
-    
                                 </tr>
     
                             </tbody>
