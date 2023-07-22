@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fútbol - TIMBA</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- FAVICON -->
+    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+    <!-- ICONS -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css" rel="stylesheet">
+
+</head>
+<body>
+
+    <header class="header" data-header>
+
+        <div class="container">
+
+            <a href="index.html" class="logo">
+                <img src="assets/img/favicon.png" width="30px">
+            </a>
+    
+            <button class="menu-toggle-btn" data-nav-toggle-btn>
+                <i class="ri-menu-line"></i>
+            </button>
+
+            <nav class="navbar">
+
+                <ul class="navbar-list">
+
+                    <li>
+                        <a href="index.html" class="navbar-link">Home</a>
+                    </li>
+
+                    <li>
+                        <a href="furbo.html" class="navbar-link">Fútbol Argentino</a>
+                    </li>
+
+                    <li>
+                        <a href="americas.html" class="navbar-link">America</a>
+                    </li>
+
+                    <li>
+                        <a href="europeo.html" class="navbar-link">Europa</a>
+                    </li>
+
+                    <li>
+                        <a href="asiatico.html" class="navbar-link">Asia</a>
+                    </li>
+
+                    <li>
+                        <a href="oceania.html" class="navbar-link">Oceanía</a>
+                    </li>
+
+                </ul>
+
+                <!-- <div class="header-actions">
+                    <a href="#" class="header-action-link">Mi Cuenta</a>
+                    <a href="#" class="header-action-link">Cerrar Sesión</a>
+                </div> -->
+
+            </nav>
+
+        </div>
+
+    </header>
+
+    <main>
+
+        <article>
+
+            <section class="hero" id="hero">
+
+                <div class="container">
+
+                    <div class="hero-content">
+
+                        <h1 class="h1 hero-title">Programa de Timba</h1>
+                        <!-- <p class="hero- text">Proyecto hecho por Pedro Miteff</p> -->
+                        <p class="form-text" style="align-content: center;">
+
+                            <span>
+                                <i class="ri-error-warning-line"></i>
+                            </span>
+
+                            IMPORTANTE: LA PAGINA SE ENCUENTRA EN DESARROLLO. PUEDE HABER ERRORES Y FALTA DE FUNCIONALIDADES
+
+                        </p>
+
+                    </div>
+
+                    
+                    <figure class="hero-banner">
+                        <img src="assets/img/hero-football.svg">
+                    </figure>
+
+                </div>
+
+            </section>
+
+            <section class="blog" id="blog">
+
+                <div class="container">
+
+                    <h2 class="h2 section-title">Calcular Apuesta</h2>
+                    <p class="section-text">FUTBOL INTERNACIONAL - AMERICAS</p>
+
+                    <div class="input">
+
+                        <select name="csvSelect" id="csvSelect" class="main-select select-liga" onchange="leerArchivoCSV()">
+                            <option disabled selected>Selecciona una Liga ... </option>
+                            <option value="csv/americas/bolivia/division-profesional.csv"> Bolivia - División Profesional</option>
+                            <option value="csv/americas/brasil/serie-b.csv">Brasil - Serie B</option>
+                            <option value="csv/americas/brasil/serie-c.csv">Brasil - Serie C</option>
+                            <option value="csv/americas/chile/primera-division.csv">Chile - Primera División</option>
+                            <option value="csv/americas/chile/primera-b.csv">Chile - Primera B</option>
+                            <option value="csv/americas/colombia/primera-a.csv">Colombia - Primera A</option>
+                            <option value="csv/americas/colombia/primera-b.csv">Colombia - Primera B</option>
+                            <option value="csv/americas/ecuador/liga-pro.csv">Ecuador - Liga PRO</option>
+                            <option value="csv/americas/ecuador/serie-b.csv">Ecuador - Serie B</option>
+                            <option value="csv/americas/eeuu/mls-este.csv">Estados Unidos - MLS (Este)</option>
+                            <option value="csv/americas/eeuu/mls-oeste.csv">Estados Unidos - MLS (Oeste)</option>
+                            <option value="csv/americas/eeuu/mls-next-este.csv">Estados Unidos - MLS Next (Este)</option>
+                            <option value="csv/americas/eeuu/mls-next-oeste.csv">Estados Unidos - MLS Next (Oeste)</option>
+                        </select>
+
+                    </div>
+
+                    <div class="input-doble select-local">
+
+                        <div class="input">
+
+                            <select name="equipoLocal" id="equipoLocal" class="second-select">
+                                <option selected disabled>Selecciona al Equipo Local ...</option>
+                            </select>
+                            
+                        </div>
+
+                        <div class="input cuota">
+                            <input type="number" name="numero" id="numero" min="1" placeholder="CUOTA" class="cuota-local" required>
+                        </div>
+
+                    </div>
+
+                    <div class="input-doble select-visitante">
+
+                        <div class="input">
+
+                            <select name="equipoVisitante" id="equipoVisitante" class="third-select">
+                                <option value="#" selected disabled>Selecciona al Equipo Visitante ...</option>
+                            </select>
+                            
+                        </div>
+
+                        <div class="input cuota">
+                            <input type="number" name="numero" id="numero" min="1" placeholder="CUOTA" class="cuota-visitante" required>
+                        </div>
+
+                    </div>
+
+                    <div class="input button">
+                        <input type="submit" value="Calcular Apuesta" onclick="calcularDatos()">
+                    </div>
+
+                    <div class="table-container">
+
+                        <table class="winDrawNoBet" id="winDrawNoBet">
+
+                            <caption>WIN DRAW NO BET o Handicap 0.0</caption>
+    
+                            <thead>
+    
+                                <tr> 
+                                    <th>Equipo Local</th>
+                                    <th>Equipo Visitante</th>
+                                    <th>Apuesta A</th>
+                                    <th>STAKE</th>
+                                </tr>
+    
+                            </thead>
+    
+                            <tbody>
+    
+                                <tr>
+                                    <td id="nombreLocal">EQUIPO LOCAL</td>
+                                    <td id="nombreVisitante">EQUIPO VISITANTE</td>
+                                    <td id="aQuienDNB">NOMBRE EQUIPO</td>
+                                    <td id="stakeDNB">10</td>
+                                </tr>
+    
+                            </tbody>
+    
+                        </table>
+
+                    </div>
+
+                    <div class="table-container">
+
+                        <table class="overGoals" id="overGoals">
+
+                            <caption>Over/Under 2 Goles</caption>
+    
+                            <thead>
+    
+                                <tr>
+    
+                                    <th>Over 2</th>
+                                    <th>Exacto 2</th>
+                                    <th>Under 2</th>
+                                    <th>Apuesta</th>
+                                    <th>STAKE</th>
+    
+                                </tr>
+    
+                            </thead>
+    
+                            <tbody>
+    
+                                <tr>
+    
+                                    <td>xN</td>
+                                    <td>xN</td>
+                                    <td>xN</td>
+                                    <td>O/U</td>
+                                    <td>10</td>
+    
+                                </tr>
+    
+                            </tbody>
+    
+                        </table>
+
+                    </div>
+
+                    <table class="bothTeamsToScore" id="bothTeamsToScore">
+
+                        <caption>BTTS Yes/No</caption>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>BTTS YES</th>
+                                <th>BTTS NO</th>
+                                <th>Apuesta</th>
+                                <th>STAKE</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+
+                                <td>xN</td>
+                                <td>xN</td>
+                                <td>O/U</td>
+                                <td>10</td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                    <div class="table-container">
+
+                        <table class="correctScore" id="correctScore">
+
+                            <caption>Correct Score</caption>
+    
+                            <thead>
+    
+                                <tr>
+    
+                                    <th>LOCAL</th>
+                                    <th>CUOTA LOCAL</th>
+                                    <th>EMPATE</th>
+                                    <th>CUOTA EMPATE</th>
+                                    <th>VISITANTE</th>
+                                    <th>CUOTA VISITANTE</th>
+    
+                                </tr>
+    
+                            </thead>
+    
+                            <tbody>
+    
+                                <tr>
+    
+                                    <td>1-0</td>
+                                    <td>xN</td>
+                                    <td>0-0</td>
+                                    <td>xN</td>
+                                    <td>0-1</td>
+                                    <td>xN</td>
+    
+                                </tr>
+    
+                                <tr>
+    
+                                    <td>2-0</td>
+                                    <td>xN</td>
+                                    <td>1-1</td>
+                                    <td>xN</td>
+                                    <td>0-2</td>
+                                    <td>xN</td>
+    
+                                </tr>
+    
+                            </tbody>
+    
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </article>
+        
+    </main>
+
+    <footer>
+
+        <div class="footer-top">
+
+            <div class="container">
+
+                <div class="footer-brand">
+
+                    <a href="#" class="logo">
+                        <img src="assets/img/favicon.png">
+                    </a>
+
+                    <p class="footer-text">Seguinos en nuestras redes! (no manda a nada)</p>
+
+                    <ul class="social-list">
+
+                        <li>
+
+                            <a href="https://www.instagram.com/" class="social-link" target="_blank">
+                                <i class="ri-instagram-line"></i>
+                            </a>
+
+                        </li>
+
+                        <li>
+
+                            <a href="https://twitter.com" class="social-link" target="_blank">
+                                <i class="ri-twitter-line"></i>
+                            </a>
+
+                        </li>
+
+                        <li>
+
+                            <a href="https://www.facebook.com/" class="social-link" target="_blank">
+                                <i class="ri-facebook-fill"></i>
+                            </a>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <div class="footer-link-box">
+
+                    <ul class="footer-list">
+
+                        <li>
+                            <p class="footer-item-title">About Us</p>
+                        </li>
+
+                        <li>
+                            <a href="#" class="footer-link">alguna porquería?</a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="footer-link">alguna porquería?</a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="footer-link">alguna porquería?</a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="footer-link">alguna porquería?</a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="footer-link">alguna porquería?</a>
+                        </li>
+
+                    </ul>
+
+                    <ul class="footer-list">
+
+                        <li>
+                            <p class="footer-item-title">alguna idea? jaja</p>
+                        </li>
+
+                        <li>
+                            <a href="#" class="footer-link">alguna pelotudez?</a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="footer-link">alguna pelotudez?</a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="footer-link">alguna pelotudez?</a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="footer-link">alguna pelotudez?</a>
+                        </li>
+
+                    </ul>
+
+                    <ul class="footer-list">
+
+                        <li>
+                            <p class="footer-item-title">Links Rápidos</p>
+                        </li>
+
+                        <li>
+                            <a href="index.html" class="footer-link">Home</a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="footer-link">Fútbol</a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="footer-link">Basquet</a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="footer-link">Mi Cuenta</a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="footer-link">Cerrar Sesión</a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="footer-botton">
+
+            <div class="container">
+
+                <center>
+
+                    <p class="copyright">
+                        Desarrollado por
+                        <a href="https://www.youtube.com/shorts/cjX_icaHfl4" target="_blank"> Jorge Rafael Videla </a>.
+                    </p>
+
+                </center>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script src="assets/js/main.js"></script>
+    <!-- <script src="assets/js/calculator.js"></script> -->
+    
+</body>
+</html>
