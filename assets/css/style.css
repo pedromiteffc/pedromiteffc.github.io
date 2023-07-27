@@ -200,7 +200,7 @@ body
 
 .header.active 
 { 
-    height: 330px; 
+    height: 400px; 
 }
 
 .header .container 
@@ -1141,7 +1141,7 @@ footer .logo
     background-color: #248232;
 }
 
-@media screen and (max-width: 390px)
+@media screen and (max-width: 560px)
 {
     .input-doble .cuota
     {
@@ -1168,6 +1168,11 @@ table th, table td
     padding: 10px;
     border: 1px solid #ddd;
     text-align: center;
+}
+
+th
+{
+    white-space: nowrap;
 }
 
 .table-container
