@@ -1,0 +1,437 @@
+06/1722:00,Aguilas,1,1,Alianza Petrolera,2
+06/1722:00,Atletico Nacional,3,2,Deportivo Pasto,5
+06/1719:15,Millonarios,2,1,Independiente de Medellin,3
+06/1719:15,America de Cali,3,2,Boyaca Chico,5
+06/1221:30,Alianza Petrolera,0,0,Atletico Nacional,0
+06/1219:00,Independiente de Medellin,0,1,America de Cali,1
+06/1120:30,Boyaca Chico,2,1,Millonarios,3
+06/1021:30,Deportivo Pasto,3,0,Aguilas,3
+06/0422:15,Alianza Petrolera,1,0,Deportivo Pasto,1
+06/0420:05,Aguilas,0,1,Atletico Nacional,1
+06/0322:30,Millonarios,2,1,America de Cali,3
+06/0320:20,Independiente de Medellin,0,0,Boyaca Chico,0
+06/0122:30,Atletico Nacional,1,0,Aguilas,1
+06/0120:15,Deportivo Pasto,0,0,Alianza Petrolera,0
+05/3122:30,America de Cali,0,1,Millonarios,1
+05/3120:15,Boyaca Chico,1,0,Independiente de Medellin,1
+05/2822:15,America de Cali,2,0,Independiente de Medellin,2
+05/2820:05,Atletico Nacional,1,1,Alianza Petrolera,2
+05/2812:00,Aguilas,0,0,Deportivo Pasto,0
+05/2722:15,Millonarios,1,0,Boyaca Chico,1
+05/2220:00,Alianza Petrolera,5,3,Aguilas,8
+05/2120:00,Boyaca Chico,1,1,America de Cali,2
+05/2022:00,Independiente de Medellin,2,2,Millonarios,4
+05/2019:00,Deportivo Pasto,1,1,Atletico Nacional,2
+05/1721:00,Bucaramanga,2,1,America de Cali,3
+05/1721:00,Deportivo Cali,0,0,Boyaca Chico,0
+05/1721:00,Deportivo Pasto,2,1,Envigado,3
+05/1721:00,Independiente de Medellin,4,0,Union Magdalena,4
+05/1721:00,Atletico Huila,0,2,Junior,2
+05/1721:00,Deportivo Pereira,2,1,Alianza Petrolera,3
+05/1721:00,Once Caldas,3,1,Santa Fe,4
+05/1721:00,Aguilas,3,0,Jaguares de Cordoba,3
+05/1721:00,Deportes Tolima,2,2,Atletico Nacional,4
+05/1721:00,Millonarios,0,0,La Equidad,0
+05/1422:30,Santa Fe,5,0,Atletico Huila,5
+05/1420:20,Alianza Petrolera,2,1,Atletico Nacional,3
+05/1418:10,America de Cali,0,0,Once Caldas,0
+05/1416:00,Independiente de Medellin,1,0,Deportivo Pasto,1
+05/1322:30,Junior,0,0,Deportivo Pereira,0
+05/1320:20,Boyaca Chico,1,1,Millonarios,2
+05/1318:10,Union Magdalena,1,1,Deportes Tolima,2
+05/1222:15,La Equidad,1,0,Bucaramanga,1
+05/1220:05,Jaguares de Cordoba,1,1,Deportivo Cali,2
+05/1218:00,Envigado,1,2,Aguilas,3
+05/1122:00,Santa Fe,0,2,Atletico Nacional,2
+05/1120:00,Independiente de Medellin,2,2,Once Caldas,4
+05/1022:10,Millonarios,3,1,Alianza Petrolera,4
+05/1020:00,Union Magdalena,0,0,Boyaca Chico,0
+05/0822:30,Atletico Huila,0,2,America de Cali,2
+05/0820:15,Deportivo Cali,2,0,Envigado,2
+05/0722:30,Deportivo Pasto,4,0,Jaguares de Cordoba,4
+05/0720:20,Millonarios,1,0,Santa Fe,1
+05/0718:10,Atletico Nacional,3,1,Boyaca Chico,4
+05/0716:00,Deportivo Pereira,3,1,Independiente de Medellin,4
+05/0622:25,Once Caldas,2,0,Junior,2
+05/0620:15,Deportes Tolima,2,1,Alianza Petrolera,3
+05/0618:05,Bucaramanga,3,0,Union Magdalena,3
+05/0520:30,Aguilas,1,1,La Equidad,2
+05/0422:15,Atletico Nacional,2,1,America de Cali,3
+05/0420:05,Millonarios,1,1,Envigado,2
+05/0119:15,Jaguares de Cordoba,1,0,Once Caldas,1
+05/0117:00,Envigado,0,1,Atletico Huila,1
+04/3022:30,Boyaca Chico,0,0,Bucaramanga,0
+04/3020:20,America de Cali,5,2,Deportivo Cali,7
+04/3018:10,Junior,1,0,Millonarios,1
+04/3016:00,La Equidad,2,0,Deportivo Pereira,2
+04/2922:30,Independiente de Medellin,1,3,Atletico Nacional,4
+04/2920:20,Alianza Petrolera,2,1,Aguilas,3
+04/2918:10,Union Magdalena,2,1,Deportivo Pasto,3
+04/2916:00,Santa Fe,2,0,Deportes Tolima,2
+04/2722:20,Millonarios,4,3,America de Cali,7
+04/2720:10,Deportivo Cali,3,2,Junior,5
+04/2718:00,Deportivo Pereira,0,0,Envigado,0
+04/2622:30,Atletico Nacional,2,0,Union Magdalena,2
+04/2620:20,Aguilas,3,1,Santa Fe,4
+04/2618:10,Deportes Tolima,1,1,Jaguares de Cordoba,2
+04/2616:00,Once Caldas,1,1,Boyaca Chico,2
+04/2522:20,Atletico Huila,2,3,Independiente de Medellin,5
+04/2520:10,Deportivo Pasto,1,1,La Equidad,2
+04/2518:00,Bucaramanga,1,1,Alianza Petrolera,2
+04/2422:10,America de Cali,2,1,Deportivo Pereira,3
+04/2322:20,Boyaca Chico,2,0,Deportes Tolima,2
+04/2320:10,Union Magdalena,1,1,Millonarios,2
+04/2318:00,Envigado,0,0,Atletico Nacional,0
+04/2222:30,Santa Fe,3,0,Bucaramanga,3
+04/2220:20,Junior,1,0,Jaguares de Cordoba,1
+04/2218:10,Alianza Petrolera,0,3,Deportivo Cali,3
+04/2216:00,La Equidad,2,1,Atletico Huila,3
+04/2121:40,Deportivo Pasto,0,0,Aguilas,0
+04/1922:00,Boyaca Chico,1,1,America de Cali,2
+04/1822:10,Jaguares de Cordoba,1,1,La Equidad,2
+04/1820:00,Once Caldas,1,2,Alianza Petrolera,3
+04/1721:40,Atletico Huila,1,1,Deportivo Pasto,2
+04/1622:30,Aguilas,2,0,Boyaca Chico,2
+04/1618:10,Deportes Tolima,0,1,Junior,1
+04/1616:00,Bucaramanga,1,2,Independiente de Medellin,3
+04/1522:10,Deportivo Pereira,2,2,Santa Fe,4
+04/1520:00,Deportivo Cali,2,1,Union Magdalena,3
+04/1422:05,Alianza Petrolera,3,0,Jaguares de Cordoba,3
+04/1322:10,Junior,1,1,Boyaca Chico,2
+04/1320:00,Deportivo Pasto,1,0,Bucaramanga,1
+04/1317:30,Envigado,2,1,Deportes Tolima,3
+04/1222:00,Independiente de Medellin,3,0,Deportivo Cali,3
+04/1217:30,Union Magdalena,0,3,Deportivo Pereira,3
+04/1122:20,America de Cali,1,3,Aguilas,4
+04/1120:10,Atletico Huila,1,1,Millonarios,2
+04/1118:00,La Equidad,4,1,Once Caldas,5
+04/1022:05,Deportes Tolima,3,1,Deportivo Pasto,4
+04/1020:00,Atletico Nacional,0,1,Junior,1
+04/0920:20,Alianza Petrolera,3,1,Santa Fe,4
+04/0916:00,Deportivo Pereira,1,1,Bucaramanga,2
+04/0822:30,Millonarios,2,1,Independiente de Medellin,3
+04/0820:20,Deportivo Cali,0,0,La Equidad,0
+04/0818:10,Jaguares de Cordoba,2,0,Envigado,2
+04/0816:00,Once Caldas,1,1,Union Magdalena,2
+04/0719:00,Aguilas,2,1,Atletico Huila,3
+04/0322:10,Junior,1,0,Alianza Petrolera,1
+04/0222:20,Atletico Huila,1,0,Deportivo Cali,1
+04/0220:10,Union Magdalena,3,1,Aguilas,4
+04/0218:00,America de Cali,0,0,Jaguares de Cordoba,0
+04/0122:30,Bucaramanga,0,2,Millonarios,2
+04/0120:20,La Equidad,0,0,Atletico Nacional,0
+04/0118:10,Independiente de Medellin,1,1,Deportes Tolima,2
+04/0116:00,Envigado,0,0,Once Caldas,0
+03/3122:10,Santa Fe,1,0,Boyaca Chico,1
+03/3120:00,Deportivo Pasto,0,0,Deportivo Pereira,0
+03/2922:00,Deportes Tolima,1,1,Millonarios,2
+03/2821:15,Boyaca Chico,3,1,La Equidad,4
+03/2722:05,Jaguares de Cordoba,0,1,Deportivo Pasto,1
+03/2621:45,Santa Fe,1,2,Millonarios,3
+03/2619:30,Deportivo Cali,1,1,America de Cali,2
+03/2617:15,Union Magdalena,2,2,Junior,4
+03/2522:30,Deportes Tolima,2,1,Atletico Huila,3
+03/2520:20,Atletico Nacional,1,1,Independiente de Medellin,2
+03/2518:10,Alianza Petrolera,2,0,Bucaramanga,2
+03/2516:00,Once Caldas,1,1,Deportivo Pereira,2
+03/2422:10,Aguilas,1,0,Envigado,1
+03/2322:10,America de Cali,2,0,Junior,2
+03/2320:00,La Equidad,2,2,Boyaca Chico,4
+03/2222:00,Millonarios,2,0,Deportivo Pasto,2
+03/2212:15,Santa Fe,3,0,Deportivo Cali,3
+03/2022:20,Atletico Huila,2,1,Once Caldas,3
+03/2020:10,Bucaramanga,1,1,Deportes Tolima,2
+03/1922:00,Independiente de Medellin,1,0,Jaguares de Cordoba,1
+03/1919:45,Millonarios,2,2,Aguilas,4
+03/1917:30,America de Cali,1,0,Alianza Petrolera,1
+03/1822:30,Junior,1,1,Santa Fe,2
+03/1820:20,Deportivo Pasto,2,1,Deportivo Cali,3
+03/1818:10,La Equidad,0,0,Union Magdalena,0
+03/1816:00,Envigado,0,1,Boyaca Chico,1
+03/1722:00,Deportivo Pereira,0,2,Atletico Nacional,2
+03/1422:10,Santa Fe,2,0,America de Cali,2
+03/1420:00,Deportes Tolima,1,0,La Equidad,1
+03/1322:10,Once Caldas,0,1,Deportivo Pasto,1
+03/1222:20,Alianza Petrolera,2,1,Union Magdalena,3
+03/1220:10,Junior,1,2,Envigado,3
+03/1218:00,Aguilas,2,1,Deportivo Pereira,3
+03/1122:20,Boyaca Chico,2,0,Independiente de Medellin,2
+03/1120:10,Atletico Nacional,0,0,Millonarios,0
+03/1118:00,Deportivo Cali,1,1,Bucaramanga,2
+03/1021:40,Jaguares de Cordoba,1,2,Atletico Huila,3
+03/0922:00,Alianza Petrolera,3,1,Deportivo Pasto,4
+03/0622:00,Atletico Huila,3,2,Boyaca Chico,5
+03/0521:50,Deportivo Pereira,1,1,Deportes Tolima,2
+03/0519:40,Deportivo Pasto,0,1,Atletico Nacional,1
+03/0517:30,Millonarios,2,0,Deportivo Cali,2
+03/0422:30,Independiente de Medellin,3,0,Aguilas,3
+03/0420:20,Union Magdalena,1,1,Jaguares de Cordoba,2
+03/0418:10,Envigado,3,2,Santa Fe,5
+03/0416:00,La Equidad,1,1,Alianza Petrolera,2
+03/0322:10,Bucaramanga,0,1,Once Caldas,1
+03/0120:00,Deportivo Cali,0,1,Deportivo Pereira,1
+02/2720:00,Boyaca Chico,1,1,Deportivo Pasto,2
+02/2719:00,Atletico Nacional,3,1,Atletico Huila,4
+02/2622:30,Alianza Petrolera,0,1,Independiente de Medellin,1
+02/2620:20,Deportes Tolima,1,2,Deportivo Cali,3
+02/2618:10,Once Caldas,1,0,Millonarios,1
+02/2616:00,Santa Fe,0,0,Union Magdalena,0
+02/2522:20,America de Cali,1,0,Envigado,1
+02/2520:10,Jaguares de Cordoba,2,0,Deportivo Pereira,2
+02/2518:00,Junior,1,0,La Equidad,1
+02/2422:00,Aguilas,1,0,Bucaramanga,1
+02/2022:05,Deportivo Cali,1,1,Aguilas,2
+02/1921:30,Bucaramanga,1,1,Atletico Nacional,2
+02/1918:10,La Equidad,0,1,Santa Fe,1
+02/1916:00,Deportivo Pereira,3,1,Once Caldas,4
+02/1822:30,Deportivo Pasto,1,0,Junior,1
+02/1820:20,Millonarios,2,1,Jaguares de Cordoba,3
+02/1818:10,Independiente de Medellin,0,1,America de Cali,1
+02/1816:00,Envigado,0,0,Alianza Petrolera,0
+02/1722:00,Atletico Huila,0,0,Deportes Tolima,0
+02/1522:00,La Equidad,2,1,Independiente de Medellin,3
+02/1422:00,Santa Fe,0,2,Deportivo Pasto,2
+02/1222:10,Atletico Nacional,1,1,Deportivo Cali,2
+02/1216:00,Boyaca Chico,3,1,Deportivo Pereira,4
+02/1122:30,America de Cali,1,1,La Equidad,2
+02/1120:20,Once Caldas,1,2,Aguilas,3
+02/1116:00,Envigado,2,1,Independiente de Medellin,3
+02/1022:10,Jaguares de Cordoba,1,1,Bucaramanga,2
+02/1020:00,Alianza Petrolera,2,0,Atletico Huila,2
+02/0920:05,Junior,0,0,Union Magdalena,0
+02/0620:00,Aguilas,4,2,Deportes Tolima,6
+02/0521:45,Union Magdalena,1,1,Envigado,2
+02/0519:30,Bucaramanga,1,0,Junior,1
+02/0517:15,Deportivo Cali,0,0,Once Caldas,0
+02/0422:00,Deportivo Pasto,2,4,America de Cali,6
+02/0419:45,Jaguares de Cordoba,2,1,Atletico Nacional,3
+02/0417:30,Independiente de Medellin,1,1,Santa Fe,2
+02/0320:00,Deportivo Pereira,2,1,Atletico Huila,3
+01/3120:10,America de Cali,4,0,Union Magdalena,4
+01/3118:00,Boyaca Chico,1,0,Jaguares de Cordoba,1
+01/3022:10,Once Caldas,1,1,Deportes Tolima,2
+01/2921:30,Junior,1,1,Independiente de Medellin,2
+01/2919:20,Deportivo Pereira,2,3,Millonarios,5
+01/2917:10,Atletico Nacional,0,0,Aguilas,0
+01/2819:20,Atletico Huila,1,2,Bucaramanga,3
+01/2817:10,Envigado,1,1,La Equidad,2
+01/2719:20,Jaguares de Cordoba,2,2,Santa Fe,4
+01/2622:20,Atletico Nacional,1,0,Once Caldas,1
+01/2620:10,Deportes Tolima,2,1,America de Cali,3
+01/2618:00,Boyaca Chico,2,0,Alianza Petrolera,2
+01/2519:20,Aguilas,1,1,Junior,2
+01/2517:10,Union Magdalena,2,1,Atletico Huila,3
+01/2422:00,Bucaramanga,0,0,Envigado,0
+12/0721:00,Deportivo Pereira,4,3,Independiente de Medellin,7
+12/0420:00,Independiente de Medellin,1,1,Deportivo Pereira,2
+11/3022:35,Santa Fe,1,1,Millonarios,2
+11/3022:35,Junior,0,2,Deportivo Pereira,2
+11/3020:30,Deportivo Pasto,0,0,Independiente de Medellin,0
+11/3020:30,America de Cali,1,1,Aguilas,2
+11/2722:05,Deportivo Pereira,5,1,Santa Fe,6
+11/2720:00,Millonarios,1,0,Junior,1
+11/2622:05,Independiente de Medellin,2,1,America de Cali,3
+11/2620:00,Aguilas,3,4,Deportivo Pasto,7
+11/2322:35,Deportivo Pereira,2,1,Millonarios,3
+11/2320:30,Junior,2,3,Santa Fe,5
+11/2320:30,Deportivo Pasto,1,0,America de Cali,1
+11/2222:35,Independiente de Medellin,2,1,Aguilas,3
+11/1418:00,Millonarios,2,0,Deportivo Pereira,2
+11/1321:00,America de Cali,2,1,Deportivo Pasto,3
+11/1318:00,Santa Fe,0,0,Junior,0
+11/1221:00,Aguilas,1,0,Independiente de Medellin,1
+11/0922:20,Junior,0,1,Millonarios,1
+11/0920:15,Santa Fe,2,0,Deportivo Pereira,2
+11/0822:20,America de Cali,0,2,Independiente de Medellin,2
+11/0820:15,Deportivo Pasto,0,1,Aguilas,1
+11/0621:00,Deportivo Pereira,4,3,Junior,7
+11/0618:00,Millonarios,1,1,Santa Fe,2
+11/0521:30,Independiente de Medellin,0,0,Deportivo Pasto,0
+11/0518:30,Aguilas,2,0,America de Cali,2
+10/3018:00,Alianza Petrolera,2,4,Millonarios,6
+10/3018:00,Santa Fe,2,1,Once Caldas,3
+10/3018:00,Bucaramanga,1,3,Deportivo Pereira,4
+10/3018:00,Atletico Nacional,1,1,La Equidad,2
+10/3018:00,Union Magdalena,0,0,America de Cali,0
+10/3018:00,Cortulua,0,0,Aguilas,0
+10/3018:00,Jaguares de Cordoba,0,2,Junior,2
+10/3018:00,Deportivo Pasto,0,0,Independiente de Medellin,0
+10/2920:05,Deportivo Cali,1,0,PatriotasFC,1
+10/2918:00,Envigado,1,1,Deportes Tolima,2
+10/2622:00,Millonarios,1,2,Independiente de Medellin,3
+10/2322:15,Once Caldas,1,1,Alianza Petrolera,2
+10/2320:10,Junior,2,1,Cortulua,3
+10/2318:05,Deportivo Pereira,1,1,Atletico Nacional,2
+10/2316:00,PatriotasFC,3,4,Bucaramanga,7
+10/2222:15,Independiente de Medellin,0,0,Jaguares de Cordoba,0
+10/2220:10,Deportes Tolima,1,0,Millonarios,1
+10/2218:05,America de Cali,4,0,Deportivo Pasto,4
+10/2216:00,Santa Fe,1,0,Deportivo Cali,1
+10/2122:10,Aguilas,1,0,Envigado,1
+10/2120:05,La Equidad,4,1,Union Magdalena,5
+10/1922:05,Independiente de Medellin,1,2,Bucaramanga,3
+10/1920:00,Millonarios,0,1,Deportivo Pereira,1
+10/1721:40,Alianza Petrolera,0,2,America de Cali,2
+10/1719:35,Deportivo Cali,1,1,Once Caldas,2
+10/1717:30,Envigado,2,0,Junior,2
+10/1622:15,Jaguares de Cordoba,2,1,Santa Fe,3
+10/1620:10,Millonarios,0,0,PatriotasFC,0
+10/1618:05,Union Magdalena,2,0,Deportivo Pereira,2
+10/1616:00,Cortulua,0,1,Deportes Tolima,1
+10/1522:10,Bucaramanga,3,1,La Equidad,4
+10/1520:05,Deportivo Pasto,1,1,Aguilas,2
+10/1322:05,Once Caldas,1,0,Atletico Nacional,1
+10/1320:00,Junior,1,1,Union Magdalena,2
+10/1317:10,Deportes Tolima,2,0,Alianza Petrolera,2
+10/1222:05,America de Cali,1,1,Jaguares de Cordoba,2
+10/1220:00,Aguilas,2,2,Deportivo Cali,4
+10/1122:10,Deportivo Pereira,0,2,Envigado,2
+10/1120:05,La Equidad,1,1,Cortulua,2
+10/1118:00,PatriotasFC,1,1,Deportivo Pasto,2
+10/1021:45,Alianza Petrolera,4,0,Santa Fe,4
+10/1018:00,Union Magdalena,0,2,Independiente de Medellin,2
+10/0921:40,Bucaramanga,0,1,Junior,1
+10/0919:35,Deportivo Cali,1,0,America de Cali,1
+10/0917:30,Atletico Nacional,1,1,Aguilas,2
+10/0822:00,Deportivo Pasto,2,1,Deportes Tolima,3
+10/0816:00,Cortulua,0,1,Once Caldas,1
+10/0721:45,Jaguares de Cordoba,1,1,La Equidad,2
+10/0718:00,Envigado,3,2,PatriotasFC,5
+10/0622:00,Atletico Nacional,3,2,Independiente de Medellin,5
+10/0619:30,Bucaramanga,0,1,Aguilas,1
+10/0521:30,Santa Fe,3,2,Millonarios,5
+10/0322:00,PatriotasFC,3,1,Union Magdalena,4
+10/0222:15,Santa Fe,1,0,Envigado,1
+10/0220:10,America de Cali,0,0,Atletico Nacional,0
+10/0218:05,Junior,1,0,Deportivo Cali,1
+10/0216:00,Deportivo Pereira,2,0,Deportivo Pasto,2
+10/0122:15,Aguilas,1,2,Deportes Tolima,3
+10/0120:10,La Equidad,1,0,Millonarios,1
+10/0118:05,Once Caldas,0,1,Jaguares de Cordoba,1
+10/0116:00,Cortulua,0,2,Bucaramanga,2
+09/3022:00,Independiente de Medellin,3,1,Alianza Petrolera,4
+09/2922:00,Santa Fe,1,1,Atletico Nacional,2
+09/2721:00,Deportivo Pasto,1,0,Cortulua,1
+09/2622:05,Atletico Nacional,1,0,PatriotasFC,1
+09/2620:00,Jaguares de Cordoba,0,0,Aguilas,0
+09/2618:00,Deportivo Cali,1,2,La Equidad,3
+09/2522:15,Deportes Tolima,1,3,Deportivo Pereira,4
+09/2520:10,Alianza Petrolera,0,1,Junior,1
+09/2518:05,Union Magdalena,0,2,Santa Fe,2
+09/2516:00,Envigado,1,2,Independiente de Medellin,3
+09/2418:30,Millonarios,2,2,America de Cali,4
+09/2416:00,Bucaramanga,0,0,Once Caldas,0
+09/2220:10,Independiente de Medellin,2,1,Deportivo Pereira,3
+09/2218:05,Aguilas,2,0,Union Magdalena,2
+09/2216:00,PatriotasFC,0,0,Alianza Petrolera,0
+09/2122:15,Junior,0,1,Millonarios,1
+09/2120:10,America de Cali,0,0,Deportes Tolima,0
+09/2118:05,La Equidad,2,3,Deportivo Pasto,5
+09/2116:00,Cortulua,2,0,Deportivo Cali,2
+09/2022:05,Once Caldas,1,0,Envigado,1
+09/2020:00,Jaguares de Cordoba,0,1,Bucaramanga,1
+09/1922:00,Deportivo Pereira,2,2,Aguilas,4
+09/1821:40,America de Cali,2,0,PatriotasFC,2
+09/1819:35,Atletico Nacional,3,0,Deportivo Cali,3
+09/1817:30,Deportivo Pasto,2,1,Junior,3
+09/1720:10,Union Magdalena,1,0,Jaguares de Cordoba,1
+09/1718:05,Deportes Tolima,1,0,Once Caldas,1
+09/1716:00,Envigado,3,2,Cortulua,5
+09/1622:05,Bucaramanga,2,1,Santa Fe,3
+09/1620:00,Alianza Petrolera,1,2,La Equidad,3
+09/1522:05,America de Cali,0,1,Deportivo Pereira,1
+09/1422:15,Deportivo Cali,2,0,Deportivo Pasto,2
+09/1222:00,Aguilas,1,0,Alianza Petrolera,1
+09/1122:15,Deportivo Cali,1,1,Bucaramanga,2
+09/1120:10,La Equidad,0,1,Envigado,1
+09/1118:05,Jaguares de Cordoba,0,1,Atletico Nacional,1
+09/1116:00,Once Caldas,2,1,Millonarios,3
+09/1022:15,Santa Fe,2,1,Deportivo Pasto,3
+09/1020:10,Independiente de Medellin,2,0,America de Cali,2
+09/1018:05,Junior,0,0,Deportivo Pereira,0
+09/1016:00,Cortulua,1,2,Union Magdalena,3
+09/0921:40,PatriotasFC,1,1,Deportes Tolima,2
+09/0618:00,Envigado,0,1,Aguilas,1
+09/0522:05,PatriotasFC,2,3,La Equidad,5
+09/0520:00,Deportivo Pasto,2,1,Jaguares de Cordoba,3
+09/0422:15,America de Cali,1,0,Deportivo Cali,1
+09/0420:10,Independiente de Medellin,4,3,Atletico Nacional,7
+09/0418:05,Union Magdalena,2,1,Junior,3
+09/0416:00,Deportivo Pereira,1,1,Once Caldas,2
+09/0322:15,Millonarios,2,0,Santa Fe,2
+09/0320:10,Deportes Tolima,0,0,Cortulua,0
+09/0318:05,Bucaramanga,3,1,Alianza Petrolera,4
+09/0121:30,Atletico Nacional,1,1,Envigado,2
+08/3122:05,Bucaramanga,0,2,America de Cali,2
+08/2922:05,Deportivo Cali,2,2,Union Magdalena,4
+08/2920:00,Jaguares de Cordoba,0,0,Envigado,0
+08/2822:15,Aguilas,3,0,Independiente de Medellin,3
+08/2820:10,Junior,2,1,Deportes Tolima,3
+08/2818:05,Cortulua,1,4,Millonarios,5
+08/2816:00,La Equidad,1,1,Deportivo Pereira,2
+08/2722:00,Atletico Nacional,3,2,Bucaramanga,5
+08/2719:45,Alianza Petrolera,0,0,Deportivo Pasto,0
+08/2717:30,Santa Fe,2,1,PatriotasFC,3
+08/2621:30,Once Caldas,1,1,America de Cali,2
+08/2522:00,Deportivo Cali,2,2,Jaguares de Cordoba,4
+08/2222:00,Deportivo Pasto,2,0,Once Caldas,2
+08/2121:40,Deportes Tolima,1,1,La Equidad,2
+08/2119:35,Union Magdalena,2,2,Atletico Nacional,4
+08/2117:30,America de Cali,2,1,Junior,3
+08/2022:15,Independiente de Medellin,2,0,Santa Fe,2
+08/2020:10,Millonarios,2,0,Jaguares de Cordoba,2
+08/2018:05,PatriotasFC,0,1,Aguilas,1
+08/2016:00,Deportivo Pereira,2,1,Cortulua,3
+08/1921:30,Alianza Petrolera,4,4,Deportivo Cali,8
+08/1918:00,Envigado,2,1,Bucaramanga,3
+08/1519:20,La Equidad,0,0,America de Cali,0
+08/1517:15,Once Caldas,1,1,PatriotasFC,2
+08/1420:05,Aguilas,0,0,Millonarios,0
+08/1418:00,Jaguares de Cordoba,1,2,Deportivo Pereira,3
+08/1321:45,Junior,4,2,Independiente de Medellin,6
+08/1319:30,Santa Fe,2,1,Deportes Tolima,3
+08/1317:15,Cortulua,0,2,Alianza Petrolera,2
+08/1221:40,Bucaramanga,1,0,Union Magdalena,1
+08/0921:30,America de Cali,2,0,Aguilas,2
+08/0722:15,Deportivo Pereira,0,1,Santa Fe,1
+08/0720:10,Junior,1,2,Once Caldas,3
+08/0716:00,Deportivo Pasto,1,0,Bucaramanga,1
+08/0622:15,Millonarios,4,2,Deportivo Cali,6
+08/0620:10,Alianza Petrolera,0,2,Atletico Nacional,2
+08/0618:05,Deportes Tolima,2,2,Jaguares de Cordoba,4
+08/0616:00,Envigado,1,2,Union Magdalena,3
+08/0521:50,PatriotasFC,3,0,Cortulua,3
+08/0519:45,Independiente de Medellin,1,1,La Equidad,2
+08/0222:05,Santa Fe,1,1,America de Cali,2
+08/0220:00,Deportivo Cali,0,3,Envigado,3
+08/0122:05,Atletico Nacional,3,1,Deportivo Pasto,4
+08/0120:00,Bucaramanga,2,1,Deportes Tolima,3
+07/3122:15,La Equidad,4,3,PatriotasFC,7
+07/3120:10,Union Magdalena,0,2,Millonarios,2
+07/3118:05,Aguilas,1,1,Junior,2
+07/3116:00,Once Caldas,2,1,Deportivo Pereira,3
+07/3018:05,Jaguares de Cordoba,2,1,Alianza Petrolera,3
+07/3016:00,Cortulua,1,0,Independiente de Medellin,1
+07/2618:40,PatriotasFC,0,0,Jaguares de Cordoba,0
+07/2518:40,Deportivo Pereira,2,1,Deportivo Cali,3
+07/2418:50,Independiente de Medellin,1,1,Once Caldas,2
+07/2416:45,Cortulua,1,1,America de Cali,2
+07/2322:15,Deportes Tolima,2,2,Atletico Nacional,4
+07/2320:10,Junior,2,0,Santa Fe,2
+07/2318:05,Deportivo Pasto,1,2,Union Magdalena,3
+07/2316:00,Aguilas,3,0,La Equidad,3
+07/2222:05,Millonarios,1,0,Envigado,1
+07/2220:00,Alianza Petrolera,3,1,Bucaramanga,4
+07/2122:00,Deportivo Cali,2,2,Independiente de Medellin,4
+07/1922:00,Deportivo Pereira,2,0,PatriotasFC,2
+07/1822:05,Once Caldas,2,0,Aguilas,2
+07/1820:00,Union Magdalena,2,1,Deportes Tolima,3
+07/1718:05,Santa Fe,1,0,Cortulua,1
+07/1716:00,Envigado,2,2,Alianza Petrolera,4
+07/1622:10,La Equidad,0,0,Junior,0
+07/1620:05,Atletico Nacional,1,2,Millonarios,3
+07/1618:00,Jaguares de Cordoba,0,1,Deportivo Pasto,1
+07/1422:10,Deportes Tolima,2,0,Deportivo Cali,2
+07/1420:05,Independiente de Medellin,1,0,PatriotasFC,1
+07/1418:00,Aguilas,2,2,Santa Fe,4
+07/1322:15,Junior,3,1,Atletico Nacional,4
