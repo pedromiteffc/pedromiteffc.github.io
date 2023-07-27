@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIMBA - FUTBOL DE ASIA</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- FAVICON -->
+    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+    <!-- ICONS -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css" rel="stylesheet">
+
+</head>
+<body>
+
+    <header class="header" data-header>
+
+        <div class="container">
+
+            <a href="index.html" class="logo">
+                <img src="assets/img/favicon.png" width="30px">
+            </a>
+    
+            <button class="menu-toggle-btn" data-nav-toggle-btn>
+                <i class="ri-menu-line"></i>
+            </button>
+
+            <nav class="navbar">
+
+                <ul class="navbar-list">
+
+                    <li>
+                        <a href="index.html" class="navbar-link">Home</a>
+                    </li>
+
+                    <li>
+                        <a href="furbo.html" class="navbar-link">Fútbol Argentino</a>
+                    </li>
+
+                    <li>
+                        <a href="americas.html" class="navbar-link">America</a>
+                    </li>
+
+                    <li>
+                        <a href="europeo.html" class="navbar-link">Europa</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="navbar-link">Asia</a>
+                    </li>
+
+                    <li>
+                        <a href="africa.html" class="navbar-link">Africa</a>
+                    </li>
+
+                    <li>
+                        <a href="oceania.html" class="navbar-link">Oceanía</a>
+                    </li>
+
+                </ul>
+
+                <div class="header-actions">
+                    <a href="#" class="header-action-link">BET 365</a>
+                    <a href="#" class="header-action-link">1XBET</a>
+                </div>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+    <main>
+
+        <article>
+
+            <section class="hero" id="hero">
+
+                <div class="container">
+
+                    <div class="hero-content">
+
+                        <h1 class="h1 hero-title">Programa de Timba</h1>
+                        <!-- <p class="hero- text">Proyecto hecho por Pedro Miteff</p> -->
+                        <p class="form-text" style="align-content: center;">
+
+                            <span>
+                                <i class="ri-error-warning-line"></i>
+                            </span>
+
+                            IMPORTANTE: LA PAGINA SE ENCUENTRA EN DESARROLLO. PUEDE HABER ERRORES Y FALTA DE FUNCIONALIDADES
+
+                        </p>
+
+                    </div>
+
+                    
+                    <figure class="hero-banner">
+                        <img src="assets/img/hero-football.svg">
+                    </figure>
+
+                </div>
+
+            </section>
+
+            <section class="blog" id="blog">
+
+                <div class="container">
+
+                    <h2 class="h2 section-title">Calcular Apuesta</h2>
+                    <p class="section-text">FUTBOL INTERNACIONAL - ASIA</p>
+
+                    <div class="input">
+
+                        <select name="csvSelect" id="csvSelect" class="main-select select-liga" onchange="leerArchivoCSV()">
+                            <option disabled selected>Selecciona una Liga ... </option>
+                            <option value="csv/asia/bangladesh/premier-league.csv">Bangladesh - Premier League</option>
+                            <option value="csv/asia/birmania/national-league.csv">Birmania - National League</option>
+                            <option value="csv/asia/china/superliga.csv">China - SuperLiga</option>
+                            <option value="csv/asia/corea/k1.csv">Corea del Sur - K1 League</option>
+                            <option value="csv/asia/corea/k2.csv">Corea del Sur - K2 League</option>
+                            <option value="csv/asia/japon/j1.csv">Japon - J1 League</option>
+                            <option value="csv/asia/japon/j2.csv">Japon - J2 League</option>
+                            <option value="csv/asia/japon/j3.csv">Japon - J3 League</option>
+                            <option value="csv/asia/japon/nadeshiko-w.csv">Japon - Nadeshiko (Femenino)</option>
+                            <option value="csv/asia/japon/nadeshiko-w-ii.csv">Japon - Nadeshiko II (Femenino)</option>
+                            <option value="csv/asia/malasia/super-league.csv">Malasia - Super League</option>
+                            <option value="csv/asia/malasia/liga-m3.csv">Malasia - Liga M3</option>
+                            <option value="csv/asia/mongolia/premier-league.csv">Mongolia - Premier League</option>
+                            <option value="csv/asia/singapur/premier-league.csv">Singapur - Premier League</option>
+                        </select>
+
+                    </div>
+
+                    <div class="input calendario">
+
+                        <select name="csvSelectCalendario" id="csvSelectCalendario" onchange="leerArchivoCalendario()">
+                            <option disabled selected>Selecciona una Liga (calendario) ... </option>
+                            <option value="calendario/asia/bangladesh/premier-league.csv">Bangladesh - Premier League</option>
+                            <option value="calendario/asia/birmania/national-league.csv">Birmania - National League</option>
+                            <option value="calendario/asia/china/superliga.csv">China - SuperLiga</option>
+                            <option value="calendario/asia/corea/k1.csv">Corea del Sur - K1 League</option>
+                            <option value="calendario/asia/corea/k2.csv">Corea del Sur - K2 League</option>
+                            <option value="calendario/asia/japon/j1.csv">Japon - J1 League</option>
+                            <option value="calendario/asia/japon/j2.csv">Japon - J2 League</option>
+                            <option value="calendario/asia/japon/j3.csv">Japon - J3 League</option>
+                            <option value="calendario/asia/japon/nadeshiko-w.csv">Japon - Nadeshiko (Femenino)</option>
+                            <option value="calendario/asia/japon/nadeshiko-w-ii.csv">Japon - Nadeshiko II (Femenino)</option>
+                            <option value="calendario/asia/malasia/super-league.csv">Malasia - Super League</option>
+                            <option value="calendario/asia/malasia/liga-m3.csv">Malasia - Liga M3</option>
+                            <option value="calendario/asia/mongolia/premier-league.csv">Mongolia - Premier League</option>
+                            <option value="calendario/asia/singapur/premier-league.csv">Singapur - Premier League</option>
+                        </select>
+
+                    </div>
+
+                    <div class="input-doble select-local">
+
+                        <div class="input">
+
+                            <select name="equipoLocal" id="equipoLocal" class="second-select">
+                                <option selected disabled>Selecciona al Equipo Local ...</option>
+                            </select>
+                            
+                        </div>
+
+                        <div class="input cuota">
+                            <input type="number" name="numero" id="numero" min="1" placeholder="CUOTA" class="cuota-local" required>
+                        </div>
+
+                    </div>
+
+                    <div class="input-doble select-visitante">
+
+                        <div class="input">
+
+                            <select name="equipoVisitante" id="equipoVisitante" class="third-select">
+                                <option value="#" selected disabled>Selecciona al Equipo Visitante ...</option>
+                            </select>
+                            
+                        </div>
+
+                        <div class="input cuota">
+                            <input type="number" name="numero" id="numero" min="1" placeholder="CUOTA" class="cuota-visitante" required>
+                        </div>
+
+                    </div>
+
+                    <div class="input button">
+                        <input type="submit" value="Calcular Apuesta" onclick="calcularDatos()">
+                    </div>
+
+                    <div class="table-container" id="quienGana">
+
+                        <table class="resultadoPartido" id="resultadoPartido">
+
+                            <caption>Resultado del Partido</caption>
+    
+                            <thead>
+    
+                                <tr> 
+                                    <th id="nombreLocal">LOCAL</th>
+                                    <th>CUOTA</th>
+                                    <th>EMPATE</th>
+                                    <th>CUOTA</th>
+                                    <th id="nombreVisitante">VISITANTE</th>
+                                    <th>CUOTA</th>
+                                </tr>
+    
+                            </thead>
+    
+                            <tbody>
+    
+                                <tr>
+                                    <td id="probabilidadLocalGana">%</td>
+                                    <td id="cuotaLocalGana">N</td>
+                                    <td id="probabilidadEmpate">%</td>
+                                    <td id="cuotaEmpate">N</td>
+                                    <td id="probabilidadVisitanteGana">%</td>
+                                    <td id="cuotaVisitanteGana">N</td>
+                                </tr>
+    
+                            </tbody>
+    
+                        </table>
+
+                    </div>
+
+                    <div class="table-container" id="chanceDoble">
+
+                        <table class="dobleChance" id="dobleChance">
+
+                            <caption>Doble Chance</caption>
+    
+                            <thead>
+    
+                                <tr> 
+                                    <th>LOCAL O EMPATE</th>
+                                    <th>CUOTA</th>
+                                    <th>LOCAL O VISITANTE</th>
+                                    <th>CUOTA</th>
+                                    <th>VISITANTE O EMPATE</th>
+                                    <th>CUOTA</th>
+                                </tr>
+    
+                            </thead>
+    
+                            <tbody>
+    
+                                <tr>
+                                    <td id="probabilidadLocaloEmpate">%</td>
+                                    <td id="cuotaLocaloEmpate">N</td>
+                                    <td id="probabilidadLocaloVisitante">%</td>
+                                    <td id="cuotaLocaloVisitante">N</td>
+                                    <td id="probabilidadVisitanteoEmpate">%</td>
+                                    <td id="cuotaVisitanteoEmpate">N</td>
+                                </tr>
+    
+                            </tbody>
+    
+                        </table>
+
+                    </div>
+
+                    <div class="table-container" id="handicapLocal">
+
+                        <table class="asianHandicapLocal" id="asianHandicapLocal">
+
+                            <caption>Asian Handicap - Equipo Local</caption>
+    
+                            <thead>
+    
+                                <tr>
+                                    <th>+ 2.0</th>
+                                    <th>+ 1.5</th>
+                                    <th>+ 1.0</th>
+                                    <th>+ 0.5</th>
+                                    <th>0.0</th>
+                                    <th>- 0.5</th>
+                                    <th>- 1.0</th>
+                                    <th>- 1.5</th>
+                                    <th>- 2.0</th>
+                                </tr>
+    
+                            </thead>
+    
+                            <tbody>
+    
+                                <tr>
+                                    <td id="handicapP2Local">%</td>
+                                    <td id="handicapP15Local">%</td>
+                                    <td id="handicapP1Local">%</td>
+                                    <td id="handicapP05Local">%</td>
+                                    <td id="handicap00Local">%</td>
+                                    <td id="handicapN05Local">%</td>
+                                    <td id="handicapN1Local">%</td>
+                                    <td id="handicapN15Local">%</td>
+                                    <td id="handicapN2Local">%</td>
+                                </tr>
+    
+                            </tbody>
+    
+                        </table>
+
+                    </div>
+
+                    <div class="table-container" id="handicapVisitante">
+
+                        <table class="asianHandicapVisitante" id="asianHandicapVisitante">
+
+                            <caption>Asian Handicap - Equipo Visitante</caption>
+    
+                            <thead>
+    
+                                <tr>
+                                    <th>+ 2.0</th>
+                                    <th>+ 1.5</th>
+                                    <th>+ 1.0</th>
+                                    <th>+ 0.5</th>
+                                    <th>0.0</th>
+                                    <th>- 0.5</th>
+                                    <th>- 1.0</th>
+                                    <th>- 1.5</th>
+                                    <th>- 2.0</th>
+                                </tr>
+    
+                            </thead>
+    
+                            <tbody>
+    
+                                <tr>
+                                    <td id="handicapP2Visitante">%</td>
+                                    <td id="handicapP15Visitante">%</td>
+                                    <td id="handicapP1Visitante">%</td>
+                                    <td id="handicapP05Visitante">%</td>
+                                    <td id="handicap00Visitante">%</td>
+                                    <td id="handicapN05Visitante">%</td>
+                                    <td id="handicapN1Visitante">%</td>
+                                    <td id="handicapN15Visitante">%</td>
+                                    <td id="handicapN2Visitante">%</td>
+                                </tr>
+    
+                            </tbody>
+    
+                        </table>
+
+                    </div>
+
+                    <div class="table-container" id="OverUndes2Goles">
+
+                        <table class="overGoals" id="overGoals">
+
+                            <caption>Over | Exacto | Menos - 2.5 GOLES</caption>
+    
+                            <thead>
+    
+                                <tr>
+                                    <th>Over</th>
+                                    <th>Cuota</th>
+                                    <th>Exacto 2</th>
+                                    <th>Cuota</th>
+                                    <th>Under</th>
+                                    <th>Cuota</th>
+                                </tr>
+    
+                            </thead>
+    
+                            <tbody>
+    
+                                <tr>
+                                    <td id="probabilidadOver2">%</td>
+                                    <td id="cuotaOver2">N</td>
+                                    <td id="probabilidadExacto2">%</td>
+                                    <td id="cuotaExacto2">N</td>
+                                    <td id="probabilidadUnder2">%</td>
+                                    <td id="cuotaUnder2">N</td>
+                                </tr>
+    
+                            </tbody>
+    
+                        </table>
+
+                    </div>
+
+                    <div class="table-container" id="OverUndes1Golesl">
+
+                        <table class="overGoals1" id="overGoals1">
+
+                            <caption>Over | Exacto | Menos - 1 GOL (EQUIPO LOCAL)</caption>
+    
+                            <thead>
+    
+                                <tr>
+                                    <th>Over</th>
+                                    <th>Cuota</th>
+                                    <th>Exacto</th>
+                                    <th>Cuota</th>
+                                    <th>Under</th>
+                                    <th>Cuota</th>
+                                </tr>
+    
+                            </thead>
+    
+                            <tbody>
+    
+                                <tr>
+                                    <td id="probabilidadOver1">%</td>
+                                    <td id="cuotaOver1">N</td>
+                                    <td id="probabilidadExacto1">%</td>
+                                    <td id="cuotaExacto1">N</td>
+                                    <td id="probabilidadUnder1">%</td>
+                                    <td id="cuotaUnder1">N</td>
+                                </tr>
+    
+                            </tbody>
+    
+                        </table>
+
+                    </div>
+
+                    <div class="table-container" id="OverUndes1Golesv">
+
+                        <table class="overGoals1v" id="overGoals1v">
+
+                            <caption>Over | Exacto | Menos - 1 GOL (EQUIPO VISITANTE)</caption>
+    
+                            <thead>
+    
+                                <tr>
+                                    <th>Over</th>
+                                    <th>Cuota</th>
+                                    <th>Exacto</th>
+                                    <th>Cuota</th>
+                                    <th>Under</th>
+                                    <th>Cuota</th>
+                                </tr>
+    
+                            </thead>
+    
+                            <tbody>
+    
+                                <tr>
+                                    <td id="probabilidadOver1Visitante">%</td>
+                                    <td id="cuotaOver1Visitante">N</td>
+                                    <td id="probabilidadExacto1Visitante">%</td>
+                                    <td id="cuotaExacto1Visitante">N</td>
+                                    <td id="probabilidadUnder1Visitante">%</td>
+                                    <td id="cuotaUnder1Visitante">N</td>
+                                </tr>
+    
+                            </tbody>
+    
+                        </table>
+
+                    </div>
+
+                    <table class="bothTeamsToScore" id="bothTeamsToScore">
+
+                        <caption>BTTS Yes/No</caption>
+
+                        <thead>
+
+                            <tr>
+                                <th>BTTS YES</th>
+                                <th>Cuota</th>
+                                <th>BTTS NO</th>
+                                <th>Cuota</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td id="probabilidadYes">%</td>
+                                <td id="cuotaYes">N</td>
+                                <td id="probabilidadNo">%</td>
+                                <td id="cuotaNo">N</td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                    <div class="table-container" id="resultadoExacto">
+
+                        <table class="correctScore" id="correctScore">
+
+                            <caption>Correct Score</caption>
+    
+                            <thead>
+    
+                                <tr>
+    
+                                    <th>LOCAL</th>
+                                    <th>PROBABILIDAD</th>
+                                    <th>EMPATE</th>
+                                    <th>PROBABILIDAD</th>
+                                    <th>VISITANTE</th>
+                                    <th>PROBABILIDAD</th>
+    
+                                </tr>
+    
+                            </thead>
+    
+                            <tbody>
+    
+                                <tr>
+                                    <td>1-0</td>
+                                    <td id="probabilidadLocal_10">%</td>
+                                    <td>0-0</td>
+                                    <td>%</td>
+                                    <td>0-1</td>
+                                    <td id="probabilidadVisitante_01">%</td>
+                                </tr>
+    
+                                <tr>
+                                    <td>2-0</td>
+                                    <td id="probabilidadLocal_20">%</td>
+                                    <td>1-1</td>
+                                    <td>%</td>
+                                    <td>0-2</td>
+                                    <td id="probabilidadVisitante_02">%</td>
+                                </tr>
+
+                                <tr>
+                                    <td>3-0</td>
+                                    <td id="probabilidadLocal_10">%</td>
+                                    <td>2-2</td>
+                                    <td>%</td>
+                                    <td>0-3</td>
+                                    <td id="probabilidadVisitante_03">%</td>
+                                </tr>
+
+                                <tr>
+                                    <td>4-0</td>
+                                    <td id="probabilidadLocal_40">%</td>
+                                    <td>3-3</td>
+                                    <td>%</td>
+                                    <td>0-4</td>
+                                    <td id="probabilidadVisitante_04">%</td>
+                                </tr>
+
+                                <tr>
+                                    <td>5-0</td>
+                                    <td id="probabilidadLocal_50">%</td>
+                                    <td>4-4</td>
+                                    <td>%</td>
+                                    <td>0-5</td>
+                                    <td id="probabilidadVisitante_05">%</td>
+                                </tr>
+
+                                <tr>
+                                    <td>2-1</td>
+                                    <td id="probabilidadLocal_21">%</td>
+                                    <td>5-5</td>
+                                    <td>%</td>
+                                    <td>1-2</td>
+                                    <td id="probabilidadVisitante_12">%</td>
+                                </tr>
+
+                                <tr>
+                                    <td>3-1</td>
+                                    <td id="probabilidadLocal_31">%</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>1-3</td>
+                                    <td id="probabilidadVisitante_13">%</td>
+                                </tr>
+
+                                <tr>
+                                    <td>4-1</td>
+                                    <td id="probabilidadLocal_41">%</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>1-4</td>
+                                    <td id="probabilidadVisitante_14">%</td>
+                                </tr>
+
+                                <tr>
+                                    <td>5-1</td>
+                                    <td id="probabilidadLocal_51">%</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>1-5</td>
+                                    <td id="probabilidadVisitante_15">%</td>
+                                </tr>
+
+                                <tr>
+                                    <td>3-2</td>
+                                    <td id="probabilidadLocal_32">%</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>2-3</td>
+                                    <td id="probabilidadVisitante_23">%</td>
+                                </tr>
+
+                                <tr>
+                                    <td>4-2</td>
+                                    <td id="probabilidadLocal_42">%</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>2-4</td>
+                                    <td id="probabilidadVisitante_24">%</td>
+                                </tr>
+
+                                <tr>
+                                    <td>5-2</td>
+                                    <td id="probabilidadLocal_52">%</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>2-5</td>
+                                    <td id="probabilidadVisitante_25">%</td>
+                                </tr>
+
+                                <tr>
+                                    <td>4-3</td>
+                                    <td id="probabilidadLocal_43">%</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>3-4</td>
+                                    <td id="probabilidadVisitante_34">%</td>
+                                </tr>
+
+                                <tr>
+                                    <td>5-3</td>
+                                    <td id="probabilidadLocal_53">%</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>3-5</td>
+                                    <td id="probabilidadVisitante_35">%</td>
+                                </tr>
+
+                                <tr>
+                                    <td">5-4</td>
+                                    <td id="probabilidadLocal_54">%</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>4-5</td>
+                                    <td id="probabilidadVisitante_45">%</td>
+                                </tr>
+    
+                            </tbody>
+    
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </article>
+        
+    </main>
+
+    <footer>
+
+        <div class="footer-top">
+
+            <div class="container">
+
+                <div class="footer-brand">
+
+                    <a href="#" class="logo">
+                        <img src="assets/img/favicon.png">
+                    </a>
+
+                    <p class="footer-text">Seguinos en nuestras redes! (no manda a nada)</p>
+
+                    <ul class="social-list">
+
+                        <li>
+
+                            <a href="https://www.instagram.com/" class="social-link" target="_blank">
+                                <i class="ri-instagram-line"></i>
+                            </a>
+
+                        </li>
+
+                        <li>
+
+                            <a href="https://twitter.com" class="social-link" target="_blank">
+                                <i class="ri-twitter-line"></i>
+                            </a>
+
+                        </li>
+
+                        <li>
+
+                            <a href="https://www.facebook.com/" class="social-link" target="_blank">
+                                <i class="ri-facebook-fill"></i>
+                            </a>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <div class="footer-link-box">
+
+                    <ul class="footer-list">
+
+                        <li>
+                            <p class="footer-item-title">About Us</p>
+                        </li>
+
+                        <li>
+                            <a href="#" class="footer-link">alguna porquería?</a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="footer-link">alguna porquería?</a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="footer-link">alguna porquería?</a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="footer-link">alguna porquería?</a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="footer-link">alguna porquería?</a>
+                        </li>
+
+                    </ul>
+
+                    <ul class="footer-list">
+
+                        <li>
+                            <p class="footer-item-title">alguna idea? jaja</p>
+                        </li>
+
+                        <li>
+                            <a href="#" class="footer-link">alguna pelotudez?</a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="footer-link">alguna pelotudez?</a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="footer-link">alguna pelotudez?</a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="footer-link">alguna pelotudez?</a>
+                        </li>
+
+                    </ul>
+
+                    <ul class="footer-list">
+
+                        <li>
+                            <p class="footer-item-title">Links Rápidos</p>
+                        </li>
+
+                        <li>
+                            <a href="index.html" class="footer-link">Home</a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="footer-link">Fútbol</a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="footer-link">Basquet</a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="footer-link">Mi Cuenta</a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="footer-link">Cerrar Sesión</a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="footer-botton">
+
+            <div class="container">
+
+                <center>
+
+                    <p class="copyright">
+                        Desarrollado por
+                        <a href="https://www.youtube.com/shorts/cjX_icaHfl4" target="_blank"> Jorge Rafael Videla </a>.
+                    </p>
+
+                </center>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script src="assets/js/main.js"></script>
+    <!-- <script src="assets/js/calculator.js"></script> -->
+    
+</body>
+</html>
