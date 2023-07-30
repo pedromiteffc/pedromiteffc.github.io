@@ -673,11 +673,17 @@ function paritdosEntreEquipos(csv){
       }
     }
   }
-  let aproxGolesFavor1 = golesFavor1 / partidosJugados
-  let aproxGolesContra1 = golesContra1 / partidosJugados
-  let aproxGolesFavor2 = golesFavor2 / partidosJugados
-  let aproxGolesContra2 = golesContra2 / partidosJugados
-  return [aproxGolesFavor1, aproxGolesContra1, aproxGolesFavor2, aproxGolesContra2]
+
+  if(partidosJugados > 0)
+  {
+    let aproxGolesFavor1 = golesFavor1 / partidosJugados
+    let aproxGolesContra1 = golesContra1 / partidosJugados
+    let aproxGolesFavor2 = golesFavor2 / partidosJugados
+    let aproxGolesContra2 = golesContra2 / partidosJugados
+    return [aproxGolesFavor1, aproxGolesContra1, aproxGolesFavor2, aproxGolesContra2]
+  }
+  return [0,0,0,0]
+  
 }
 
 // function evaluarImportanciaGanar1(csv) {
@@ -909,18 +915,19 @@ async function cargarArchivos() {
       leerArchivoCSVyCalendario('csv'),
       leerArchivoCSVyCalendario('calendario')
     ]);
-
+    
     let [golesEquipo1, golesEquipo2] = aproxGolesFinal(calendarioContent, csvContent)
+    let cuotasResultados = calcular_cuotas_resultados_exactos(golesEquipo1, golesEquipo2)
 
-    let cuotas_resultados = calcular_cuotas_resultados_exactos(golesEquipo1, golesEquipo2);
-    console.log(cuotas_resultados)
-    // for (let resultado in cuotas_resultados) {
-    //   if (cuotas_resultados.hasOwnProperty(resultado)) {
-    //     let cuota = cuotas_resultados[resultado];
-    //     let probabilidad = 100 / cuota;
-    //     console.log(`Cuota para resultado ${resultado}: ${cuota.toFixed(4)} | probabilidad: ${probabilidad.toFixed(2)}`);
-    //   }
-    // }
+
+    // console.log(golesEquipo1, golesEquipo2)
+    calcular_cuotas_resultados_exactos(golesEquipo1, golesEquipo2)
+    ganarEmpatePerder(cuotasResultados)
+    bothTeamToScore(golesEquipo1, golesEquipo2)
+    // console.log(cuotasResultados)
+    
+    
+
     
 
   } catch (error) {
@@ -1010,6 +1017,20 @@ function calcular_cuotas_resultados_exactos(aprox_goles1, aprox_goles2) {
   cuotas["Equipo 2 - 1 gol"] = 1 / goles_equipo2_1;
   cuotas["Equipo 2 - menos de 1 gol"] = 1 / goles_equipo2_menos_de_1;
   
+  cuotaOver2.innerHTML = cuotas["Goles totales - más de 2.5 goles"].toFixed(2)
+  cuotaExacto2.innerHTML = cuotas["Goles totales - exactamente 2 goles"].toFixed(2)
+  cuotaUnder2.innerHTML = cuotas["Goles totales - menos de 2.5 goles"].toFixed(2)
+
+  cuotaOver1.innerHTML = cuotas["Equipo 1 - más de 1 gol"].toFixed(2)
+  cuotaExacto1.innerHTML = cuotas["Equipo 1 - 1 gol"].toFixed(2)
+  cuotaUnder1.innerHTML = cuotas["Equipo 1 - menos de 1 gol"].toFixed(2)
+
+  cuotaOver1Visitante.innerHTML = cuotas["Equipo 2 - más de 1 gol"].toFixed(2)
+  cuotaExacto1Visitante.innerHTML = cuotas["Equipo 2 - 1 gol"].toFixed(2)
+  cuotaUnder1Visitante.innerHTML = cuotas["Equipo 2 - menos de 1 gol"].toFixed(2)
+
+  // probabilidadEmpate_00.innerHTML = cuotas["0-0"]
+  
   return cuotas;
 }
 
@@ -1024,6 +1045,179 @@ function calcular_probabilidad_resultado_exacto(aprox_goles1, aprox_goles2, gole
 
 //CALCULO PROBABILIDADES DE QUE GANE CADA EQUIPO
 function ganarEmpatePerder(cuotas_resultados){
+  function sumar_probabilidades_equipo1(cuotas_resultados) {
+    let suma = 0;
+    for (let resultado in cuotas_resultados) {
+        if (cuotas_resultados.hasOwnProperty(resultado)) {
+            if (resultado.includes('-') && resultado !== "0-0") {
+                let goles_equipo1 = parseInt(resultado.split('-')[0]);
+                let goles_equipo2 = parseInt(resultado.split('-')[1]);
+                if (!isNaN(goles_equipo1) && !isNaN(goles_equipo2) && goles_equipo1 > goles_equipo2) {
+                    suma += (100 / cuotas_resultados[resultado])
+                }
+            }
+        }
+    }
+    return suma;
+}
+  
+  function sumar_probabilidades_equipo2(cuotas_resultados) {
+    let suma = 0;
+    for (let resultado in cuotas_resultados) {
+        if (cuotas_resultados.hasOwnProperty(resultado)) {
+            if (resultado.includes('-') && resultado !== "0-0") {
+                let goles_equipo1 = parseInt(resultado.split('-')[0]);
+                let goles_equipo2 = parseInt(resultado.split('-')[1]);
+                if (!isNaN(goles_equipo1) && !isNaN(goles_equipo2) && goles_equipo1 < goles_equipo2) {
+                    suma += (100 / cuotas_resultados[resultado])
+                }
+            }
+        }
+    }
+    return suma;
+  }
+  
+  function sumar_probabilidades_empate(cuotas_resultados) {
+    // let cuotas_empate = [];
+    let cuotas_empate = 0
+    for (let resultado in cuotas_resultados) {
+        if (cuotas_resultados.hasOwnProperty(resultado)) {
+            if (resultado.includes('-')) {
+                let goles_equipo1 = parseInt(resultado.split('-')[0]);
+                let goles_equipo2 = parseInt(resultado.split('-')[1]);
+                if (!isNaN(goles_equipo1) && !isNaN(goles_equipo2) && goles_equipo1 === goles_equipo2) {
+                    // cuotas_empate.push(100 / cuotas_resultados[resultado]);
+                    cuotas_empate += 100/cuotas_resultados[resultado]
+                }
+            }
+        }
+    }
+    // let factor_correccion = cuotas_empate.length / (Object.keys(cuotas_resultados).length - cuotas_empate.length);
+    // let suma = 0;
+    // for (let cuota of cuotas_empate) {
+    //     suma += cuota;
+    return cuotas_empate;
+    // }
+  }
+    
+  
+  
+  let probabilidad_equipo1 = sumar_probabilidades_equipo1(cuotas_resultados);
+  let probabilidad_empate = sumar_probabilidades_empate(cuotas_resultados);
+  let probabilidad_equipo2 = sumar_probabilidades_equipo2(cuotas_resultados);
+  
+  // Inicializar las sumas
+  let suma_equipo1 = 0;
+  let suma_equipo2 = 0;
+  let suma_empate = 0;
+  
+  // Calcular las sumas de probabilidades
+  for (let resultado in cuotas_resultados) {
+      if (cuotas_resultados.hasOwnProperty(resultado)) {
+          if (resultado.includes('-')) {
+              try {
+                  let [goles_equipo1, goles_equipo2] = resultado.split("-").map(Number);
+  
+                  if (goles_equipo1 > goles_equipo2) {
+                      suma_equipo1 += 1 / cuotas_resultados[resultado];
+                  } else if (goles_equipo1 < goles_equipo2) {
+                      suma_equipo2 += 1 / cuotas_resultados[resultado];
+                  } else if (goles_equipo1 == goles_equipo2) {
+                      suma_empate += 1 / cuotas_resultados[resultado];
+                  }
+              } catch (err) {
+                  continue;
+              }
+          }
+      }
+  }
+  
+  // Calcular la suma total
+  let suma_total = suma_equipo1 + suma_equipo2 + suma_empate;
+  
+  // Calcular las probabilidades finales equitativas
+  let probabilidad_equipo1Equitativo = suma_equipo1 / suma_total;
+  let probabilidad_equipo2Equitativo = suma_equipo2 / suma_total;
+  let probabilidad_empateEquitativo = suma_empate / suma_total;
+ 
+  let cuota_equipo1_ganar = 1 / probabilidad_equipo1Equitativo;
+  let cuota_equipo2_ganar = 1 / probabilidad_equipo2Equitativo;
+  let cuota_empate = 1 / probabilidad_empateEquitativo;
+
+  let probabilidad_equipo1_o_empate = probabilidad_equipo1Equitativo + probabilidad_empateEquitativo;
+  let probabilidad_equipo2_o_empate = probabilidad_equipo2Equitativo + probabilidad_empateEquitativo;
+  let probabilidad_equipo1_o_equipo2 = probabilidad_equipo1Equitativo + probabilidad_equipo2Equitativo;
+  let cuota_equipo1_o_empate = 1 / probabilidad_equipo1_o_empate;
+  let cuota_equipo2_o_empate = 1 / probabilidad_equipo2_o_empate;
+  let cuota_equipo1_o_equipo2 = 1 / probabilidad_equipo1_o_equipo2;
+
+
+  
+  // return [cuota_equipo1_ganar, cuota_equipo2_ganar, cuota_empate, cuota_equipo1_o_empate, cuota_equipo2_o_empate, cuota_equipo1_o_equipo2]
+  
+  cuotaLocalGana.innerHTML = cuota_equipo1_ganar.toFixed(2)
+  cuotaVisitanteGana.innerHTML = cuota_equipo2_ganar.toFixed(2)
+  cuotaEmpate.innerHTML = cuota_empate.toFixed(2)
+
+  cuotaLocaloEmpate.innerHTML = cuota_equipo1_o_empate.toFixed(2)
+  cuotaVisitanteoEmpate.innerHTML = cuota_equipo2_o_empate.toFixed(2)
+  cuotaLocaloVisitante.innerHTML = cuota_equipo1_o_equipo2.toFixed(2)
+  
+}
+
+
+function bothTeamToScore(goles1, goles2){
+  let resultados_cuotas = calcular_cuotas_resultados_exactos(goles1, goles2);
+
+  let probabilidad_1gol_equipo1 = 100 / resultados_cuotas["Equipo 1 - 1 gol"];
+  let probabilidad_menos1gol_equipo1 = 100 / resultados_cuotas["Equipo 1 - menos de 1 gol"];
+  let probabilidad_mas1gol_equipo1 = 100 / resultados_cuotas["Equipo 1 - más de 1 gol"];
+
+  let probabilidad_1gol_equipo2 = 100 / resultados_cuotas["Equipo 2 - 1 gol"];
+  let probabilidad_menos1gol_equipo2 = 100 / resultados_cuotas["Equipo 2 - menos de 1 gol"];
+  let probabilidad_mas1gol_equipo2 = 100 / resultados_cuotas["Equipo 2 - más de 1 gol"];
+
+  let probabilidad_equipo1si = probabilidad_1gol_equipo1 + probabilidad_mas1gol_equipo1;
+  let probabilidad_equipo1no = 100 - probabilidad_1gol_equipo1 - probabilidad_mas1gol_equipo1;
+  let probabilidad_equipo2si = probabilidad_1gol_equipo2 + probabilidad_mas1gol_equipo2;
+  let probabilidad_equipo2no = 100 - probabilidad_1gol_equipo2 - probabilidad_mas1gol_equipo2;
+
+  let probabilidad_equipo1si_equipo2no = ((probabilidad_equipo1si / 100) * (probabilidad_equipo2no / 100)) * 100;
+  let probabilidad_equipo1no_equipo2si = ((probabilidad_equipo1no / 100) * (probabilidad_equipo2si / 100)) * 100;
+  let probabilidad_equipo1si_equipo2si = ((probabilidad_equipo1si / 100) * (probabilidad_equipo2si / 100)) * 100;
+  let probabilidad_equipo1no_equipo2no = ((probabilidad_equipo1no / 100) * (probabilidad_equipo2no / 100)) * 100;
+
+  let both_team_to_score = probabilidad_equipo1si_equipo2si;
+  let both_team_to_score_no = 100 - probabilidad_equipo1si_equipo2si;
+  let cuota_btts = 100 / both_team_to_score;
+  let cuota_bttsn = 100 / both_team_to_score_no;
+
+  cuotaYes.innerHTML = cuota_btts.toFixed(2)
+  cuotaNo.innerHTML = cuota_bttsn.toFixed(2)
+
+  return [cuota_btts, cuota_bttsn]
+}
+
+function asianHandicap(aprox_goles1, aprox_goles2, sumaGolesLocal, sumaGolesVisitante){
+  let goles1 = aprox_goles1 + sumaGolesLocal
+  let goles2 = aprox_goles2 + sumaGolesVisitante
+
+  function calcular_cuotas_resultados_exactos_ah_0(goles1, goles2) {
+    let cuotas = {};
+  
+    for (let goles_equipo1 = 0; goles_equipo1 < 10; goles_equipo1++) {
+        for (let goles_equipo2 = 0; goles_equipo2 < 10; goles_equipo2++) {
+            let probabilidad_resultado = calcular_probabilidad_resultado_exacto(goles1, goles2, goles_equipo1, goles_equipo2);
+            let resultado = `${goles_equipo1}-${goles_equipo2}`;
+            cuotas[resultado] = 1 / probabilidad_resultado;
+        }
+    }
+  
+    return cuotas;
+  }
+
+  let ah = calcular_cuotas_resultados_exactos_ah_0(goles1, goles2)
+
   function sumar_probabilidades_equipo1(cuotas_resultados) {
     let suma = 0;
     for (let resultado in cuotas_resultados) {
@@ -1072,14 +1266,14 @@ function ganarEmpatePerder(cuotas_resultados){
     let factor_correccion = cuotas_empate.length / (Object.keys(cuotas_resultados).length - cuotas_empate.length);
     let suma = 0;
     for (let cuota of cuotas_empate) {
-        suma += cuota * factor_correccion;
+        suma += cuota;
     }
     return suma;
   }
-  
-  let probabilidad_equipo1 = sumar_probabilidades_equipo1(cuotas_resultados);
-  let probabilidad_empate = sumar_probabilidades_empate(cuotas_resultados);
-  let probabilidad_equipo2 = sumar_probabilidades_equipo2(cuotas_resultados);
+
+  let probabilidad_equipo1 = sumar_probabilidades_equipo1(ah);
+  let probabilidad_empate = sumar_probabilidades_empate(ah);
+  let probabilidad_equipo2 = sumar_probabilidades_equipo2(ah);
   
   // Inicializar las sumas
   let suma_equipo1 = 0;
@@ -1087,18 +1281,18 @@ function ganarEmpatePerder(cuotas_resultados){
   let suma_empate = 0;
   
   // Calcular las sumas de probabilidades
-  for (let resultado in cuotas_resultados) {
-      if (cuotas_resultados.hasOwnProperty(resultado)) {
+  for (let resultado in ah) {
+      if (ah.hasOwnProperty(resultado)) {
           if (resultado.includes('-')) {
               try {
                   let [goles_equipo1, goles_equipo2] = resultado.split("-").map(Number);
   
                   if (goles_equipo1 > goles_equipo2) {
-                      suma_equipo1 += 1 / cuotas_resultados[resultado];
+                      suma_equipo1 += 1 / ah[resultado];
                   } else if (goles_equipo1 < goles_equipo2) {
-                      suma_equipo2 += 1 / cuotas_resultados[resultado];
+                      suma_equipo2 += 1 / ah[resultado];
                   } else {
-                      suma_empate += 1 / cuotas_resultados[resultado];
+                      suma_empate += 1 / ah[resultado];
                   }
               } catch (err) {
                   continue;
@@ -1111,51 +1305,21 @@ function ganarEmpatePerder(cuotas_resultados){
   let suma_total = suma_equipo1 + suma_equipo2 + suma_empate;
   
   // Calcular las probabilidades finales equitativas
-  probabilidad_equipo1 = suma_equipo1 / suma_total;
-  probabilidad_equipo2 = suma_equipo2 / suma_total;
-  probabilidad_empate = suma_empate / suma_total;
-  let cuota_equipo1_ganar = 1 / probabilidad_equipo1;
-  let cuota_equipo2_ganar = 1 / probabilidad_equipo2;
-  let cuota_empate = 1 / probabilidad_empate;
+  let probabilidad_equipo1Final = suma_equipo1 / suma_total;
+  let probabilidad_equipo2Final = suma_equipo2 / suma_total;
+  let probabilidad_empateFinal = suma_empate / suma_total;
+  let cuota_equipo1_ganar = 1 / probabilidad_equipo1Final;
+  let cuota_equipo2_ganar = 1 / probabilidad_equipo2Final;
+  let cuota_empate = 1 / probabilidad_empateFinal;
 
-  let probabilidad_equipo1_o_empate = probabilidad_equipo1 + probabilidad_empate;
-  let probabilidad_equipo2_o_empate = probabilidad_equipo2 + probabilidad_empate;
-  let probabilidad_equipo1_o_equipo2 = probabilidad_equipo1 + probabilidad_equipo2;
-  let cuota_equipo1_o_empate = 1 / probabilidad_equipo1_o_empate;
-  let cuota_equipo2_o_empate = 1 / probabilidad_equipo2_o_empate;
-  let cuota_equipo1_o_equipo2 = 1 / probabilidad_equipo1_o_equipo2;
+  let ah_0_equipo1 = ((100 / cuota_equipo1_ganar) / ((100 / cuota_equipo1_ganar) + (100 / cuota_equipo2_ganar))) * 100
+  let ah_0_equipo2 = ((100 / cuota_equipo2_ganar) / ((100 / cuota_equipo1_ganar) + (100 / cuota_equipo2_ganar))) * 100
+  let cuota_ah_0_equipo1 = 100 / ah_0_equipo1
+  let cuota_ah_0_equipo2 = 100 / ah_0_equipo2
 
-  return [cuota_equipo1_ganar, cuota_equipo2_ganar, cuota_empate, cuota_equipo1_o_empate, cuota_equipo2_o_empate, cuota_equipo1_o_equipo2]
+
+  return [cuota_ah_0_equipo1, cuota_ah_0_equipo2]
 }
 
 
-function bothTeamToScore(goles1, goles2){
-  let resultados_cuotas = calcular_cuotas_resultados_exactos(goles1, goles2);
 
-  let probabilidad_1gol_equipo1 = 100 / resultados_cuotas["Equipo 1 - 1 gol"];
-  let probabilidad_menos1gol_equipo1 = 100 / resultados_cuotas["Equipo 1 - menos de 1 gol"];
-  let probabilidad_mas1gol_equipo1 = 100 / resultados_cuotas["Equipo 1 - más de 1 gol"];
-
-  let probabilidad_1gol_equipo2 = 100 / resultados_cuotas["Equipo 2 - 1 gol"];
-  let probabilidad_menos1gol_equipo2 = 100 / resultados_cuotas["Equipo 2 - menos de 1 gol"];
-  let probabilidad_mas1gol_equipo2 = 100 / resultados_cuotas["Equipo 2 - más de 1 gol"];
-
-  let probabilidad_equipo1si = probabilidad_1gol_equipo1 + probabilidad_mas1gol_equipo1;
-  let probabilidad_equipo1no = 100 - probabilidad_1gol_equipo1 - probabilidad_mas1gol_equipo1;
-  let probabilidad_equipo2si = probabilidad_1gol_equipo2 + probabilidad_mas1gol_equipo2;
-  let probabilidad_equipo2no = 100 - probabilidad_1gol_equipo2 - probabilidad_mas1gol_equipo2;
-
-  let probabilidad_equipo1si_equipo2no = ((probabilidad_equipo1si / 100) * (probabilidad_equipo2no / 100)) * 100;
-  let probabilidad_equipo1no_equipo2si = ((probabilidad_equipo1no / 100) * (probabilidad_equipo2si / 100)) * 100;
-  let probabilidad_equipo1si_equipo2si = ((probabilidad_equipo1si / 100) * (probabilidad_equipo2si / 100)) * 100;
-  let probabilidad_equipo1no_equipo2no = ((probabilidad_equipo1no / 100) * (probabilidad_equipo2no / 100)) * 100;
-
-  let both_team_to_score = probabilidad_equipo1si_equipo2si;
-  let both_team_to_score_no = 100 - probabilidad_equipo1si_equipo2si;
-  let cuota_btts = 100 / both_team_to_score;
-  let cuota_bttsn = 100 / both_team_to_score_no;
-
-
-
-  return [cuota_btts, cuota_bttsn]
-}
