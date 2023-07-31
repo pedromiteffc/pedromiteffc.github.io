@@ -924,8 +924,32 @@ async function cargarArchivos() {
     calcular_cuotas_resultados_exactos(golesEquipo1, golesEquipo2)
     ganarEmpatePerder(cuotasResultados)
     bothTeamToScore(golesEquipo1, golesEquipo2)
+    let [ah0L, ah0V, ah05mL, ah05mV] = asianHandicap(golesEquipo1, golesEquipo2, 0, 0)
+    let [ah1L, ah1mV, ah05L, ah15mV] = asianHandicap(golesEquipo1, golesEquipo2, 1, 0)
+    let [ah2L, ah2mV, ah15L, nada] = asianHandicap(golesEquipo1, golesEquipo2, 2, 0)
+    let [ah1mL, ah1V, ah15mL, ah05V ] = asianHandicap(golesEquipo1, golesEquipo2, 0, 1)
+    let [ah2mL, ah2V, nada1, ah15V] = asianHandicap(golesEquipo1, golesEquipo2, 0, 2)
     // console.log(cuotasResultados)
-    
+
+    handicapP2Local.innerHTML = ah2L.toFixed(2)
+    handicapP15Local.innerHTML = ah15L.toFixed(2)
+    handicapP1Local.innerHTML = ah1L.toFixed(2)
+    handicapP05Local.innerHTML = ah05L.toFixed(2)
+    handicap00Local.innerHTML = ah0L.toFixed(2)
+    handicapN05Local.innerHTML = ah05mL.toFixed(2)
+    handicapN1Local.innerHTML = ah1mL.toFixed(2)
+    handicapN15Local.innerHTML = ah15mL.toFixed(2)
+    handicapN2Local.innerHTML = ah2mL.toFixed(2)
+
+    handicapP2Visitante.innerHTML = ah2V. toFixed(2)
+    handicapP15Visitante.innerHTML = ah15V.toFixed(2)
+    handicapP1Visitante.innerHTML = ah1V.toFixed(2)
+    handicapP05Visitante.innerHTML = ah05V.toFixed(2)
+    handicap00Visitante.innerHTML = ah0V.toFixed(2)
+    handicapN05Visitante.innerHTML = ah05mV.toFixed(2)
+    handicapN1Visitante.innerHTML = ah1mV.toFixed(2)
+    handicapN15Visitante.innerHTML = ah15mV.toFixed(2)
+    handicapN2Visitante.innerHTML = ah2mV.toFixed(2)
     
 
     
@@ -1018,20 +1042,66 @@ function calcular_cuotas_resultados_exactos(aprox_goles1, aprox_goles2) {
   cuotas["Equipo 2 - menos de 1 gol"] = 1 / goles_equipo2_menos_de_1;
   
   cuotaOver2.innerHTML = cuotas["Goles totales - más de 2.5 goles"].toFixed(2)
+  probabilidadOver2.innerHTML = (100/cuotas["Goles totales - más de 2.5 goles"]).toFixed(2) + '%'
   cuotaExacto2.innerHTML = cuotas["Goles totales - exactamente 2 goles"].toFixed(2)
+  probabilidadExacto2.innerHTML = (100/cuotas["Goles totales - exactamente 2 goles"]).toFixed(2) + '%'
   cuotaUnder2.innerHTML = cuotas["Goles totales - menos de 2.5 goles"].toFixed(2)
+  probabilidadUnder2.innerHTML = (100/cuotas["Goles totales - menos de 2.5 goles"]).toFixed(2) + '%'
 
   cuotaOver1.innerHTML = cuotas["Equipo 1 - más de 1 gol"].toFixed(2)
+  probabilidadOver1.innerHTML = (100/cuotas["Equipo 1 - más de 1 gol"]).toFixed(2) + '%'
   cuotaExacto1.innerHTML = cuotas["Equipo 1 - 1 gol"].toFixed(2)
+  probabilidadExacto1.innerHTML = (100/cuotas["Equipo 1 - 1 gol"]).toFixed(2) + '%'
   cuotaUnder1.innerHTML = cuotas["Equipo 1 - menos de 1 gol"].toFixed(2)
+  probabilidadUnder1.innerHTML = (100/cuotas["Equipo 1 - menos de 1 gol"]).toFixed(2) + '%'
 
   cuotaOver1Visitante.innerHTML = cuotas["Equipo 2 - más de 1 gol"].toFixed(2)
+  probabilidadOver1Visitante.innerHTML = (100/cuotas["Equipo 2 - más de 1 gol"]).toFixed(2) + '%'
   cuotaExacto1Visitante.innerHTML = cuotas["Equipo 2 - 1 gol"].toFixed(2)
+  probabilidadExacto1Visitante.innerHTML = (100/cuotas["Equipo 2 - 1 gol"]).toFixed(2) + '%'
   cuotaUnder1Visitante.innerHTML = cuotas["Equipo 2 - menos de 1 gol"].toFixed(2)
+  probabilidadUnder1Visitante.innerHTML = (100/cuotas["Equipo 2 - menos de 1 gol"]).toFixed(2) + '%'
 
-  // probabilidadEmpate_00.innerHTML = cuotas["0-0"]
-  
-  return cuotas;
+  probabilidadLocal_10.innerHTML = cuotas["1-0"].toFixed(2)
+  probabilidadLocal_20.innerHTML = cuotas["2-0"].toFixed(2)
+  probabilidadLocal_30.innerHTML = cuotas["3-0"].toFixed(2)
+  probabilidadLocal_40.innerHTML = cuotas["4-0"].toFixed(2)
+  probabilidadLocal_50.innerHTML = cuotas["5-0"].toFixed(2)
+  probabilidadLocal_21.innerHTML = cuotas["2-1"].toFixed(2)
+  probabilidadLocal_31.innerHTML = cuotas["3-1"].toFixed(2)
+  probabilidadLocal_41.innerHTML = cuotas["4-1"].toFixed(2)
+  probabilidadLocal_51.innerHTML = cuotas["5-1"].toFixed(2)
+  probabilidadLocal_32.innerHTML = cuotas["3-2"].toFixed(2)
+  probabilidadLocal_42.innerHTML = cuotas["4-2"].toFixed(2)
+  probabilidadLocal_52.innerHTML = cuotas["5-2"].toFixed(2)
+  probabilidadLocal_43.innerHTML = cuotas["4-3"].toFixed(2)
+  probabilidadLocal_53.innerHTML = cuotas["5-3"].toFixed(2)
+  probabilidadLocal_54.innerHTML = cuotas["5-4"].toFixed(2)
+
+  probabilidadEmpate_00.innerHTML = cuotas["0-0"].toFixed(2)
+  probabilidadEmpate_11.innerHTML = cuotas["1-1"].toFixed(2)
+  probabilidadEmpate_22.innerHTML = cuotas["2-2"].toFixed(2)
+  probabilidadEmpate_33.innerHTML = cuotas["3-3"].toFixed(2)
+  probabilidadEmpate_44.innerHTML = cuotas["4-4"].toFixed(2)
+  probabilidadEmpate_55.innerHTML = cuotas["5-5"].toFixed(2)
+
+  probabilidadVisitante_01.innerHTML = cuotas["0-1"].toFixed(2)
+  probabilidadVisitante_02.innerHTML = cuotas["0-2"].toFixed(2)
+  probabilidadVisitante_03.innerHTML = cuotas["0-3"].toFixed(2)
+  probabilidadVisitante_04.innerHTML = cuotas["0-4"].toFixed(2)
+  probabilidadVisitante_05.innerHTML = cuotas["0-5"].toFixed(2)
+  probabilidadVisitante_12.innerHTML = cuotas["1-2"].toFixed(2)
+  probabilidadVisitante_13.innerHTML = cuotas["1-3"].toFixed(2)
+  probabilidadVisitante_14.innerHTML = cuotas["1-4"].toFixed(2)
+  probabilidadVisitante_15.innerHTML = cuotas["1-5"].toFixed(2)
+  probabilidadVisitante_23.innerHTML = cuotas["2-3"].toFixed(2)
+  probabilidadVisitante_24.innerHTML = cuotas["2-4"].toFixed(2)
+  probabilidadVisitante_25.innerHTML = cuotas["2-5"].toFixed(2)
+  probabilidadVisitante_34.innerHTML = cuotas["3-4"].toFixed(2)
+  probabilidadVisitante_35.innerHTML = cuotas["3-5"].toFixed(2)
+  probabilidadVisitante_45.innerHTML = cuotas["4-5"].toFixed(2)
+
+  return cuotas
 }
 
 function calcular_probabilidad_resultado_exacto(aprox_goles1, aprox_goles2, goles_equipo1, goles_equipo2) {
@@ -1058,7 +1128,7 @@ function ganarEmpatePerder(cuotas_resultados){
             }
         }
     }
-    return suma;
+    return suma
 }
   
   function sumar_probabilidades_equipo2(cuotas_resultados) {
@@ -1074,7 +1144,7 @@ function ganarEmpatePerder(cuotas_resultados){
             }
         }
     }
-    return suma;
+    return suma
   }
   
   function sumar_probabilidades_empate(cuotas_resultados) {
@@ -1092,12 +1162,7 @@ function ganarEmpatePerder(cuotas_resultados){
             }
         }
     }
-    // let factor_correccion = cuotas_empate.length / (Object.keys(cuotas_resultados).length - cuotas_empate.length);
-    // let suma = 0;
-    // for (let cuota of cuotas_empate) {
-    //     suma += cuota;
-    return cuotas_empate;
-    // }
+    return cuotas_empate
   }
     
   
@@ -1107,9 +1172,9 @@ function ganarEmpatePerder(cuotas_resultados){
   let probabilidad_equipo2 = sumar_probabilidades_equipo2(cuotas_resultados);
   
   // Inicializar las sumas
-  let suma_equipo1 = 0;
-  let suma_equipo2 = 0;
-  let suma_empate = 0;
+  let suma_equipo1 = 0
+  let suma_equipo2 = 0
+  let suma_empate = 0
   
   // Calcular las sumas de probabilidades
   for (let resultado in cuotas_resultados) {
@@ -1159,9 +1224,17 @@ function ganarEmpatePerder(cuotas_resultados){
   cuotaVisitanteGana.innerHTML = cuota_equipo2_ganar.toFixed(2)
   cuotaEmpate.innerHTML = cuota_empate.toFixed(2)
 
+  probabilidadLocalGana.innerHTML = (100/cuota_equipo1_ganar).toFixed(2) + '%'
+  probabilidadVisitanteGana.innerHTML = (100/cuota_equipo2_ganar).toFixed(2) + '%'
+  probabilidadEmpate.innerHTML = (100/cuota_empate).toFixed(2) + '%'
+
   cuotaLocaloEmpate.innerHTML = cuota_equipo1_o_empate.toFixed(2)
   cuotaVisitanteoEmpate.innerHTML = cuota_equipo2_o_empate.toFixed(2)
   cuotaLocaloVisitante.innerHTML = cuota_equipo1_o_equipo2.toFixed(2)
+
+  probabilidadLocaloEmpate.innerHTML = (100/cuota_equipo1_o_empate).toFixed(2) + '%'
+  probabilidadVisitanteoEmpate.innerHTML = (100/cuota_equipo2_o_empate).toFixed(2) + '%'
+  probabilidadLocaloVisitante.innerHTML = (100/cuota_equipo1_o_equipo2).toFixed(2) + '%'
   
 }
 
@@ -1193,7 +1266,9 @@ function bothTeamToScore(goles1, goles2){
   let cuota_bttsn = 100 / both_team_to_score_no;
 
   cuotaYes.innerHTML = cuota_btts.toFixed(2)
+  probabilidadYes.innerHTML = (100/cuota_btts).toFixed(2) + '%'
   cuotaNo.innerHTML = cuota_bttsn.toFixed(2)
+  probabilidadNo.innerHTML = (100/cuota_bttsn).toFixed(2) + '%'
 
   return [cuota_btts, cuota_bttsn]
 }
@@ -1251,24 +1326,21 @@ function asianHandicap(aprox_goles1, aprox_goles2, sumaGolesLocal, sumaGolesVisi
   }
   
   function sumar_probabilidades_empate(cuotas_resultados) {
-    let cuotas_empate = [];
+    // let cuotas_empate = [];
+    let cuotas_empate = 0
     for (let resultado in cuotas_resultados) {
         if (cuotas_resultados.hasOwnProperty(resultado)) {
             if (resultado.includes('-')) {
                 let goles_equipo1 = parseInt(resultado.split('-')[0]);
                 let goles_equipo2 = parseInt(resultado.split('-')[1]);
                 if (!isNaN(goles_equipo1) && !isNaN(goles_equipo2) && goles_equipo1 === goles_equipo2) {
-                    cuotas_empate.push(cuotas_resultados[resultado]);
+                    // cuotas_empate.push(100 / cuotas_resultados[resultado]);
+                    cuotas_empate += 100/cuotas_resultados[resultado]
                 }
             }
         }
     }
-    let factor_correccion = cuotas_empate.length / (Object.keys(cuotas_resultados).length - cuotas_empate.length);
-    let suma = 0;
-    for (let cuota of cuotas_empate) {
-        suma += cuota;
-    }
-    return suma;
+    return cuotas_empate
   }
 
   let probabilidad_equipo1 = sumar_probabilidades_equipo1(ah);
@@ -1291,7 +1363,7 @@ function asianHandicap(aprox_goles1, aprox_goles2, sumaGolesLocal, sumaGolesVisi
                       suma_equipo1 += 1 / ah[resultado];
                   } else if (goles_equipo1 < goles_equipo2) {
                       suma_equipo2 += 1 / ah[resultado];
-                  } else {
+                  } else if(goles_equipo1 == goles_equipo2){
                       suma_empate += 1 / ah[resultado];
                   }
               } catch (err) {
@@ -1318,8 +1390,7 @@ function asianHandicap(aprox_goles1, aprox_goles2, sumaGolesLocal, sumaGolesVisi
   let cuota_ah_0_equipo2 = 100 / ah_0_equipo2
 
 
-  return [cuota_ah_0_equipo1, cuota_ah_0_equipo2]
+
+
+  return [cuota_ah_0_equipo1, cuota_ah_0_equipo2, cuota_equipo1_ganar, cuota_equipo2_ganar]
 }
-
-
-
