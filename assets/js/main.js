@@ -1,7 +1,3 @@
-const navToggleBtn = document.querySelector('[data-nav-toggle-btn]')
-const header = document.querySelector('[data-header]')
-
-
 const equipoLocalSelect = document.getElementById('equipoLocal')
 const equipoLocalValue = equipoLocalSelect.value
 const equipoVisitanteSelect = document.getElementById('equipoVisitante')
@@ -127,11 +123,6 @@ const probabilidadVisitante_35 = document.getElementById('probabilidadVisitante_
 
 const probabilidadLocal_54 = document.getElementById('probabilidadLocal_54') //PROBABILIDAD LOCAL GANA 5-4
 const probabilidadVisitante_45 = document.getElementById('probabilidadVisitante_45') //PROBABILIDAD VISITA GANA 4-5
-
-navToggleBtn.addEventListener('click', () =>
-{
-    header.classList.toggle('active')
-})
 
 function leerArchivoCSV()
 {
