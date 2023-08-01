@@ -19,7 +19,7 @@
 </head>
 <body>
 
-    <header class="header" data-header>
+    <header class="header" id="header" data-header>
 
         <div class="container">
 
@@ -27,7 +27,7 @@
                 <img src="assets/img/favicon.png" width="30px">
             </a>
     
-            <button class="menu-toggle-btn" data-nav-toggle-btn>
+            <button class="menu-toggle-btn" id="menu-toggle-btn" data-nav-toggle-btn>
                 <i class="ri-menu-line"></i>
             </button>
 
@@ -100,7 +100,7 @@
                         </div>
 
                         <h2 class="h2 about-title">Característica Principales</h2>
-                        <p class="about-text">TEXTO DE EJEMPLO ACA VA LO QUE SE CANTA EL CULO </p>
+                        <p class="about-text">Que nos diferencia del resto</p>
 
                     </div>
 
@@ -133,8 +133,8 @@
                                 </div>
 
                                 <h3 class="h3 card-title">Gran cantidad de Ligas</h3>
-<!-- 
-                                <p class="card-text">
+
+                                <!-- <p class="card-text">
                                     Sed ut perspiciatis unde omnis iste natus error sit voluptas
                                 </p> -->
 
@@ -188,40 +188,55 @@
 
                 <div class="container">
 
-                    <h2 class="h2 section-title">Algunas características (esto es al pedo pero qcy, estaba aburrido jaja)</h2>
-                    <p class="section-text">ACA VA CUALQUIER PORQUERÍA <br> (LAS FOTOS ESTAN PUESTAS ASI NOMAS)</p>
+                    <h2 class="h2 section-title">Mas características</h2>
+                    <p class="section-text">Otras características que contiene la pagina</p>
 
                     <div class="features-wrapper">
 
                         <figure class="features-banner">
-                            <img src="assets/img/feature1.svg">
+                            <img src="assets/img/stats2.svg">
                         </figure>
 
                        <div class="features-content">
 
                             <div class="features-content-subtitle">
                                 <i class="ri-bard-fill"></i>
-                                <span>CHICHE 01 </span>
+                                <span>TODO EN BASE A ESTADISTICAS</span>
                             </div>
 
                             <h3 class="features-content-title">
-                                Acá va algun, <strong>chiche</strong> que sea <strong>"importante"</strong> para la página
+                                Todo el analisis esta basado en <strong> estadísticas </strong> actuales de <strong>todas las ligas</strong>
                             </h3>
 
-                            <p class="features-content-text">
+                            <!-- <p class="features-content-text">
                                 ACA VA CUALQUIER COSA O DIRECTAMENTE NADA
-                            </p>
+                            </p> -->
 
                             <ul class="features-list">
 
                                 <li class="features-list-item">
                                     <i class="ri-arrow-right-s-line"></i>
-                                    <p>CHICHE</p>
+                                    <p>Partidos Jugados</p>
                                 </li>
 
                                 <div class="features-list-item">
                                     <i class="ri-arrow-right-s-line"></i>
-                                    <p>CHICHE (puede haber mas)</p>
+                                    <p>Resultados</p>
+                                </div>
+
+                                <div class="features-list-item">
+                                    <i class="ri-arrow-right-s-line"></i>
+                                    <p>Forma del Equipo</p>
+                                </div>
+
+                                <div class="features-list-item">
+                                    <i class="ri-arrow-right-s-line"></i>
+                                    <p>Goles</p>
+                                </div>
+
+                                <div class="features-list-item">
+                                    <i class="ri-arrow-right-s-line"></i>
+                                    <p>Y mas ...</p>
                                 </div>
 
                             </ul>
@@ -240,11 +255,11 @@
 
                             <div class="features-content-subtitle">
                                 <i class="ri-bard-fill"></i>
-                                <span>CHICHE 02</span>
+                                <span>DISEÑO COMPLETAMENTE RESPONSIVE</span>
                             </div>
 
                             <h3 class="features-content-title">
-                                Acá va otro, <strong>chiche</strong> que sea <strong>"importante"</strong> para la página
+                                Ofrecemos un diseño <strong>full responsive</strong> para que puedas usar la página <strong>donde, cuando y como quieras</strong>
                             </h3>
 
                             <p class="features-content-text">
@@ -255,12 +270,17 @@
 
                                 <li class="features-list-item">
                                     <i class="ri-arrow-right-s-line"></i>
-                                    <p>CHICHE</p>
+                                    <p>Computadoras</p>
                                 </li>
 
                                 <div class="features-list-item">
                                     <i class="ri-arrow-right-s-line"></i>
-                                    <p>CHICHE (puede haber mas)</p>
+                                    <p>Tablets</p>
+                                </div>
+
+                                <div class="features-list-item">
+                                    <i class="ri-arrow-right-s-line"></i>
+                                    <p>Telefonos</p>
                                 </div>
 
                             </ul>
@@ -277,8 +297,8 @@
 
                 <div class="container">
 
-                    <h2 class="h2 section-title">NC QUE PONER ACA JAJA (tira ideas puto)</h2>
-                    <p class="section-text">ACA VA CUALQUIER PORQUERIA (LAS FOTOS ESTAN ASI NOMAS Y HECHO MEDIO ASI NOMAS TODO)</p>
+                    <h2 class="h2 section-title">Algunas Noticias</h2>
+                    <p class="section-text">Noticias sobre los eventos mas destacados de la ultima semana</p>
 
                     <ul class="blog-list">
 
@@ -286,12 +306,32 @@
 
                             <div class="blog-card">
 
-                                <figure class="blog-banner" style="width: 100%;">
-                                    <img src="assets/img/liga-profesional.jpg">
+                                <figure class="blog-banner" style="width: 375px; height: 250px;">
+                                    <img src="https://cloudfront-us-east-1.images.arcpublishing.com/infobae/DUXEMGSVUFFHTLDT7Z7CKDONEE.jpg">
                                 </figure>
 
-                                <h3 class="blog-title">Liga Profesional</h3>
-                                <p class="blog-text">ALGUN TEXTO DE EJEMPLO QCY</p>
+                                <h3 class="blog-title">Campeón Indiscutido</h3>
+                                <p class="blog-text" style="margin-top: 5px;">River Plate se consagró campeon de la Liga Profesional de Futbol</p>
+
+                                <a href="furbo.html" class="blog-link-btn">
+                                    <span>Ver Más</span>
+                                    <i class="ri-arrow-right-s-line"></i>
+                                </a>
+
+                            </div>
+
+                        </li>
+
+                        <li>
+
+                            <div class="blog-card">
+
+                                <figure class="blog-banner" style="width: 375px; height: 250px;">
+                                    <img src="https://www.ole.com.ar/images/2023/01/15/yAHznhqOX_720x0__1.jpg">
+                                </figure>
+
+                                <h3 class="blog-title">Prestianni, amenazado de muerte</h3>
+                                <p class="blog-text" style="margin-top: 5px;">Luego de la derrota con Huracán, la barra de Velez apretó al futbolista de 17 años</p>
 
                                 <a href="furbo.html" class="blog-link-btn">
                                     <span>Ver Timbas</span>
@@ -306,46 +346,12 @@
 
                             <div class="blog-card">
 
-                                <figure class="blog-banner" style="width: 100%; height: 100%;">
-                                    <img src="assets/img/primera-nacional.jpg">
+                                <figure class="blog-banner" style="width: 375px; height: 250px;">
+                                    <img src="https://cdn.futbolargentino.com/sdi/2023/07/29/independiente-vs-boca-juniors-en-vivo-online-en-directo-por-la-fecha-27-liga-profesional-de-futbol-1174257.jpg">
                                 </figure>
 
-                                <h3 class="blog-title">Primera Nacional</h3>
-                                <p class="blog-text">ALGUN TEXTO DE EJEMPLO QCY</p>
-
-                                <a href="furbo.html" class="blog-link-btn">
-                                    <span>Ver Timbas</span>
-                                    <i class="ri-arrow-right-s-line"></i>
-                                </a>
-
-                            </div>
-
-                        </li>
-
-                        <li>
-
-                            <div class="blog-card">
-
-                                <figure class="blog-banner">
-                                    <img src="assets/img/europa-league.jpeg">
-                                </figure>
-
-                                <!-- <div class="blog-meta">
-
-                                    <span>
-                                        <i class="ri-calendar-line"></i>
-                                        <time datetime="2023-04-10">27 / 05 / 2023</time>
-                                    </span>
-
-                                    <span>
-                                        <i class="ri-user-6-line"></i>
-                                        <p>Admin</p>
-                                    </span>
-
-                                </div> -->
-
-                                <h3 class="blog-title">UEFA Europa League</h3>
-                                <p class="blog-text">ALGUN TEXTO DE EJEMPLO QCY</p>
+                                <h3 class="blog-title">Victoria para sorneir</h3>
+                                <p class="blog-text" style="margin-top: 5px;">Boca venció 2-0 a Independiente en su visita a Avellaneda y termino dentro de los primeros 10</p>
 
                                 <a href="furbo.html" class="blog-link-btn">
                                     <span>Ver Timbas</span>
@@ -366,8 +372,8 @@
 
                 <div class="container">
 
-                    <h2 class="h2 section-title">Contactanos (NO ANDA)</h2>
-                    <p class="section-text">ALGUN TEXTO DE MIERDA, SE PUEDE PONER CUALQUIER BOLUDEZ ACA</p>
+                    <h2 class="h2 section-title">Contactanos</h2>
+                    <p class="section-text">Escribenos su consulta aqui debajo para poder ayudarlo</p>
 
                     <div class="contact-wrapper">
 
@@ -410,9 +416,9 @@
 
                             <li>
 
-                                <a href="index.html" class="contact-link">
+                                <a href="https://pedromiteffc.github.io/" class="contact-link">
                                     <i class="ri-globe-line"></i>
-                                    <span>: www.ejemplo.com</span>
+                                    <span>: pedromiteffc.github.io/</span>
                                 </a>
 
                             </li>
@@ -429,17 +435,8 @@
                             <li>
 
                                 <a href="#" class="contact-link">
-                                    <i class="ri-time-line"></i>
-                                    <span>: (no se que poner jaja)</span>
-                                </a>
-
-                            </li>
-
-                            <li>
-
-                                <a href="#" class="contact-link">
                                     <i class="ri-map-pin-line"></i>
-                                    <span>: Vaca Muerta, Argentina?</span>
+                                    <span>: Buenos Aires, Argentina</span>
                                 </a>
 
                             </li>
@@ -565,19 +562,19 @@
                         </li>
 
                         <li>
-                            <a href="#" class="footer-link">Fútbol</a>
+                            <a href="furbo.html" class="footer-link">Fútbol</a>
                         </li>
 
                         <li>
-                            <a href="#" class="footer-link">Basquet</a>
+                            <a href="basque.html" class="footer-link">Basquet</a>
                         </li>
 
                         <li>
-                            <a href="#" class="footer-link">Mi Cuenta</a>
+                            <a href="#" class="footer-link">BET 365</a>
                         </li>
 
                         <li>
-                            <a href="#" class="footer-link">Cerrar Sesión</a>
+                            <a href="#" class="footer-link">1XBET</a>
                         </li>
 
                     </ul>
@@ -607,7 +604,9 @@
 
     </footer>
 
+    <!-- <script src="assets/js/main.js"></script> -->
     <script src="assets/js/calculator.js"></script>
+
     
 </body>
 </html>
