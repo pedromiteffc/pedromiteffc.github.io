@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Asistencia Tira Blanco</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- FUENTE -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+
+</head>
+
+<body data-page="asistencia">
+
+    <nav class="navbar">
+
+        <div class="container nav-header">
+
+            <select id="selector-categoria" onchange="cambiarCategoria()">
+                <option value="U9">Pre-Mini (U9)</option>
+                <option value="U11">Mini (U11)</option>
+                <option value="U13">Infantiles (U13)</option>
+            </select>
+
+            <a href="jugadores.html" class="btn-link">⚙️ Jugadores</a>
+
+        </div>
+
+    </nav>
+
+    <div class="date-navigator">
+
+        <button onclick="cambiarDia(-1)" class="btn-arrow">❮</button>
+
+        <div class="date-display">
+
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+
+            <input type="date" id="input-fecha" onchange="seleccionarFechaManual()">
+
+        </div>
+
+        <button onclick="cambiarDia(1)" class="btn-arrow">❯</button>
+
+    </div>
+
+    <main class="container">
+
+        <div id="lista-asistencia" class="player-grid"></div>
+
+        <div class="actions">
+            <button class="btn-secondary" onclick="verReporteMensual()">Reporte Mensual</button>
+            <button class="btn-primary" onclick="exportarPDF()">PDF del Día</button>
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
