@@ -1,0 +1,240 @@
+:root {
+    --bg: #f8f9fa;
+    --card: #ffffff;
+    --text: #2d3436;
+    --accent: #0f9d58;
+    --danger: #e74c3c;
+    --border: #edf2f7;
+    --radius: 8px;
+}
+
+* 
+{ 
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body 
+{
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding-bottom: 90px;
+}
+
+.container 
+{ 
+    width: 95%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.navbar 
+{
+    background: var(--card);
+    padding: 15px 0;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.nav-header 
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+select 
+{
+    flex: 1;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-weight: 600;
+    background: var(--bg);
+}
+
+.btn-link 
+{
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 600;
+    background: var(--bg);
+    padding: 10px 15px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+}
+
+.date-navigator 
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--card);
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    gap: 15px;
+}
+
+.date-display 
+{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg);
+    padding: 8px 12px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+}
+
+.date-display svg 
+{ 
+    color: var(--text);
+}
+
+.date-display input[type="date"] 
+{
+    border: none;
+    background: transparent;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text);
+    outline: none;
+}
+
+.btn-arrow 
+{
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: var(--text);
+    cursor: pointer;
+    padding: 10px;
+}
+
+.attendance-card 
+{
+    background: var(--card);
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+}
+
+.player-name 
+{
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    display: block;
+    text-align: center;
+}
+
+.toggle-group 
+{
+    display: flex;
+    gap: 10px;
+}
+
+.btn-toggle 
+{
+    flex: 1;
+    padding: 12px;
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--card);
+    font-weight: 600;
+    color: #a0aec0;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-toggle.presente.activo 
+{
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+}
+
+.btn-toggle.ausente.activo 
+{
+    background: var(--danger);
+    border-color: var(--danger);
+    color: white;
+}
+
+.manage-card 
+{
+    background: var(--card);
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: var(--radius);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--border);
+}
+
+.btn-delete 
+{ color: var(--danger);
+    background: none;
+    border: none;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.add-player
+{ 
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.add-player input
+{
+    flex: 1;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+.actions 
+{
+    position: fixed;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 95%;
+    max-width: 600px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.btn-primary, .btn-secondary 
+{
+    padding: 15px;
+    border: none;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+}
+.btn-primary
+{
+    background: var(--accent);
+    color: white;
+}
+
+.btn-secondary
+{
+    background: var(--card);
+    color: var(--text);
+    border: 1px solid var(--border);
+}
