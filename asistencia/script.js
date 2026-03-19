@@ -179,7 +179,7 @@ async function exportarPDF()
     const fechaStr = fechaApp.toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
     
     doc.setFontSize(18)
-    doc.text(`Asistencia ${categoriaActual} - La Ocho`, 14, 15)
+    doc.text(`Asistencia ${categoriaActual} - Tira Blanco`, 14, 15)
     doc.setFontSize(12)
     doc.text(`Fecha: ${fechaStr}`, 14, 23)
     
@@ -215,7 +215,7 @@ async function verReporteMensual()
     const nombreMes = fechaApp.toLocaleString('es-ES', { month: 'long' }).toUpperCase()
 
     doc.setFontSize(18)
-    doc.text(`Reporte Mensual ${categoriaActual} - La Ocho`, 14, 15)
+    doc.text(`Reporte Mensual ${categoriaActual} - Tira Blanco`, 14, 15)
     doc.setFontSize(12)
     doc.text(`Mes: ${nombreMes} ${añoApp}`, 14, 23)
 
