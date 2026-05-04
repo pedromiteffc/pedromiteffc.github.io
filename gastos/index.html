@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dashboard de Gastos</title>
+
+        <link rel="stylesheet" href="style.css">
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+        <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+    </head>
+
+    <body>
+
+        <div class="background-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+        </div>
+
+        <main class="glass-container">
+
+            <header class="header">
+
+                <div class="header-title" style="display: flex; justify-content: space-between; align-items: center;">
+
+                    <h1>Mi Billetera</h1>
+                    <a href="admin.html" style="color: var(--text-muted); text-decoration: none; font-size: 1.2rem; transition: color 0.2s;" onmouseover="this.style.color='var(--primary-btn)'" onmouseout="this.style.color='var(--text-muted)'">
+                        <i class="fa-solid fa-gear"></i>
+                    </a>
+
+                </div>
+
+                <div class="dashboard-top">
+
+                    <div class="balance-card">
+                        <p>Balance Total</p>
+                        <h2 id="balance">$0.00</h2>
+                    </div>
+
+                    <div class="summary">
+
+                        <div class="income">
+                            <p>Ingresos</p>
+                            <span id="money-plus">+$0.00</span>
+                        </div>
+
+                        <div class="expense">
+                            <p>Gastos</p>
+                            <span id="money-minus">-$0.00</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+            <div class="content-grid">
+                
+                <section class="chart-section">
+
+                    <h3 id="chart-title">Gastos por Categoría</h3>
+                    
+                    <div class="type-toggle">
+
+                        <input type="radio" id="chart-type-expense" name="chart-type" value="expense" checked>
+                        <label for="chart-type-expense">Gastos</label>
+                        
+                        <input type="radio" id="chart-type-income" name="chart-type" value="income">
+                        <label for="chart-type-income">Ingresos</label>
+
+                    </div>
+
+                    <div class="chart-container">
+                        <canvas id="expenseChart"></canvas>
+                    </div>
+
+                </section>
+
+                <section class="add-transaction">
+
+                    <h3 id="form-title">Nueva Transacción</h3>
+
+                    <form id="form">
+
+                        <div class="type-toggle">
+
+                            <input type="radio" id="type-expense" name="type" value="expense" checked>
+                            <label for="type-expense">Gasto</label>
+                            
+                            <input type="radio" id="type-income" name="type" value="income">
+                            <label for="type-income">Ingreso</label>
+
+                        </div>
+
+
+                        <div class="form-control">
+                            <input type="date" id="date" required />
+                        </div>
+
+                        <div class="form-control">
+                            <input type="text" id="text" placeholder="Descripción (Ej: Súper o Sueldo)" required />
+                        </div>
+                        
+                        <div class="form-control">
+                            <select id="category" required>
+                            </select>
+                        </div>
+                        
+                        <div class="form-control">
+                            <input type="number" id="amount" placeholder="Monto (Ej: 15000)" min="0" required />
+                        </div>
+                        
+                        <button class="btn" id="submit-btn">Agregar Transacción</button>
+                        <button type="button" class="btn btn-cancel" id="cancel-edit-btn" style="display: none;">Cancelar Edición</button>
+
+                    </form>
+
+                </section>
+
+                <section class="history-section">
+
+                    <h3>Historial por Día</h3>
+                    
+                    <button id="calendar-toggle" class="calendar-toggle">
+                        <span id="calendar-toggle-text">Ocultar Calendario</span>
+                        <i class="fa-solid fa-chevron-up" id="calendar-toggle-icon"></i>
+                    </button>
+
+                    <div class="calendar-container" id="calendar-body">
+
+                        <div class="calendar-header">
+                            <button id="prev-month"><i class="fa-solid fa-chevron-left"></i></button>
+                            <h4 id="month-year"></h4>
+                            <button id="next-month"><i class="fa-solid fa-chevron-right"></i></button>
+                        </div>
+
+                        <div class="calendar-days-of-week">
+                            <span>Do</span><span>Lu</span><span>Ma</span><span>Mi</span><span>Ju</span><span>Vi</span><span>Sa</span>
+                        </div>
+
+                        <div id="calendar-grid" class="calendar-grid"></div>
+                        
+                    </div>
+
+                    <div class="selected-date-header">
+                        <span id="selected-date-display">Mostrando: Hoy</span>
+                    </div>
+
+                    <ul id="list" class="list"></ul>
+
+                </section>
+
+            </div>
+
+        </main>
+
+        <script src="script.js"></script>
+
+    </body>
+
+</html>
