@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-
 <html lang="es">
 
     <head>
+
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Dashboard de Gastos</title>
+
+        <title>Gestor de Gastos</title>
 
         <link rel="stylesheet" href="style.css">
 
@@ -13,6 +14,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
         <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+
     </head>
 
     <body>
@@ -27,11 +29,19 @@
             <header class="header">
 
                 <div class="header-title" style="display: flex; justify-content: space-between; align-items: center;">
-
                     <h1>Mi Billetera</h1>
                     <a href="admin.html" style="color: var(--text-muted); text-decoration: none; font-size: 1.2rem; transition: color 0.2s;" onmouseover="this.style.color='var(--primary-btn)'" onmouseout="this.style.color='var(--text-muted)'">
                         <i class="fa-solid fa-gear"></i>
                     </a>
+                </div>
+
+                <div class="global-filter">
+
+                    <label for="filter-wallet"><i class="fa-solid fa-wallet"></i> Vista de cuenta:</label>
+
+                    <select id="filter-wallet">
+                        <option value="all">Todas las billeteras</option>
+                    </select>
 
                 </div>
 
@@ -65,15 +75,12 @@
                 <section class="chart-section">
 
                     <h3 id="chart-title">Gastos por Categoría</h3>
-                    
-                    <div class="type-toggle">
 
+                    <div class="type-toggle">
                         <input type="radio" id="chart-type-expense" name="chart-type" value="expense" checked>
                         <label for="chart-type-expense">Gastos</label>
-                        
                         <input type="radio" id="chart-type-income" name="chart-type" value="income">
                         <label for="chart-type-income">Ingresos</label>
-
                     </div>
 
                     <div class="chart-container">
@@ -89,31 +96,30 @@
                     <form id="form">
 
                         <div class="type-toggle">
-
                             <input type="radio" id="type-expense" name="type" value="expense" checked>
                             <label for="type-expense">Gasto</label>
-                            
                             <input type="radio" id="type-income" name="type" value="income">
                             <label for="type-income">Ingreso</label>
-
                         </div>
-
 
                         <div class="form-control">
                             <input type="date" id="date" required />
                         </div>
 
                         <div class="form-control">
-                            <input type="text" id="text" placeholder="Descripción (Ej: Súper o Sueldo)" required />
+                            <input type="text" id="text" placeholder="Descripción (Ej: Súper)" required />
                         </div>
                         
                         <div class="form-control">
-                            <select id="category" required>
-                            </select>
+                            <select id="wallet" required></select>
+                        </div>
+
+                        <div class="form-control">
+                            <select id="category" required></select>
                         </div>
                         
                         <div class="form-control">
-                            <input type="number" id="amount" placeholder="Monto (Ej: 15000)" min="0" required />
+                            <input type="number" id="amount" placeholder="Monto" min="0" required />
                         </div>
                         
                         <button class="btn" id="submit-btn">Agregar Transacción</button>
@@ -145,7 +151,7 @@
                         </div>
 
                         <div id="calendar-grid" class="calendar-grid"></div>
-                        
+
                     </div>
 
                     <div class="selected-date-header">
@@ -163,5 +169,5 @@
         <script src="script.js"></script>
 
     </body>
-
+    
 </html>
