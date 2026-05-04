@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
-:root 
-{
+:root {
     --bg-color: #f3f4f6;
     --glass-bg: rgba(255, 255, 255, 0.65);
     --glass-border: rgba(255, 255, 255, 0.4);
@@ -12,15 +11,16 @@
     --primary-btn: #3b82f6;
 }
 
-* 
-{ 
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0; 
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* FIX 1: Bloquear el ancho total del dispositivo */
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
 }
 
-body 
-{
+body {
     font-family: 'Inter', sans-serif;
     background-color: var(--bg-color);
     color: var(--text-main);
@@ -30,37 +30,25 @@ body
     min-height: 100vh;
     padding: 20px;
     position: relative;
-    overflow-x: hidden;
 }
 
-.background-shapes .shape 
-{ 
-    position: absolute; 
-    border-radius: 50%; 
-    filter: blur(60px); 
-    z-index: -1; 
+/* FIX 2: Encerrar las formas borrosas para que no rompan el ancho de la pantalla */
+.background-shapes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
 }
 
-.shape-1 
-{ 
-    width: 400px; 
-    height: 400px; 
-    background: rgba(59, 130, 246, 0.3); 
-    top: -100px; 
-    left: -100px; 
-}
+.background-shapes .shape { position: absolute; border-radius: 50%; filter: blur(60px); }
+.shape-1 { width: 400px; height: 400px; background: rgba(59, 130, 246, 0.3); top: -10%; left: -10%; }
+.shape-2 { width: 350px; height: 350px; background: rgba(46, 204, 113, 0.2); bottom: -10%; right: -10%; }
 
-.shape-2 
-{ 
-    width: 350px; 
-    height: 350px; 
-    background: rgba(46, 204, 113, 0.2); 
-    bottom: 50px; 
-    right: -100px; 
-}
-
-.glass-container 
-{
+.glass-container {
     background: var(--glass-bg);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
@@ -76,644 +64,166 @@ body
     transition: all 0.3s ease;
 }
 
-.header h1 
-{ 
-    font-size: 1.2rem; 
-    text-align: center; 
-    color: var(--text-muted); 
-    margin-bottom: 20px; 
+.header h1 { font-size: 1.2rem; text-align: center; color: var(--text-muted); margin-bottom: 20px; }
+
+.dashboard-top { display: flex; flex-direction: column; gap: 15px; }
+.balance-card { text-align: center; }
+.balance-card p { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+.balance-card h2 { font-size: 2.5rem; font-weight: 600; }
+
+.summary {
+    display: flex; justify-content: space-between;
+    background: rgba(255, 255, 255, 0.5); padding: 15px;
+    border-radius: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.02);
 }
+.summary div { flex: 1; text-align: center; }
+.summary div:first-child { border-right: 1px solid var(--glass-border); }
+.summary p { font-size: 0.85rem; color: var(--text-muted); }
+.income span { color: var(--positive); font-weight: 600; font-size: 1.1rem; }
+.expense span { color: var(--negative); font-weight: 600; font-size: 1.1rem; }
 
-.dashboard-top 
-{ 
-    display: flex; 
-    flex-direction: 
-    column; gap: 15px; 
+.content-grid { display: flex; flex-direction: column; gap: 25px; }
+h3 { font-size: 1.1rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; margin-bottom: 15px; text-align: center; }
+
+.chart-container { position: relative; height: 200px; width: 100%; display: flex; justify-content: center; }
+
+.type-toggle {
+    display: flex; background: rgba(255, 255, 255, 0.7);
+    border-radius: 12px; margin-bottom: 15px; overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.05); position: relative;
 }
-
-.balance-card 
-{ 
-    text-align: center; 
+.type-toggle input { display: none; }
+.type-toggle label {
+    flex: 1; text-align: center; padding: 10px; cursor: pointer;
+    font-size: 0.95rem; font-weight: 600; color: var(--text-muted);
+    transition: all 0.3s ease; z-index: 1;
 }
+.type-toggle input[value="expense"]:checked + label { background: var(--negative); color: white; }
+.type-toggle input[value="income"]:checked + label { background: var(--positive); color: white; }
 
-.balance-card p 
-{ 
-    font-size: 0.9rem; 
-    text-transform: uppercase; 
-    letter-spacing: 1px; 
-}
-
-.balance-card h2 
-{ 
-    font-size: 2.5rem; 
-    font-weight: 600; 
-}
-
-.summary 
-{
-    display: flex; 
-    justify-content: space-between;
-    background: rgba(255, 255, 255, 0.5); 
-    padding: 15px;
-    border-radius: 16px; 
-    box-shadow: 0 2px 10px rgba(0,0,0,0.02);
-}
-
-.summary div 
-{ 
-    flex: 1; 
-    text-align: center; 
-}
-
-.summary div:first-child 
-{ 
-    border-right: 1px solid var(--glass-border); 
-}
-
-.summary p 
-{ 
-    font-size: 0.85rem; 
-    color: var(--text-muted); 
-}
-
-.income span 
-{ 
-    color: var(--positive); 
-    font-weight: 600; 
-    font-size: 1.1rem; 
-}
-
-.expense span 
-{ 
-    color: var(--negative); 
-    font-weight: 600; 
-    font-size: 1.1rem; 
-}
-
-
-.content-grid 
-{ 
-    display: flex; 
-    flex-direction: column; 
-    gap: 25px; 
-}
-
-h3 
-{ 
-    font-size: 1.1rem; 
-    border-bottom: 1px solid var(--glass-border); 
-    padding-bottom: 10px; 
-    margin-bottom: 15px; 
-    text-align: center; 
-}
-
-.chart-container 
-{ 
-    position: relative; 
-    height: 200px; 
-    width: 100%; 
-    display: flex; 
-    justify-content: center; 
-}
-
-.type-toggle 
-{
-    display: flex; 
-    background: rgba(255, 255, 255, 0.7);
-    border-radius: 12px; 
-    margin-bottom: 15px; 
-    overflow: hidden;
-    border: 1px solid rgba(0,0,0,0.05); 
-    position: relative;
-}
-
-.type-toggle input 
-{ 
-    display: none; 
-}
-
-.type-toggle label 
-{
-    flex: 1; 
-    text-align: center; 
-    padding: 10px; 
-    cursor: pointer;
-    font-size: 0.95rem; 
-    font-weight: 600; 
-    color: var(--text-muted);
-    transition: all 0.3s ease; 
-    z-index: 1;
-}
-
-.type-toggle input[value="expense"]:checked + label 
-{ 
-    background: var(--negative); 
-    color: white; 
-}
-
-.type-toggle input[value="income"]:checked + label 
-{ 
-    background: var(--positive); 
-    color: white; 
-}
-
-.form-control input, .form-control select 
-{
-    width: 100%; 
-    padding: 12px 15px; 
-    margin-bottom: 15px;
+.form-control input, .form-control select {
+    width: 100%; padding: 12px 15px; margin-bottom: 15px;
     border-radius: 12px; border: 1px solid rgba(0,0,0,0.05);
-    background: rgba(255,255,255,0.7); 
-    font-family: inherit;
-    font-size: 1rem; 
-    outline: none; 
-    transition: all 0.2s ease;
+    background: rgba(255,255,255,0.7); font-family: inherit;
+    font-size: 1rem; outline: none; transition: all 0.2s ease;
     color: var(--text-main);
 }
+.form-control input:focus, .form-control select:focus { background: #fff; border-color: var(--primary-btn); box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); }
 
-.form-control input:focus, .form-control select:focus 
-{ 
-    background: #fff; 
-    border-color: var(--primary-btn); 
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); 
-}
+.btn { width: 100%; padding: 12px; border: none; background-color: var(--primary-btn); color: white; font-size: 1rem; font-weight: 600; border-radius: 12px; cursor: pointer; transition: background 0.3s ease; margin-bottom: 10px;}
+.btn:hover { background-color: #2563eb; }
+.btn-cancel { background-color: #95a5a6; }
+.btn-cancel:hover { background-color: #7f8c8d; }
 
-.btn 
-{ 
-    width: 100%; 
-    padding: 12px; 
-    border: none; 
-    background-color: var(--primary-btn); 
-    color: white; 
-    font-size: 1rem; 
-    font-weight: 600; 
-    border-radius: 12px; 
-    cursor: pointer; 
-    transition: background 0.3s ease; 
-    margin-bottom: 10px;
-}
-
-.btn:hover 
-{ 
-    background-color: #2563eb; 
-}
-
-.btn-cancel 
-{ 
-    background-color: #95a5a6; 
-}
-
-.btn-cancel:hover 
-{ 
-    background-color: #7f8c8d; 
-}
-
-
-.calendar-toggle 
-{
-    width: 100%; 
-    background: rgba(255, 255, 255, 0.7);
-    border: 1px solid var(--glass-border); 
-    padding: 10px 15px;
-    border-radius: 12px; 
-    display: flex; 
-    justify-content: space-between;
-    align-items: center; 
-    font-family: inherit; 
-    font-size: 0.95rem;
-    color: var(--text-main); 
-    font-weight: 600; 
-    cursor: pointer;
-    margin-bottom: 10px; 
-    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+/* =========================================
+   CALENDARIO DESPLEGABLE
+   ========================================= */
+.calendar-toggle {
+    width: 100%; background: rgba(255, 255, 255, 0.7);
+    border: 1px solid var(--glass-border); padding: 10px 15px;
+    border-radius: 12px; display: flex; justify-content: space-between;
+    align-items: center; font-family: inherit; font-size: 0.95rem;
+    color: var(--text-main); font-weight: 600; cursor: pointer;
+    margin-bottom: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.02);
     transition: all 0.2s ease;
 }
+.calendar-toggle:hover { background: rgba(255, 255, 255, 0.9); }
 
-.calendar-toggle:hover 
-{ 
-    background: rgba(255, 255, 255, 0.9); 
-}
-
-.calendar-container 
-{
-    background: rgba(255, 255, 255, 0.5); 
-    border-radius: 16px;
-    padding: 15px; 
-    margin-bottom: 15px; 
-    border: 1px solid var(--glass-border);
+.calendar-container {
+    background: rgba(255, 255, 255, 0.5); border-radius: 16px;
+    padding: 15px; margin-bottom: 15px; border: 1px solid var(--glass-border);
     transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s ease;
-    max-height: 400px; 
-    opacity: 1; 
-    overflow: hidden;
+    max-height: 400px; opacity: 1; overflow: hidden;
 }
 
-.calendar-container.collapsed 
-{
-    max-height: 0; 
-    opacity: 0; 
-    padding-top: 0; 
-    padding-bottom: 0;
-    margin-bottom: 5px; 
-    border: none;
+.calendar-container.collapsed {
+    max-height: 0; opacity: 0; padding-top: 0; padding-bottom: 0;
+    margin-bottom: 5px; border: none;
 }
 
-.calendar-header 
-{ 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    margin-bottom: 10px; 
-}
+.calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.calendar-header button { background: transparent; border: none; font-size: 1.1rem; cursor: pointer; color: var(--text-muted); padding: 5px 10px; border-radius: 8px; transition: background 0.2s; }
+.calendar-header button:hover { background: rgba(255,255,255,0.8); }
+.calendar-header h4 { font-size: 0.95rem; font-weight: 600; text-transform: capitalize; }
 
+.calendar-days-of-week { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; font-size: 0.75rem; color: var(--text-muted); font-weight: 600; margin-bottom: 5px; }
+.calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+.calendar-day { aspect-ratio: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; font-size: 0.85rem; cursor: pointer; border-radius: 8px; transition: all 0.2s; }
+.calendar-day:hover { background: rgba(255,255,255,0.8); }
+.calendar-day.empty { cursor: default; }
+.calendar-day.empty:hover { background: transparent; }
+.calendar-day.selected { background: var(--primary-btn); color: white; box-shadow: 0 2px 8px rgba(59, 130, 246, 0.4); }
+.calendar-day.selected .dot { border: 1px solid white; }
 
-.calendar-header button 
-{ 
-    background: transparent; 
-    border: none; 
-    font-size: 1.1rem; 
-    cursor: pointer; 
-    color: var(--text-muted); 
-    padding: 5px 10px; 
-    border-radius: 8px; 
-    transition: background 0.2s; 
-}
+.dots-container { display: flex; gap: 3px; margin-top: 2px; height: 4px; }
+.dot { width: 5px; height: 5px; border-radius: 50%; }
+.dot.expense { background-color: var(--negative); }
+.dot.income { background-color: var(--positive); }
 
-.calendar-header button:hover 
-{ 
-    background: rgba(255,255,255,0.8); 
-}
+.selected-date-header { text-align: center; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px; font-weight: 500;}
 
-.calendar-header h4 
-{ 
-    font-size: 0.95rem; 
-    font-weight: 600; 
-    text-transform: capitalize; 
-}
+/* =========================================
+   HISTORIAL - CARDS (DISEÑO MOBILE FIRST)
+   ========================================= */
+.list { list-style-type: none; display: flex; flex-direction: column; gap: 12px; max-height: 300px; overflow-y: auto; padding-right: 8px; padding-left: 2px; padding-bottom: 5px; }
+.list::-webkit-scrollbar { width: 6px; }
+.list::-webkit-scrollbar-track { background: transparent; }
+.list::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
 
-
-.calendar-days-of-week 
-{ 
-    display: grid; 
-    grid-template-columns: repeat(7, 1fr); 
-    text-align: center; 
-    font-size: 0.75rem; 
-    color: var(--text-muted); 
-    font-weight: 600; 
-    margin-bottom: 5px; 
-}
-
-.calendar-grid 
-{ 
-    display: grid; 
-    grid-template-columns: repeat(7, 1fr); 
-    gap: 2px; 
-}
-
-.calendar-day 
-{ 
-    aspect-ratio: 1; 
-    display: flex; 
-    flex-direction: column; 
-    justify-content: center; 
-    align-items: center; 
-    font-size: 0.85rem; 
-    cursor: pointer; 
-    border-radius: 8px; 
-    transition: all 0.2s; 
-}
-
-.calendar-day:hover 
-{ 
-    background: rgba(255,255,255,0.8); 
-}
-
-.calendar-day.empty 
-{ 
-    cursor: default; 
-}
-
-.calendar-day.empty:hover 
-{ 
-    background: transparent; 
-}
-
-.calendar-day.selected 
-{ 
-    background: var(--primary-btn); 
-    color: white; 
-    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.4); 
-}
-
-.calendar-day.selected .dot 
-{ 
-    border: 1px solid white; 
-}
-
-
-.dots-container 
-{
-     display: flex; 
-    gap: 3px; 
-    margin-top: 2px; 
-    height: 4px; 
-}
-
-.dot 
-{ 
-    width: 5px; 
-    height: 5px; 
-    border-radius: 50%; 
-}
-
-.dot.expense 
-{ 
-    background-color: var(--negative); 
-}
-
-.dot.income 
-{ 
-    background-color: var(--positive);
-}
-
-
-.selected-date-header 
-{ 
-    text-align: center; 
-    font-size: 0.85rem; 
-    color: var(--text-muted); 
-    margin-bottom: 10px; 
-    font-weight: 500;
-}
-
-.list 
-{ 
-    list-style-type: none; 
-    display: flex; 
-    flex-direction: column; 
-    gap: 12px; 
-    max-height: 300px; 
-    overflow-y: auto; 
-    padding-right: 8px; 
-    padding-left: 2px; 
-    padding-bottom: 5px; 
-}
-
-.list::-webkit-scrollbar 
-{ 
-    width: 6px; 
-}
-
-.list::-webkit-scrollbar-track 
-{ 
-    background: transparent; 
-}
-
-.list::-webkit-scrollbar-thumb 
-{ 
-    background: rgba(0,0,0,0.1); 
-    border-radius: 10px; 
-}
-
-
-.list li 
-{
+.list li {
     background: rgba(255, 255, 255, 0.9);
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.04), -4px -4px 10px rgba(255, 255, 255, 0.8);
-    display: flex; 
-    flex-direction: column; 
-    align-items: flex-start;
-    padding: 12px 16px; 
-    border-radius: 16px;
+    display: flex; flex-direction: column; align-items: flex-start;
+    padding: 12px 16px; border-radius: 16px;
     border: 1px solid rgba(255, 255, 255, 1);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    position: relative; 
-    overflow: hidden;
+    position: relative; overflow: hidden;
 }
 
-.transaction-content 
-{ 
-    width: 100%; 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-}
+/* FIX 3: Bloquear desbordamientos de flexbox por textos muy largos */
+.transaction-content { width: 100%; display: flex; justify-content: space-between; align-items: center; min-width: 0; gap: 10px;}
+.transaction-info { display: flex; align-items: center; gap: 14px; min-width: 0; flex: 1;}
 
-.transaction-info 
-{ 
-    display: flex; 
-    align-items: center; 
-    gap: 14px; 
-}
+.icon-box { width: 42px; height: 42px; border-radius: 12px; display: flex; justify-content: center; align-items: center; font-size: 1.2rem; box-shadow: inset 2px 2px 5px rgba(0,0,0,0.03), inset -2px -2px 5px rgba(255,255,255,1); flex-shrink: 0;}
+.icon-expense { background: rgba(231, 76, 60, 0.08); }
+.icon-income { background: rgba(46, 204, 113, 0.08); }
 
-.icon-box 
-{ 
-    width: 42px; 
-    height: 42px; 
-    border-radius: 12px; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    font-size: 1.2rem; 
-    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.03), inset -2px -2px 5px rgba(255,255,255,1);
-}
-
-.icon-expense
-{
-    background: rgba(231, 76, 60, 0.08);
-}
-
-.icon-income
-{
-    background: rgba(46, 204, 113, 0.08);
-}
-
-
-.transaction-details
-{
-    display: flex;
-    flex-direction: column;
-}
-
-.transaction-details strong { font-size: 0.95rem; color: var(--text-main); letter-spacing: -0.3px; }
+.transaction-details { display: flex; flex-direction: column; min-width: 0; flex: 1; }
+/* Acorta nombres muy largos de gastos con puntos suspensivos en lugar de romper el margen */
+.transaction-details strong { font-size: 0.95rem; color: var(--text-main); letter-spacing: -0.3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .category-tag { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
 
-.transaction-amount 
-{ 
-    font-weight: 600; 
-    font-size: 1.05rem; 
-    transition: transform 0.3s ease;
-}
+.transaction-amount { font-weight: 600; font-size: 1.05rem; transition: transform 0.3s ease; flex-shrink: 0;}
+.text-expense { color: var(--negative); }
+.text-income { color: var(--positive); }
 
-.text-expense
-{
-    color: var(--negative);
-}
-
-.text-income
-{
-    color: var(--positive);
-}
-
-.transaction-actions
-{
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    gap: 12px; 
-    margin-top: 10px;
-    padding-top: 10px;
+.transaction-actions {
+    width: 100%; display: flex; justify-content: flex-end; gap: 12px; 
+    margin-top: 10px; padding-top: 10px;
     border-top: 1px solid rgba(0,0,0,0.05);
     transition: transform 0.3s ease;
 }
 
-.action-btn 
-{
-    width: 34px;
-    height: 34px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    font-size: 0.85rem;
-    transition: background 0.2s;
+.action-btn {
+    width: 34px; height: 34px; border-radius: 8px; border: none; cursor: pointer;
+    display: flex; justify-content: center; align-items: center;
+    color: white; font-size: 0.85rem; transition: background 0.2s;
 }
+.edit-btn { background: var(--primary-btn); }
+.edit-btn:hover { background: #2563eb; }
+.delete-btn { background: var(--negative); }
+.delete-btn:hover { background: #c0392b; }
 
-.edit-btn
-{
-    background: var(--primary-btn);
-}
+/* =========================================
+   GRILLA ADMIN
+   ========================================= */
+.admin-grid { display: grid; gap: 30px; grid-template-columns: 1fr; align-items: start;}
+@media (min-width: 900px) { .admin-grid { grid-template-columns: 1fr 1fr; } }
 
-.edit-btn:hover
-{
-    background: #2563eb;
-}
-
-.delete-btn
-{
-    background: var(--negative);
-}
-
-.delete-btn:hover
-{
-    background: #c0392b;
-}
-
-@media (min-width: 900px) 
-{
-
-    body
-    {
-        align-items: center;
-    }
-
-    .glass-container
-    {
-        max-width: 1100px;
-        padding: 40px;
-    }
-
-    .dashboard-top
-    {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        background: rgba(255, 255, 255, 0.4);
-        padding: 20px 30px;
-        border-radius: 20px;
-    }
-
-    .balance-card
-    {
-        text-align: left;
-    }
-
-    .summary
-    {
-        width: 400px;
-        background: transparent;
-        box-shadow: none;
-        padding: 0;
-    }
-
-    .content-grid
-    {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 30px;
-        align-items: start;
-    }
-
-    .list
-    {
-        max-height: 400px;
-    }
-
-    .chart-container
-    {
-        height: 250px;
-    }
-
-
-    .list li
-    {
-        flex-direction: row;
-        align-items: center;
-    }
-
-    .transaction-content
-    {
-        width: auto;
-        flex: 1;
-    }
-
-    .transaction-actions 
-    {
-        position: absolute;
-        right: 10px;
-        top: 50%;
-        transform: translateY(-50%) translateX(150%);
-        width: auto;
-        margin-top: 0;
-        padding-top: 0;
-        border-top: none;
-        display: flex;
-        gap: 8px;
-        opacity: 1;
-    }
-
-    .list li:hover .transaction-actions
-    {
-        transform: translateY(-50%) translateX(0);
-    }
-
-    .list li:hover .transaction-amount
-    {
-        transform: translateX(-70px); opacity: 0.3;
-    }
-
-}
-
-.admin-grid
-{
-    display: grid;
-    gap: 30px;
-    grid-template-columns: 1fr;
-    align-items: start;
-}
-
-@media (min-width: 900px)
-{
-    .admin-grid
-    {
-        grid-template-columns: 1fr 1fr;
-    }
-}
-
-.global-filter 
-{
+/* =========================================
+   FILTRO GLOBAL Y BADGES BILLETERA
+   ========================================= */
+.global-filter {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -722,17 +232,10 @@ h3
     border-radius: 12px;
     margin-bottom: 20px;
     border: 1px solid var(--glass-border);
+    gap: 10px;
 }
-
-.global-filter label 
-{ 
-    font-size: 0.9rem; 
-    color: var(--text-muted); 
-    font-weight: 600;
-}
-
-.global-filter select 
-{
+.global-filter label { font-size: 0.9rem; color: var(--text-muted); font-weight: 600; white-space: nowrap;}
+.global-filter select {
     border: none;
     background: transparent;
     font-family: inherit;
@@ -742,16 +245,12 @@ h3
     outline: none;
     cursor: pointer;
     text-align: right;
+    max-width: 55%; /* Evita que el texto empuje hacia afuera */
+    text-overflow: ellipsis;
 }
 
-.icon-wrapper
-{
-    position: relative;
-    display: inline-block;
-}
-
-.wallet-badge 
-{
+.icon-wrapper { position: relative; display: inline-block; flex-shrink: 0;}
+.wallet-badge {
     position: absolute;
     bottom: -4px;
     right: -4px;
@@ -762,4 +261,37 @@ h3
     background-color: white;
     object-fit: cover;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* =========================================
+   ESTILOS PANEL DE ADMIN
+   ========================================= */
+.back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--primary-btn); text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: opacity 0.2s; }
+.back-link:hover { opacity: 0.8; }
+input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
+input[type="color"]::-webkit-color-swatch { border: none; border-radius: 8px; }
+
+
+/* =========================================
+   MEDIA QUERY: DESKTOP
+   ========================================= */
+@media (min-width: 900px) {
+    body { align-items: center; }
+    .glass-container { max-width: 1100px; padding: 40px; }
+    .dashboard-top { flex-direction: row; justify-content: space-between; align-items: center; background: rgba(255, 255, 255, 0.4); padding: 20px 30px; border-radius: 20px; }
+    .balance-card { text-align: left; }
+    .summary { width: 400px; background: transparent; box-shadow: none; padding: 0; }
+    .content-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px; align-items: start; }
+    .list { max-height: 400px; }
+    .chart-container { height: 250px; }
+
+    .list li { flex-direction: row; align-items: center; }
+    .transaction-content { width: auto; flex: 1; }
+    .transaction-actions {
+        position: absolute; right: 10px; top: 50%; transform: translateY(-50%) translateX(150%);
+        width: auto; margin-top: 0; padding-top: 0; border-top: none;
+        display: flex; gap: 8px; opacity: 1;
+    }
+    .list li:hover .transaction-actions { transform: translateY(-50%) translateX(0); }
+    .list li:hover .transaction-amount { transform: translateX(-70px); opacity: 0.3; } 
 }
