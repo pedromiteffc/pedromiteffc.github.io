@@ -695,3 +695,71 @@ h3
     }
 
 }
+
+.admin-grid
+{
+    display: grid;
+    gap: 30px;
+    grid-template-columns: 1fr;
+    align-items: start;
+}
+
+@media (min-width: 900px)
+{
+    .admin-grid
+    {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.global-filter 
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255,255,255,0.8);
+    padding: 10px 15px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 1px solid var(--glass-border);
+}
+
+.global-filter label 
+{ 
+    font-size: 0.9rem; 
+    color: var(--text-muted); 
+    font-weight: 600;
+}
+
+.global-filter select 
+{
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-main);
+    outline: none;
+    cursor: pointer;
+    text-align: right;
+}
+
+.icon-wrapper
+{
+    position: relative;
+    display: inline-block;
+}
+
+.wallet-badge 
+{
+    position: absolute;
+    bottom: -4px;
+    right: -4px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid white;
+    background-color: white;
+    object-fit: cover;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
