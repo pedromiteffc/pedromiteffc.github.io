@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tracker de Espíritus - Fortnite</title>
+    <style>
+        /* CSS: Estilos Base */
+        :root {
+            --bg-color: #121212;
+            --card-bg: #242424;
+            --panel-bg: #1a1a1a;
+            --text-color: #ffffff;
+            --accent-color: #8b5cf6;
+            --accent-hover: #7c3aed;
+            --obtained-border: #4ade80;
+            --maxed-color: #fbbf24;
+            --danger-color: #ef4444;
+            --type-header: #3b82f6;
+            --import-border: #10b981;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1, h2 { text-align: center; color: var(--accent-color); }
+
+        /* Panel de Estadísticas (Contadores) */
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px auto 40px auto;
+            max-width: 900px;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            background-color: var(--panel-bg);
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: 2px solid #333;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+            min-width: 200px;
+            justify-content: center;
+        }
+
+        .stat-obtained { border-color: var(--obtained-border); color: var(--obtained-border); }
+        .stat-maxed { border-color: var(--maxed-color); color: var(--maxed-color); }
+        .stat-missing { border-color: var(--danger-color); color: var(--danger-color); }
+
+        .stat-box span {
+            color: white;
+            font-size: 1.8rem;
+        }
+
+        /* Panel de Administración */
+        .admin-panel {
+            background-color: var(--panel-bg);
+            border-radius: 12px;
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto 40px auto;
+            border: 1px solid #333;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .full-width { grid-column: 1 / -1; }
+
+        @media (max-width: 768px) {
+            .admin-panel { grid-template-columns: 1fr; }
+            .form-row { flex-direction: column; }
+        }
+
+        .admin-section {
+            background-color: #222;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .admin-section h3 {
+            margin-top: 0; color: #ccc; font-size: 1.1rem;
+            border-bottom: 1px solid #444; padding-bottom: 10px;
+        }
+
+        .form-group { display: flex; flex-direction: column; gap: 10px; }
+        .form-row { display: flex; gap: 10px; }
+        .form-row > * { flex: 1; }
+
+        input, select {
+            padding: 10px; border-radius: 6px; border: 1px solid #444;
+            background-color: #2a2a2a; color: white; width: 100%; box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px; border-radius: 6px; cursor: pointer; font-weight: bold; border: none;
+        }
+        
+        .btn-primary { background-color: var(--accent-color); color: white; transition: 0.2s; }
+        .btn-primary:hover { background-color: var(--accent-hover); }
+        
+        .btn-danger { background-color: transparent; color: var(--danger-color); border: 1px solid var(--danger-color); padding: 5px 10px; font-size: 0.9rem;}
+        .btn-danger:hover { background-color: rgba(239, 68, 68, 0.1); }
+
+        .btn-import { background-color: var(--import-border); color: white; width: 100%; margin-top: 10px; }
+        .btn-import:hover { background-color: #059669; }
+
+        .btn-wipe { background-color: var(--danger-color); color: white; margin-top: 10px; width: 100%; }
+
+        /* Zona de Pegado */
+        .paste-zone {
+            min-height: 100px;
+            border: 2px dashed var(--import-border);
+            border-radius: 8px;
+            background-color: #1a2e25;
+            padding: 15px;
+            color: #ccc;
+            overflow-y: auto;
+            max-height: 250px;
+            font-size: 0.9rem;
+        }
+        
+        .paste-zone:empty:before {
+            content: "Copia los Item IDs de la wiki y pégalos aquí dentro (Ctrl+V)...";
+            color: #888;
+        }
+
+        .paste-zone img { max-width: 50px; max-height: 50px; }
+
+        /* Mini listas */
+        .mini-list {
+            list-style: none; padding: 0; margin-top: 15px;
+            max-height: 150px; overflow-y: auto;
+        }
+        .mini-list li {
+            display: flex; justify-content: space-between; align-items: center;
+            background: #2a2a2a; padding: 8px 12px; margin-bottom: 5px; border-radius: 4px;
+        }
+
+        /* Tracker */
+        .instructions { text-align: center; color: #a1a1aa; margin-bottom: 30px; }
+        .tracker-container { max-width: 1200px; margin: 0 auto; }
+        
+        .type-section {
+            margin-bottom: 20px; background-color: rgba(255,255,255,0.02);
+            padding: 20px; border-radius: 12px; border: 1px solid #333;
+        }
+
+        .dropdown-header {
+            display: flex; justify-content: space-between; align-items: center;
+            color: var(--type-header); border-bottom: 2px solid var(--type-header);
+            padding-bottom: 10px; cursor: pointer; user-select: none; transition: 0.2s;
+        }
+        .dropdown-header:hover { opacity: 0.8; }
+        .dropdown-header h2 { margin: 0; text-transform: capitalize; }
+        
+        .arrow-icon { transition: transform 0.3s ease; }
+        .type-section.collapsed .arrow-icon { transform: rotate(-90deg); }
+        .type-section.collapsed .grid-container { display: none; }
+
+        .grid-container {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; margin-top: 20px;
+        }
+
+        .card {
+            background-color: var(--card-bg); border: 2px solid transparent;
+            border-radius: 12px; padding: 15px; text-align: center;
+            transition: all 0.3s ease; cursor: pointer; position: relative;
+        }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+        .card.obtained { border-color: var(--obtained-border); background-color: rgba(74, 222, 128, 0.1); }
+        
+        .card img {
+            width: 100%; height: 180px; 
+            object-fit: contain; 
+            border-radius: 8px; margin: 10px 0; background-color: #1f1f1f;
+            padding: 10px; box-sizing: border-box;
+        }
+        
+        .card h4 { 
+            margin: 5px 0; 
+            font-size: 1.2rem; 
+            color: #ddd; 
+        }
+        
+        .crown-btn {
+            background: none; border: none; font-size: 28px; cursor: pointer;
+            color: #555; transition: 0.2s;
+        }
+        .crown-btn:hover { transform: scale(1.2); }
+        .crown-btn.maxed { color: var(--maxed-color); text-shadow: 0 0 15px rgba(251, 191, 36, 0.8); }
+    </style>
+</head>
+<body>
+
+    <h1>Tracker de Espíritus - Fortnite</h1>
+
+    <div class="stats-container">
+        <div class="stat-box stat-obtained">Obtenidos: <span id="count-obtained">0</span></div>
+        <div class="stat-box stat-maxed">Maxeados: <span id="count-maxed">0</span></div>
+        <div class="stat-box stat-missing">Faltantes: <span id="count-missing">0</span></div>
+    </div>
+
+    <p class="instructions">
+        Haz clic en la imagen para marcar como "Obtenido". Haz clic en la 👑 para marcar como "Maxeado". <br> 
+        <strong>Haz clic en los nombres para desplegar u ocultar los espíritus.</strong>
+    </p>
+
+    <div class="admin-panel">
+        
+        <div class="admin-section full-width">
+            <h3>⚡ Importación Inteligente (HD y Nombres Exactos)</h3>
+            <p style="font-size: 0.9rem; color: #aaa; margin-top: 0;">Selecciona la lista en la wiki (texto con IDs + imágenes), cópiala y pégala.</p>
+            <div id="paste-zone" class="paste-zone" contenteditable="true"></div>
+            <button class="btn-import" id="btn-process-import">Procesar e Importar Espíritus HD</button>
+            <button class="btn-wipe" id="btn-wipe-all">Eliminar TODO (Reiniciar de Cero)</button>
+        </div>
+
+        <hr style="grid-column: 1 / -1; border-color: #333; width: 100%;">
+
+        <div class="admin-section">
+            <h3>1. Crear Tipo Manualmente (Ej: Grim Sprite)</h3>
+            <div class="form-group">
+                <input type="text" id="type-name" placeholder="Nombre del Tipo" required>
+                <button class="btn-primary" id="btn-save-type">Guardar Tipo</button>
+            </div>
+            <ul id="list-types" class="mini-list"></ul>
+        </div>
+
+        <div class="admin-section">
+            <h3>2. Crear Variante Manualmente (Ej: Gem)</h3>
+            <div class="form-group">
+                <input type="text" id="varname-input" placeholder="Nombre de la Variante" required>
+                <button class="btn-primary" id="btn-save-varname">Guardar Variante</button>
+            </div>
+            <ul id="list-varnames" class="mini-list"></ul>
+        </div>
+
+        <div class="admin-section full-width">
+            <h3>3. Armar Espíritu Manualmente</h3>
+            <div class="form-group">
+                <div class="form-row">
+                    <select id="sel-type"><option value="">-- Selecciona un Tipo --</option></select>
+                    <select id="sel-varname"><option value="">-- Selecciona una Variante --</option></select>
+                </div>
+                <input type="url" id="spirit-img" placeholder="URL de la Imagen (https://...)" required>
+                <button class="btn-primary" id="btn-save-spirit">Crear Espíritu</button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="tracker-container" id="tracker-container"></div>
+
+    <script>
+        // Estructuras de Datos
+        let types = JSON.parse(localStorage.getItem('fntTypes')) || [];
+        let varNames = JSON.parse(localStorage.getItem('fntVarNames')) || [];
+        let spirits = JSON.parse(localStorage.getItem('fntSpiritsConfig')) || [];
+        let progress = JSON.parse(localStorage.getItem('fntProgress')) || {};
+        let dropdownState = JSON.parse(localStorage.getItem('fntDropdowns')) || {}; 
+
+        // Funciones de Guardado
+        function saveData() {
+            localStorage.setItem('fntTypes', JSON.stringify(types));
+            localStorage.setItem('fntVarNames', JSON.stringify(varNames));
+            localStorage.setItem('fntSpiritsConfig', JSON.stringify(spirits));
+            localStorage.setItem('fntProgress', JSON.stringify(progress));
+            localStorage.setItem('fntDropdowns', JSON.stringify(dropdownState));
+            renderAll();
+        }
+
+        function saveDropdownState() {
+            localStorage.setItem('fntDropdowns', JSON.stringify(dropdownState));
+        }
+
+        const sortAlpha = (a, b) => a.name.localeCompare(b.name);
+
+        function getHighResUrl(url) {
+            if (!url) return url;
+            let cleanUrl = url;
+            if (cleanUrl.includes('/revision/latest')) cleanUrl = cleanUrl.split('/revision/latest')[0];
+            if (cleanUrl.includes('/scale-to-width-down')) cleanUrl = cleanUrl.split('/scale-to-width-down')[0];
+            if (cleanUrl.includes('?')) cleanUrl = cleanUrl.split('?')[0];
+            return cleanUrl;
+        }
+
+        function renderCounters() {
+            let total = spirits.length;
+            let obtained = 0;
+            let maxed = 0;
+
+            spirits.forEach(s => {
+                if (progress[s.id]?.obtained) obtained++;
+                if (progress[s.id]?.maxed) maxed++;
+            });
+
+            let missing = total - obtained;
+
+            document.getElementById('count-obtained').textContent = obtained;
+            document.getElementById('count-maxed').textContent = maxed;
+            document.getElementById('count-missing').textContent = missing;
+        }
+
+        // LIMPIADOR EXTREMO PARA LA VARIANTE
+        function cleanVariantName(rawName) {
+            let clean = rawName;
+            clean = clean.replace(/\.(png|jpg|jpeg|webp|gif)/gi, '');
+            clean = clean.replace(/(_Icon|_Sprite|Icon|Sprite)/gi, '');
+            clean = clean.replace(/(ESD_|Item_|Spirit_)/gi, '');
+            clean = clean.replace(/_/g, ' ').trim();
+            if (clean.length > 0) {
+                clean = clean.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ');
+            }
+            return clean || 'Base';
+        }
+
+        // LIMPIADOR CONSERVADOR PARA EL TIPO DE ESPÍRITU
+        function cleanTypeName(rawName) {
+            let clean = rawName;
+            clean = clean.replace(/(ESD_|Item_|Spirit_|_Variant)/gi, '');
+            // Separamos letras si están pegadas (Ej: GrimSprite -> Grim Sprite) solo si no hay espacios ya
+            if (!clean.includes(' ')) {
+                clean = clean.replace(/([a-z])([A-Z])/g, '$1 $2');
+            }
+            clean = clean.replace(/_/g, ' ').trim();
+            if (clean.length > 0) {
+                clean = clean.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ');
+            }
+            return clean || 'Desconocido';
+        }
+
+        document.getElementById('btn-process-import').addEventListener('click', () => {
+            const pasteZone = document.getElementById('paste-zone');
+            const images = pasteZone.querySelectorAll('img');
+            let importedCount = 0;
+
+            if (images.length === 0) {
+                alert("No detecté ninguna imagen. Asegúrate de copiar tanto las imágenes como sus IDs.");
+                return;
+            }
+
+            images.forEach(imgEl => {
+                let src = imgEl.src;
+                
+                if (src.includes('data:image') || (imgEl.naturalWidth > 0 && imgEl.naturalWidth < 30)) return; 
+
+                src = getHighResUrl(src);
+                let current = imgEl;
+                let name = '';
+
+                while (current && current !== pasteZone) {
+                    current = current.parentElement;
+                    if (current.querySelectorAll('img').length > 1) break; 
+
+                    let text = current.innerText.trim();
+                    if (text.length > 2) {
+                        name = text.split('\n')[0].trim();
+                    }
+                }
+
+                if (!name && imgEl.alt && imgEl.alt.length > 2) {
+                    name = imgEl.alt.trim();
+                }
+
+                if (name && name.length > 2) {
+                    let typeName = "Desconocido";
+                    let varName = "Base";
+
+                    // --- NUEVA LÓGICA DE EXTRACCIÓN POR DOS PUNTOS (:) ---
+                    if (name.includes(':')) {
+                        let parts = name.split(':');
+                        
+                        // Todo lo que está antes del ":" es el Tipo exacto
+                        typeName = cleanTypeName(parts[0].trim());
+                        
+                        // Lo que queda del texto se usa para buscar la Variante
+                        let resto = parts.slice(1).join(':');
+                        if (resto.includes('Variant_')) {
+                            varName = cleanVariantName(resto.split('Variant_')[1]);
+                        } else {
+                            varName = cleanVariantName(resto);
+                        }
+                    } 
+                    // Respaldo por si no tiene ":" pero sí tiene "Variant_"
+                    else if (name.includes('Variant_')) {
+                        let parts = name.split('Variant_');
+                        typeName = cleanTypeName(parts[0]);
+                        varName = cleanVariantName(parts[1]); 
+                    } 
+                    // Respaldo de emergencia
+                    else {
+                        let words = name.replace(/_/g, ' ').split(' ');
+                        typeName = cleanTypeName(words[0]);
+                        let rawVar = words.slice(1).join(' ');
+                        varName = cleanVariantName(rawVar);
+                    }
+                    // -----------------------------------------------------
+
+                    // Registrar o encontrar el Tipo
+                    let typeObj = types.find(t => t.name.toLowerCase() === typeName.toLowerCase());
+                    if (!typeObj) {
+                        typeObj = { id: 't_' + Date.now() + Math.random(), name: typeName };
+                        types.push(typeObj);
+                    }
+
+                    // Registrar o encontrar la Variante
+                    let varObj = varNames.find(v => v.name.toLowerCase() === varName.toLowerCase());
+                    if (!varObj) {
+                        varObj = { id: 'v_' + Date.now() + Math.random(), name: varName };
+                        varNames.push(varObj);
+                    }
+
+                    // Guardar el Espíritu
+                    let existing = spirits.find(s => s.typeId === typeObj.id && s.varId === varObj.id);
+                    if (!existing) {
+                        spirits.push({ id: 's_' + Date.now() + Math.random(), typeId: typeObj.id, varId: varObj.id, image: src });
+                        importedCount++;
+                    } else if (existing.image !== src) {
+                        existing.image = src; 
+                    }
+                }
+            });
+
+            pasteZone.innerHTML = ''; 
+            saveData();
+            
+            if(importedCount > 0) alert(`¡Éxito! Se importaron ${importedCount} espíritus limpiamente.`);
+        });
+
+        document.getElementById('btn-wipe-all').addEventListener('click', () => {
+            if(confirm("⚠️ ¿Estás completamente seguro? Esto borrará todos los tipos, variantes, espíritus e imágenes. Tu progreso se perderá para siempre.")) {
+                types = []; varNames = []; spirits = []; progress = {}; dropdownState = {};
+                saveData();
+            }
+        });
+
+        document.getElementById('btn-save-type').addEventListener('click', () => {
+            const name = document.getElementById('type-name').value.trim();
+            if (!name) return alert("Ingresa el tipo.");
+            
+            const cleanName = cleanTypeName(name);
+            types.push({ id: 't_' + Date.now(), name: cleanName });
+            document.getElementById('type-name').value = '';
+            saveData();
+        });
+
+        document.getElementById('btn-save-varname').addEventListener('click', () => {
+            const name = document.getElementById('varname-input').value.trim();
+            if (!name) return alert("Ingresa la variante.");
+            
+            const cleanName = cleanVariantName(name);
+            varNames.push({ id: 'v_' + Date.now(), name: cleanName });
+            document.getElementById('varname-input').value = '';
+            saveData();
+        });
+
+        document.getElementById('btn-save-spirit').addEventListener('click', () => {
+            const typeId = document.getElementById('sel-type').value;
+            const varId = document.getElementById('sel-varname').value;
+            let image = document.getElementById('spirit-img').value.trim();
+
+            if (!typeId || !varId) return alert("Selecciona Tipo y Variante.");
+            
+            image = image ? getHighResUrl(image) : '';
+
+            const existing = spirits.find(s => s.typeId === typeId && s.varId === varId);
+            if (existing) {
+                if(confirm("Este espíritu ya existe. ¿Quieres actualizar su imagen?")) {
+                    existing.image = image;
+                    saveData();
+                }
+            } else {
+                spirits.push({ id: 's_' + Date.now(), typeId, varId, image });
+                saveData();
+            }
+            document.getElementById('spirit-img').value = '';
+        });
+
+        window.deleteType = function(id) {
+            if (confirm("¿Eliminar este tipo? Se borrarán sus espíritus.")) {
+                types = types.filter(t => t.id !== id);
+                spirits = spirits.filter(s => s.typeId !== id);
+                saveData();
+            }
+        }
+        window.deleteVarName = function(id) {
+            if (confirm("¿Eliminar esta variante? Se borrarán los espíritus que la usen.")) {
+                varNames = varNames.filter(v => v.id !== id);
+                spirits = spirits.filter(s => s.varId !== id);
+                saveData();
+            }
+        }
+
+        function renderAdminLists() {
+            const listTypes = document.getElementById('list-types');
+            listTypes.innerHTML = '';
+            const sortedTypes = [...types].sort(sortAlpha);
+            sortedTypes.forEach(t => {
+                listTypes.innerHTML += `<li>${t.name} <button class="btn-danger" onclick="deleteType('${t.id}')">Borrar</button></li>`;
+            });
+
+            const listVars = document.getElementById('list-varnames');
+            listVars.innerHTML = '';
+            const sortedVars = [...varNames].sort(sortAlpha);
+            sortedVars.forEach(v => {
+                listVars.innerHTML += `<li>${v.name} <button class="btn-danger" onclick="deleteVarName('${v.id}')">Borrar</button></li>`;
+            });
+
+            const selType = document.getElementById('sel-type');
+            selType.innerHTML = '<option value="">-- Selecciona un Tipo --</option>';
+            sortedTypes.forEach(t => selType.innerHTML += `<option value="${t.id}">${t.name}</option>`);
+
+            const selVar = document.getElementById('sel-varname');
+            selVar.innerHTML = '<option value="">-- Selecciona una Variante --</option>';
+            sortedVars.forEach(v => selVar.innerHTML += `<option value="${v.id}">${v.name}</option>`);
+        }
+
+        function renderTracker() {
+            const container = document.getElementById('tracker-container');
+            container.innerHTML = '';
+
+            const sortedTypes = [...types].sort(sortAlpha);
+
+            sortedTypes.forEach(type => {
+                let typeSpirits = spirits.filter(s => s.typeId === type.id);
+                if (typeSpirits.length === 0) return;
+
+                typeSpirits.sort((a, b) => {
+                    const nameA = varNames.find(v => v.id === a.varId)?.name || '';
+                    const nameB = varNames.find(v => v.id === b.varId)?.name || '';
+                    return nameA.localeCompare(nameB);
+                });
+
+                const section = document.createElement('div');
+                const isCollapsed = dropdownState[type.id] === true;
+                section.className = `type-section ${isCollapsed ? 'collapsed' : ''}`;
+                
+                const header = document.createElement('div');
+                header.className = 'dropdown-header';
+                header.innerHTML = `<h2>${type.name}</h2><span class="arrow-icon">▼</span>`;
+                
+                header.addEventListener('click', () => {
+                    section.classList.toggle('collapsed');
+                    dropdownState[type.id] = section.classList.contains('collapsed');
+                    saveDropdownState();
+                });
+
+                const grid = document.createElement('div');
+                grid.className = 'grid-container';
+
+                typeSpirits.forEach(spirit => {
+                    let varObj = varNames.find(v => v.id === spirit.varId);
+                    let varName = varObj ? varObj.name : 'Variante';
+
+                    let displayImage = spirit.image;
+                    
+                    if (!displayImage || displayImage.includes('via.placeholder.com')) {
+                        let baseSpirit = typeSpirits.find(s => {
+                            let v = varNames.find(x => x.id === s.varId);
+                            return v && (v.name.toUpperCase() === 'A' || v.name.toUpperCase() === 'BASE');
+                        });
+                        
+                        if (baseSpirit && baseSpirit.image) {
+                            displayImage = baseSpirit.image;
+                        } else {
+                            displayImage = 'https://via.placeholder.com/200x200?text=Sin+Imagen'; 
+                        }
+                    }
+
+                    const isObtained = progress[spirit.id]?.obtained || false;
+                    const isMaxed = progress[spirit.id]?.maxed || false;
+
+                    const card = document.createElement('div');
+                    card.className = `card ${isObtained ? 'obtained' : ''}`;
+                    
+                    card.innerHTML = `
+                        <h4>${varName}</h4>
+                        <img src="${displayImage}" alt="${varName}" onerror="this.src='https://via.placeholder.com/200x200?text=Sin+Imagen'">
+                        <button class="crown-btn ${isMaxed ? 'maxed' : ''}" title="Marcar como maxeado">👑</button>
+                    `;
+
+                    card.querySelector('img').addEventListener('click', () => {
+                        if (!progress[spirit.id]) progress[spirit.id] = {};
+                        progress[spirit.id].obtained = !progress[spirit.id].obtained;
+                        if (!progress[spirit.id].obtained) progress[spirit.id].maxed = false;
+                        saveData();
+                    });
+
+                    card.querySelector('.crown-btn').addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        if (!progress[spirit.id]) progress[spirit.id] = {};
+                        progress[spirit.id].maxed = !progress[spirit.id].maxed;
+                        if (progress[spirit.id].maxed) progress[spirit.id].obtained = true;
+                        saveData();
+                    });
+
+                    grid.appendChild(card);
+                });
+
+                section.appendChild(header);
+                section.appendChild(grid);
+                container.appendChild(section);
+            });
+        }
+
+        function renderAll() {
+            renderCounters();
+            renderAdminLists();
+            renderTracker();
+        }
+
+        renderAll();
+    </script>
+</body>
+</html>
