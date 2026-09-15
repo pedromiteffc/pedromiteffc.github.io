@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Hoop Tracker</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body class="flex flex-col h-screen antialiased overflow-hidden">
+
+    <div id="app-container" class="w-full h-full flex flex-col overflow-hidden">
+
+        <div id="view-home" class="flex-1 w-full flex flex-col items-center justify-center p-6 space-y-12 relative">
+
+            <div class="absolute inset-0 overflow-hidden pointer-events-none">
+                <div class="absolute -top-20 -left-20 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl"></div>
+                <div class="absolute top-1/2 -right-20 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl"></div>
+            </div>
+            
+            <div class="flex flex-col items-center gap-5 z-10">
+
+                <div class="w-28 h-28 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center shadow-lg shadow-orange-500/30 border-4 border-slate-900">
+                    <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 2v20M2 12h20M7 5c0 3.866 2.239 7 5 7M17 5c0 3.866-2.239 7-5 7M7 19c0-3.866 2.239-7 5-7M17 19c0-3.866-2.239-7-5-7"></path></svg>
+                </div>
+
+                <div class="text-center">
+                    <h1 class="text-5xl font-black text-white tracking-tighter">Hoop<span class="text-orange-500">Tracker</span></h1>
+                    <p class="text-slate-400 font-medium mt-2">Mapa de calor y analíticas de tiro</p>
+                </div>
+
+            </div>
+            
+            <div class="w-full max-w-sm space-y-4 z-10">
+
+                <button id="btn-home-new" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 px-6 rounded-2xl shadow-lg shadow-blue-500/20 transition-all active:scale-95 text-lg flex items-center justify-center gap-3">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                    Nueva Sesión
+                </button>
+
+                <button id="btn-home-history" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-bold py-4 px-6 rounded-2xl shadow-sm transition-all active:scale-95 text-lg flex items-center justify-center gap-3">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>
+                    Sesiones Anteriores
+                </button>
+
+            </div>
+
+        </div>
+
+        <div id="view-session" class="hidden flex-1 w-full flex flex-col h-full bg-slate-900">
+
+            <header class="flex justify-between items-center p-4 bg-slate-800 border-b border-slate-700 shrink-0 z-20 shadow-md">
+
+                <div class="flex items-center">
+
+                    <button id="btn-back-session" class="hidden p-2 -ml-2 mr-2 text-slate-300 hover:text-white transition-colors active:scale-95">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+
+                    <h2 id="session-title-text" class="text-xl font-extrabold text-white tracking-tight">Sesión Activa</h2>
+
+                </div>
+
+                <div class="flex items-center gap-2">
+
+                    <button id="btn-share-session" class="hidden p-2 text-slate-300 hover:text-white transition-colors active:scale-95 bg-slate-700/50 rounded-lg shadow-sm" title="Descargar como PDF">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    </button>
+
+                    <button id="btn-finish-session" class="px-4 py-2 bg-red-600 hover:bg-red-500 text-sm font-bold rounded-lg transition-colors text-white active:scale-95 shadow-lg shadow-red-500/20">
+                        Finalizar Sesión
+                    </button>
+
+                </div>
+
+            </header>
+
+            <main class="flex-1 overflow-y-auto pb-6 w-full flex flex-col items-center">
+
+                <div id="export-area" class="w-full max-w-lg flex flex-col items-center bg-slate-900 rounded-lg mt-2 relative">
+                    
+                    <div id="export-container" class="p-4 w-full space-y-5">
+
+                        <div id="filter-container" class="hidden bg-slate-800 rounded-2xl p-4 border border-slate-700 shadow-lg">
+
+                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Filtrar por tipo de tiro</label>
+
+                            <select id="shot-filter" class="w-full bg-slate-900 text-white border border-slate-600 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 shadow-inner appearance-none font-medium">
+                                <option value="Todos">Todos los lanzamientos</option>
+                            </select>
+
+                        </div>
+
+                        <div class="flex justify-between items-center bg-slate-800 rounded-2xl p-4 border border-slate-700 shadow-lg">
+
+                            <div>
+                                <p class="text-slate-400 text-[11px] font-bold uppercase tracking-widest mb-1">Puntos Totales</p>
+                                <p class="text-4xl font-black text-white leading-none" id="stat-pts">0</p>
+                            </div>
+
+                            <div class="text-right">
+                                <p class="text-slate-400 text-[11px] font-bold uppercase tracking-widest mb-1">Eficacia %</p>
+                                <p class="text-2xl font-bold text-blue-400 leading-none" id="stat-fgpct">0%</p>
+                            </div>
+
+                        </div>
+                        
+                        <div class="grid grid-cols-4 gap-2">
+
+                            <div class="bg-slate-900/50 rounded-xl p-2.5 flex flex-col justify-center border border-slate-700/50">
+                                <p class="text-[10px] text-slate-400 font-bold mb-1 tracking-wide">TOTAL</p>
+                                <p class="text-sm font-bold text-slate-200" id="stat-fg">0/0</p>
+                            </div>
+                            
+                            <div class="bg-slate-900/50 rounded-xl p-2.5 flex flex-col justify-center border border-slate-700/50">
+                                <p class="text-[10px] text-slate-400 font-bold mb-1 tracking-wide">2PT</p>
+                                <p class="text-sm font-bold text-slate-200" id="stat-2pt">0/0</p>
+                            </div>
+
+                            <div class="bg-slate-900/50 rounded-xl p-2.5 flex flex-col justify-center border border-slate-700/50">
+                                <p class="text-[10px] text-slate-400 font-bold mb-1 tracking-wide">3PT</p>
+                                <p class="text-sm font-bold text-slate-200" id="stat-3pt">0/0</p>
+                            </div>
+
+                            <div class="bg-slate-900/50 rounded-xl p-2.5 flex flex-col justify-center border border-slate-700/50">
+                                <p class="text-[10px] text-slate-400 font-bold mb-1 tracking-wide">TL</p>
+                                <p class="text-sm font-bold text-slate-200" id="stat-ft">0/0</p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="court-container" id="court-container">
+
+                        <svg viewBox="0 0 500 470" class="court-svg" id="court-svg" preserveAspectRatio="xMidYMid meet">
+
+                            <g id="interactive-zones">
+
+                                <path id="z2-esq-izq" data-name="Línea Fondo Izq. (2PT)" data-pts="2" class="court-zone" d="M 250 0 L 45 0 L 45 140 Z" />
+                                <path id="z2-45-izq" data-name="45° Izq. (2PT)" data-pts="2" class="court-zone" d="M 250 0 L 45 140 A 225 225 0 0 0 140 236 Z" />
+                                <path id="z2-centro" data-name="Pintura/Centro (2PT)" data-pts="2" class="court-zone" d="M 250 0 L 140 236 A 225 225 0 0 0 360 236 Z" />
+                                <path id="z2-45-der" data-name="45° Der. (2PT)" data-pts="2" class="court-zone" d="M 250 0 L 360 236 A 225 225 0 0 0 455 140 Z" />
+                                <path id="z2-esq-der" data-name="Línea Fondo Der. (2PT)" data-pts="2" class="court-zone" d="M 250 0 L 455 140 L 455 0 Z" />
+                                
+                                <path id="z3-esq-izq" data-name="Esquina Izq. (3PT)" data-pts="3" class="court-zone" d="M 45 0 L 0 0 L 0 170.7 L 45 140 Z" />
+                                <path id="z3-45-izq" data-name="45° Izq. (3PT)" data-pts="3" class="court-zone" d="M 45 140 L 0 170.7 L 0 470 L 31 470 L 140 236 A 225 225 0 0 1 45 140 Z" />
+                                <path id="z3-centro" data-name="Eje Central (3PT)" data-pts="3" class="court-zone" d="M 140 236 L 31 470 L 469 470 L 360 236 A 225 225 0 0 1 140 236 Z" />
+                                <path id="z3-45-der" data-name="45° Der. (3PT)" data-pts="3" class="court-zone" d="M 360 236 L 469 470 L 500 470 L 500 170.7 L 455 140 A 225 225 0 0 1 360 236 Z" />
+                                <path id="z3-esq-der" data-name="Esquina Der. (3PT)" data-pts="3" class="court-zone" d="M 455 140 L 500 170.7 L 500 0 L 455 0 Z" />
+                            </g>
+
+                            <line x1="0" y1="0" x2="500" y2="0" class="court-line" />
+                            <rect x="170" y="0" width="160" height="190" fill="transparent" stroke="#94a3b8" stroke-width="3" pointer-events="none"/>
+
+                            <path d="M 190 190 A 60 60 0 0 1 310 190" class="court-line" stroke-dasharray="8,8" />
+                            <path d="M 310 190 A 60 60 0 0 1 190 190" class="court-line" />
+                            
+                            <path d="M 210 40 A 40 40 0 0 0 290 40" class="court-line" />
+                            <line x1="220" y1="28" x2="280" y2="28" class="court-backboard" />
+                            <circle cx="250" cy="40" r="7.5" class="court-hoop" />
+                            
+
+                            <line x1="45" y1="0" x2="45" y2="140" class="court-line" />
+                            <line x1="455" y1="0" x2="455" y2="140" class="court-line" />
+                            <path d="M 45 140 A 225 225 0 0 0 455 140" class="court-line" />
+
+                            <circle id="z1-ft" cx="250" cy="190" r="28" class="ft-zone-interactive" data-name="Tiro Libre (1PT)" data-pts="1" />
+                            <text x="250" y="180" font-size="12" font-weight="bold" fill="#cbd5e1" text-anchor="middle" pointer-events="none">TL</text>
+                            
+                            <g id="zone-labels" class="zone-label" font-size="16">
+
+                                <text id="label-z2-esq-izq" x="120" y="55"></text>
+                                <text id="label-z2-45-izq" x="130" y="140"></text>
+                                <text id="label-z2-centro" x="250" y="125"></text>
+                                <text id="label-z2-45-der" x="370" y="140"></text>
+                                <text id="label-z2-esq-der" x="380" y="55"></text>
+
+                                <text id="label-z3-esq-izq" x="22" y="75" font-size="14"></text>
+                                <text id="label-z3-45-izq" x="70" y="310"></text>
+                                <text id="label-z3-centro" x="250" y="370"></text>
+                                <text id="label-z3-45-der" x="430" y="310"></text>
+                                <text id="label-z3-esq-der" x="478" y="75" font-size="14"></text>
+
+                                <text id="label-z1-ft" x="250" y="200" font-size="15"></text>
+
+                            </g>
+
+                        </svg>
+                    </div>
+                    
+                    <div class="flex flex-col items-center space-y-3" id="court-instruction">
+                        
+                        <p class="text-center text-sm font-medium text-slate-400">Toca un sector para cargar lanzamientos</p>
+
+                        <div class="flex items-center gap-4 text-[10px] font-bold text-slate-300 uppercase tracking-wider">
+                            <div class="flex items-center gap-1.5"><div class="w-3 h-3 rounded-sm bg-red-500/70 border border-red-500"></div> &lt; 40%</div>
+                            <div class="flex items-center gap-1.5"><div class="w-3 h-3 rounded-sm bg-yellow-500/70 border border-yellow-500"></div> 40-55%</div>
+                            <div class="flex items-center gap-1.5"><div class="w-3 h-3 rounded-sm bg-green-500/70 border border-green-500"></div> &gt; 55%</div>
+                        </div>
+
+                    </div>
+                    
+                </div>
+
+                <button id="btn-toggle-summary" class="fixed right-6 bottom-6 z-30 bg-blue-600 text-white p-4 rounded-full shadow-lg shadow-blue-500/40 active:scale-95 transition-transform flex items-center justify-center border-2 border-slate-800">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                </button>
+
+            </main>
+
+        </div>
+
+
+        <div id="view-history" class="hidden flex-1 w-full flex flex-col h-full bg-slate-900">
+
+            <header class="flex items-center p-4 bg-slate-800 border-b border-slate-700 shrink-0 z-20 shadow-md">
+
+                <button id="btn-back-home" class="p-2 -ml-2 text-slate-300 hover:text-white transition-colors active:scale-95">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                </button>
+
+                <h2 class="text-xl font-extrabold text-white ml-2 tracking-tight">Sesiones Anteriores</h2>
+
+            </header>
+
+            <main class="flex-1 overflow-y-auto p-4 relative">
+
+                <div id="history-list" class="max-w-lg mx-auto space-y-3 pb-6"></div>
+
+            </main>
+
+        </div>
+
+    </div>
+
+    <div class="backdrop" id="backdrop"></div>
+
+    <div class="bottom-sheet flex flex-col gap-5 max-w-lg mx-auto right-0" id="bottom-sheet">
+
+        <div class="flex justify-between items-center border-b border-slate-700/50 pb-3">
+
+            <div>
+                <h2 class="text-2xl font-black text-white tracking-tight" id="sheet-title">Zona Seleccionada</h2>
+                <p class="text-sm font-medium text-slate-400" id="sheet-subtitle">Selecciona el tipo y resultado</p>
+            </div>
+
+            <button id="btn-cancel" class="text-slate-400 hover:text-white p-2 rounded-full hover:bg-slate-700 transition-colors">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+
+        </div>
+
+        <div id="mode-2pt-container" class="space-y-3 hidden">
+
+            <label class="text-sm font-bold text-slate-300 uppercase tracking-wider">Modo de Tiro (2PT)</label>
+
+            <div class="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                <button class="mode-btn-2pt px-3 py-2.5 rounded-xl border border-slate-600 text-sm font-semibold text-slate-300 active:scale-95 transition-colors" data-mode="Bandeja">Bandeja</button>
+                <button class="mode-btn-2pt px-3 py-2.5 rounded-xl border border-slate-600 text-sm font-semibold text-slate-300 active:scale-95 transition-colors" data-mode="Ganchos">Ganchos</button>
+                <button class="mode-btn-2pt px-3 py-2.5 rounded-xl border border-slate-600 text-sm font-semibold text-slate-300 active:scale-95 transition-colors" data-mode="Flotadoras">Flotadoras</button>
+                <button class="mode-btn-2pt px-3 py-2.5 rounded-xl border border-slate-600 text-sm font-semibold text-slate-300 active:scale-95 transition-colors" data-mode="Lanzamiento">Lanzamiento</button>
+                <button class="mode-btn-2pt px-3 py-2.5 rounded-xl border border-slate-600 text-sm font-semibold text-slate-300 active:scale-95 transition-colors" data-mode="Otro">Otro...</button>
+            </div>
+
+        </div>
+
+        <div id="mode-3pt-container" class="space-y-3 hidden">
+
+            <label class="text-sm font-bold text-slate-300 uppercase tracking-wider" id="label-3pt">Tipo de Lanzamiento</label>
+
+            <div class="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                <button class="mode-btn-3pt px-3 py-2.5 rounded-xl border border-slate-600 text-sm font-semibold text-slate-300 active:scale-95 transition-colors" data-mode="En estático">En estático</button>
+                <button class="mode-btn-3pt px-3 py-2.5 rounded-xl border border-slate-600 text-sm font-semibold text-slate-300 active:scale-95 transition-colors" data-mode="Catch & shoot">Catch & shoot</button>
+                <button class="mode-btn-3pt px-3 py-2.5 rounded-xl border border-slate-600 text-sm font-semibold text-slate-300 active:scale-95 transition-colors" data-mode="Sobre pique">Sobre pique</button>
+                <button class="mode-btn-3pt px-3 py-2.5 rounded-xl border border-slate-600 text-sm font-semibold text-slate-300 active:scale-95 transition-colors" data-mode="Tiro incómodo">Tiro incómodo</button>
+                <button class="mode-btn-3pt px-3 py-2.5 rounded-xl border border-slate-600 text-sm font-semibold text-slate-300 active:scale-95 transition-colors" data-mode="Otro">Otro...</button>
+            </div>
+
+        </div>
+        
+        <div id="custom-mode-container" class="hidden mt-1 transition-all">
+            <input type="text" id="custom-mode-input" placeholder="Especificar (Ej: Fadeaway)..." class="w-full bg-slate-900 text-white border border-slate-600 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 shadow-inner">
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 mt-2">
+
+            <div class="flex flex-col items-center justify-center p-4 bg-blue-500/10 border border-blue-500/30 rounded-2xl shadow-sm">
+
+                <span class="text-blue-400 font-bold mb-3 uppercase tracking-wider text-xs">Total Intentos</span>
+
+                <div class="flex items-center gap-3">
+                    <button id="btn-minus-total" class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-500/20 text-blue-400 text-2xl font-bold active:scale-90 transition-transform select-none">&minus;</button>
+                    <span id="count-total" class="text-3xl font-black text-white w-8 text-center select-none">0</span>
+                    <button id="btn-plus-total" class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-500/20 text-blue-400 text-2xl font-bold active:scale-90 transition-transform select-none">+</button>
+                </div>
+
+            </div>
+
+            <div class="flex flex-col items-center justify-center p-4 bg-green-500/10 border border-green-500/30 rounded-2xl shadow-sm">
+
+                <span class="text-green-400 font-bold mb-3 uppercase tracking-wider text-xs">Convertidos</span>
+
+                <div class="flex items-center gap-3">
+                    <button id="btn-minus-made" class="w-10 h-10 flex items-center justify-center rounded-full bg-green-500/20 text-green-400 text-2xl font-bold active:scale-90 transition-transform select-none">&minus;</button>
+                    <span id="count-made" class="text-3xl font-black text-white w-8 text-center select-none">0</span>
+                    <button id="btn-plus-made" class="w-10 h-10 flex items-center justify-center rounded-full bg-green-500/20 text-green-400 text-2xl font-bold active:scale-90 transition-transform select-none">+</button>
+                </div>
+
+            </div>
+
+        </div>
+
+        <button id="btn-save-batch" class="w-full bg-slate-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all text-lg mt-1 flex items-center justify-center gap-2 opacity-50 pointer-events-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            Guardar en Zona
+        </button>
+
+    </div>
+
+    <div id="side-panel" class="fixed top-0 right-0 w-4/5 max-w-[320px] h-full bg-slate-800 z-50 transform translate-x-full transition-transform duration-300 shadow-2xl flex flex-col">
+
+        <div class="p-5 border-b border-slate-700 flex justify-between items-center bg-slate-900 shadow-sm z-10">
+
+            <h2 class="text-xl font-black text-white tracking-tight flex items-center gap-2">
+                <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>
+                Historial de cargas
+            </h2>
+
+            <button id="btn-close-side" class="text-slate-400 hover:text-white p-2 rounded-full hover:bg-slate-700 transition-colors active:scale-95">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+
+        </div>
+
+        <div id="summary-list" class="flex-1 overflow-y-auto p-4 space-y-3 bg-slate-800"></div>
+
+    </div>
+
+    <script type="module">
+
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js"
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, onSnapshot, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'hoop-tracker-app'
+        let db = null
+        let auth = null
+        let userId = null
+
+        let currentSession = {
+            startTime: null,
+            endTime: null,
+            zones: {},
+            stats: { pts: 0, fga: 0, fgm: 0, pt2a: 0, pt2m: 0, pt3a: 0, pt3m: 0, fta: 0, ftm: 0 }
+        }
+
+        let sessionsHistory = []
+        let isReadOnly = false
+        
+        let pendingInput = { zoneId: '', zoneName: '', points: 2, mode2pt: 'Bandeja', mode3pt: 'En estático' }
+        let inputTotal = 0
+        let inputMade = 0
+        let isSheetOpen = false
+        let editingRecord = null
+
+        const bottomSheet = document.getElementById('bottom-sheet')
+        const backdrop = document.getElementById('backdrop')
+        const customModeInput = document.getElementById('custom-mode-input')
+        const sidePanel = document.getElementById('side-panel')
+        
+        const COLOR_RED = 'rgba(239, 68, 68, 0.75)'
+        const COLOR_YELLOW = 'rgba(234, 179, 8, 0.75)'
+        const COLOR_GREEN = 'rgba(34, 197, 94, 0.75)'
+        const COLOR_DEFAULT = 'rgba(255, 255, 255, 0.03)'
+
+        async function initApp() {
+
+            try {
+
+                if (typeof __firebase_config !== 'undefined') {
+
+                    const firebaseConfig = JSON.parse(__firebase_config)
+                    const app = initializeApp(firebaseConfig)
+                    auth = getAuth(app)
+                    db = getFirestore(app)
+                    
+                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                        await signInWithCustomToken(auth, __initial_auth_token)
+                    } 
+                    else {
+                        await signInAnonymously(auth)
+                    }
+                    
+                    if (auth.currentUser) {
+                        userId = auth.currentUser.uid
+                        setupFirestoreListener()
+                    }
+
+                }
+
+            } catch (error) {
+                console.warn("Firebase offline. Funcionando en memoria.", error)
+            }
+
+            setupEventListeners()
+        }
+
+        function showHome() {
+            document.getElementById('view-session').classList.add('hidden')
+            document.getElementById('view-history').classList.add('hidden')
+            document.getElementById('view-home').classList.remove('hidden')
+        }
+
+        function startNewSession() {
+
+            currentSession = {
+                startTime: new Date().toISOString(),
+                endTime: null,
+                zones: {},
+                stats: { pts: 0, fga: 0, fgm: 0, pt2a: 0, pt2m: 0, pt3a: 0, pt3m: 0, fta: 0, ftm: 0 }
+            }
+            isReadOnly = false
+            
+            document.getElementById('filter-container').classList.add('hidden')
+            
+            resetAllZones();
+            renderStats('Todos')
+            
+            document.getElementById('view-home').classList.add('hidden')
+            document.getElementById('view-history').classList.add('hidden')
+            document.getElementById('view-session').classList.remove('hidden')
+            
+            document.getElementById('btn-finish-session').classList.remove('hidden')
+            document.getElementById('btn-share-session').classList.add('hidden')
+            document.getElementById('btn-back-session').classList.add('hidden')
+            document.getElementById('court-instruction').classList.remove('hidden')
+            document.getElementById('session-title-text').textContent = "Sesión Activa"
+            
+            renderEntryLog()
+        }
+
+        async function finishSession() {
+
+            if (!currentSession.startTime || currentSession.stats.fga + currentSession.stats.fta === 0) {
+                showHome()
+                return
+            }
+            
+            const btnFinish = document.getElementById('btn-finish-session')
+            btnFinish.textContent = "Guardando..."
+            btnFinish.classList.add('opacity-75', 'pointer-events-none')
+
+            currentSession.endTime = new Date().toISOString()
+            
+            if (db && userId) {
+                try {
+                    const sessionsRef = collection(db, 'artifacts', appId, 'users', userId, 'sessions')
+                    await addDoc(sessionsRef, currentSession)
+                } catch (e) {
+                    console.error("Error al guardar", e)
+                }
+            }
+            
+            btnFinish.textContent = "Finalizar Sesión"
+            btnFinish.classList.remove('opacity-75', 'pointer-events-none')
+            showHome()
+        }
+
+        function showHistory() {
+            document.getElementById('view-home').classList.add('hidden')
+            document.getElementById('view-session').classList.add('hidden')
+            document.getElementById('view-history').classList.remove('hidden')
+            renderHistoryList()
+        }
+
+        function viewPastSession(session) {
+            currentSession = session;
+            isReadOnly = true;
+            
+            document.getElementById('filter-container').classList.remove('hidden');
+            populateFilter();
+            document.getElementById('shot-filter').value = 'Todos';
+            
+            resetAllZones();
+            updateHeatMap('Todos'); 
+            renderStats('Todos');
+            
+            document.getElementById('view-home').classList.add('hidden');
+            document.getElementById('view-history').classList.add('hidden');
+            document.getElementById('view-session').classList.remove('hidden');
+            
+            document.getElementById('btn-finish-session').classList.add('hidden');
+            document.getElementById('btn-share-session').classList.remove('hidden');
+            document.getElementById('btn-back-session').classList.remove('hidden');
+            document.getElementById('court-instruction').classList.add('hidden');
+            document.getElementById('session-title-text').textContent = "Detalle de Sesión";
+            
+            renderEntryLog();
+        }
+
+        // --- FIREBASE LISTENERS ---
+        function setupFirestoreListener() {
+            const sessionsRef = collection(db, 'artifacts', appId, 'users', userId, 'sessions');
+            onSnapshot(sessionsRef, (snapshot) => {
+                sessionsHistory = [];
+                snapshot.forEach(doc => {
+                    sessionsHistory.push({ id: doc.id, ...doc.data() });
+                });
+                sessionsHistory.sort((a, b) => new Date(b.startTime) - new Date(a.startTime));
+                if (!document.getElementById('view-history').classList.contains('hidden')) {
+                    renderHistoryList();
+                }
+            }, (error) => console.error("Error onSnapshot:", error));
+        }
+
+        function renderHistoryList() {
+            const container = document.getElementById('history-list');
+            container.innerHTML = '';
+            
+            if (sessionsHistory.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 px-4 bg-slate-800/50 rounded-2xl border border-slate-700/50 mt-4">
+                        <p class="text-slate-400 font-medium text-lg">No hay sesiones registradas.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            sessionsHistory.forEach((session) => {
+                const dateObj = new Date(session.startTime);
+                const dateStr = dateObj.toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' });
+                
+                const stats = session.stats || { pts: 0, fga: 0, fgm: 0 };
+                const fgPct = stats.fga > 0 ? Math.round((stats.fgm / stats.fga) * 100) : 0;
+                
+                const el = document.createElement('div');
+                el.className = "bg-slate-800 p-4 rounded-2xl border border-slate-700 flex justify-between items-center cursor-pointer active:scale-95 transition-transform hover:bg-slate-750 shadow-sm gap-2";
+                el.innerHTML = `
+                    <div class="flex-1 min-w-0">
+                        <p class="text-white font-black text-lg tracking-tight truncate">${dateStr}</p>
+                        <p class="text-sm text-slate-400 font-medium mt-1 truncate">Total Tiros: ${stats.fga + stats.fta}</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="text-right bg-slate-900/50 py-2 px-3 rounded-xl border border-slate-700/50">
+                            <p class="text-blue-400 font-black text-xl leading-none mb-1">${fgPct}% <span class="text-xs text-blue-500/70">TC</span></p>
+                            <p class="text-[11px] font-bold text-slate-300 uppercase tracking-widest">${stats.pts} PTS</p>
+                        </div>
+                        <button class="btn-delete-session p-2.5 rounded-xl bg-red-500/10 text-red-400 hover:bg-red-500/20 active:scale-90 transition-transform shrink-0" title="Eliminar Sesión">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                        </button>
+                    </div>
+                `;
+                
+                el.addEventListener('click', () => viewPastSession(session));
+                
+                el.querySelector('.btn-delete-session').addEventListener('click', async (e) => {
+                    e.stopPropagation(); // Avoid opening the session view
+                    if (db && userId) {
+                        try {
+                            const btn = e.currentTarget;
+                            btn.classList.add('opacity-50', 'pointer-events-none');
+                            await deleteDoc(doc(db, 'artifacts', appId, 'users', userId, 'sessions', session.id));
+                            // the onSnapshot listener will automatically remove it from the list
+                        } catch (err) {
+                            console.error("Error al eliminar la sesión", err);
+                            btn.classList.remove('opacity-50', 'pointer-events-none');
+                        }
+                    }
+                });
+                
+                container.appendChild(el);
+            });
+        }
+
+        // --- UI & LÓGICA DE TIROS ---
+        function updateCountersUI() {
+            document.getElementById('count-total').textContent = inputTotal;
+            document.getElementById('count-made').textContent = inputMade;
+            
+            const btnSave = document.getElementById('btn-save-batch');
+            if (inputTotal === 0) {
+                btnSave.classList.add('opacity-50', 'pointer-events-none', 'bg-slate-700');
+                btnSave.classList.remove('bg-blue-600', 'hover:bg-blue-500');
+            } else {
+                btnSave.classList.remove('opacity-50', 'pointer-events-none', 'bg-slate-700');
+                btnSave.classList.add('bg-blue-600', 'hover:bg-blue-500');
+            }
+        }
+
+        function openShotModal(zoneId, zoneName, points) {
+            if (isReadOnly) return;
+            isSheetOpen = true;
+            editingRecord = null;
+            pendingInput.zoneId = zoneId;
+            pendingInput.zoneName = zoneName;
+            pendingInput.points = points;
+            
+            document.querySelectorAll('.court-zone, .ft-zone-interactive').forEach(el => el.classList.remove('selected'));
+            document.getElementById(zoneId).classList.add('selected');
+            
+            inputTotal = 0;
+            inputMade = 0;
+            updateCountersUI();
+            
+            const sheetTitle = document.getElementById('sheet-title');
+            if (points === 1) {
+                sheetTitle.textContent = "Tiro Libre (1PT)";
+                document.getElementById('sheet-subtitle').textContent = "Selecciona cantidad total y convertidos";
+            } else {
+                sheetTitle.textContent = `${points}PT - ${zoneName}`;
+                document.getElementById('sheet-subtitle').textContent = "Intento de Tiro de Campo";
+            }
+            
+            resetModeSelection();
+            document.getElementById('btn-save-batch').innerHTML = `
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                Guardar en Zona
+            `;
+            bottomSheet.classList.add('open');
+            backdrop.classList.add('open');
+        }
+
+        function closeShotModal() {
+            isSheetOpen = false;
+            bottomSheet.classList.remove('open');
+            if (!sidePanel.classList.contains('translate-x-0')) {
+                backdrop.classList.remove('open');
+            }
+            document.querySelectorAll('.court-zone.selected, .ft-zone-interactive.selected').forEach(el => el.classList.remove('selected'));
+            customModeInput.blur();
+        }
+        
+        function openSidePanel() {
+            sidePanel.classList.remove('translate-x-full');
+            sidePanel.classList.add('translate-x-0');
+            backdrop.classList.add('open');
+        }
+
+        function closeSidePanel() {
+            sidePanel.classList.add('translate-x-full');
+            sidePanel.classList.remove('translate-x-0');
+            if (!isSheetOpen) backdrop.classList.remove('open');
+        }
+
+        function renderEntryLog() {
+            const container = document.getElementById('summary-list');
+            container.innerHTML = '';
+            
+            let allRecords = [];
+            
+            Object.keys(currentSession.zones).forEach(zoneId => {
+                const zData = currentSession.zones[zoneId];
+                let records = zData.records || [];
+                
+                // Backward compatibility
+                if (zData.total !== undefined && !zData.records) {
+                    records = [{ mode: 'Desconocido', total: zData.total, made: zData.made, points: zoneId.startsWith('z3') ? 3 : (zoneId.startsWith('z2') ? 2 : 1) }];
+                }
+
+                records.forEach((r, index) => {
+                    allRecords.push({
+                        zoneId: zoneId,
+                        index: index,
+                        record: r
+                    });
+                });
+            });
+            
+            if (allRecords.length === 0) {
+                container.innerHTML = `
+                    <div class="flex flex-col items-center justify-center h-full text-slate-500 pt-10">
+                        <svg class="w-12 h-12 mb-3 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 12H4M8 16l-4-4 4-4"></path></svg>
+                        <p class="font-medium text-sm text-center">No hay lanzamientos registrados.</p>
+                    </div>`;
+                return;
+            }
+            
+            allRecords.reverse().forEach(item => {
+                const r = item.record;
+                const pct = r.total > 0 ? Math.round((r.made / r.total) * 100) : 0;
+                
+                let colorClass = 'text-red-400';
+                if (pct >= 50) colorClass = 'text-green-400';
+                else if (pct >= 40) colorClass = 'text-yellow-400';
+                
+                const zoneElement = document.getElementById(item.zoneId);
+                const zoneName = zoneElement ? zoneElement.getAttribute('data-name') : 'Zona';
+                
+                const el = document.createElement('div');
+                el.className = 'bg-slate-700/40 p-4 rounded-2xl border border-slate-600/50 flex justify-between items-center shadow-sm gap-2';
+                el.innerHTML = `
+                    <div class="flex-1 min-w-0">
+                        <p class="text-slate-200 font-bold text-sm truncate">${zoneName}</p>
+                        <p class="text-slate-400 text-xs truncate">${r.mode}</p>
+                    </div>
+                    <div class="text-right flex flex-col items-end shrink-0 gap-1">
+                        <div class="flex items-center gap-2">
+                            <span class="text-lg font-black ${colorClass}">${r.made}/${r.total}</span>
+                            <span class="text-[10px] text-slate-400 font-bold bg-slate-900 px-1.5 py-0.5 rounded border border-slate-700/50">${pct}%</span>
+                        </div>
+                        ${!isReadOnly ? `
+                        <div class="flex items-center gap-1 mt-1">
+                            <button class="btn-edit p-1.5 rounded-lg bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 active:scale-90 transition-transform" title="Editar">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                            </button>
+                            <button class="btn-delete p-1.5 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 active:scale-90 transition-transform" title="Eliminar">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                            </button>
+                        </div>
+                        ` : ''}
+                    </div>
+                `;
+                
+                if (!isReadOnly) {
+                    el.querySelector('.btn-edit').addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        openEditModal(item.zoneId, item.index);
+                    });
+                    el.querySelector('.btn-delete').addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        deleteRecord(item.zoneId, item.index);
+                    });
+                }
+                
+                container.appendChild(el);
+            });
+        }
+
+        function deleteRecord(zoneId, index) {
+            if (isReadOnly) return;
+            currentSession.zones[zoneId].records.splice(index, 1);
+            currentSession.stats = calculateStats('Todos');
+            updateHeatMap('Todos');
+            renderStats('Todos');
+            renderEntryLog();
+        }
+
+        function openEditModal(zoneId, index) {
+            if (isReadOnly) return;
+            const rec = currentSession.zones[zoneId].records[index];
+            const zoneElement = document.getElementById(zoneId);
+            const zoneName = zoneElement ? zoneElement.getAttribute('data-name') : 'Zona';
+            
+            editingRecord = { zoneId, index };
+            
+            pendingInput.zoneId = zoneId;
+            pendingInput.zoneName = zoneName;
+            pendingInput.points = rec.points;
+            
+            inputTotal = rec.total;
+            inputMade = rec.made;
+            
+            let mode = rec.mode;
+            pendingInput.mode2pt = 'Bandeja';
+            pendingInput.mode3pt = 'En estático';
+            customModeInput.value = '';
+            
+            if (rec.points === 3) {
+                const standardModes = ['En estático', 'Catch & shoot', 'Sobre pique', 'Tiro incómodo'];
+                if (standardModes.includes(mode)) {
+                    pendingInput.mode3pt = mode;
+                } else {
+                    pendingInput.mode3pt = 'Otro';
+                    customModeInput.value = mode;
+                }
+            } else if (rec.points === 2) {
+                const standardModes = ['Bandeja', 'Ganchos', 'Flotadoras'];
+                if (standardModes.includes(mode)) {
+                    pendingInput.mode2pt = mode;
+                } else if (mode.startsWith('Lanzamiento')) {
+                    pendingInput.mode2pt = 'Lanzamiento';
+                    const subModeMatch = mode.match(/\((.*?)\)/);
+                    if (subModeMatch) {
+                        const subMode = subModeMatch[1];
+                        const standard3ptModes = ['En estático', 'Catch & shoot', 'Sobre pique', 'Tiro incómodo'];
+                        if (standard3ptModes.includes(subMode)) {
+                            pendingInput.mode3pt = subMode;
+                        } else {
+                            pendingInput.mode3pt = 'Otro';
+                            customModeInput.value = subMode;
+                        }
+                    } else {
+                        pendingInput.mode3pt = 'En estático';
+                    }
+                } else {
+                    pendingInput.mode2pt = 'Otro';
+                    customModeInput.value = mode;
+                }
+            }
+            
+            updateCountersUI();
+            updateModeUI();
+            
+            const sheetTitle = document.getElementById('sheet-title');
+            if (rec.points === 1) {
+                sheetTitle.textContent = "Editar Tiro Libre";
+            } else {
+                sheetTitle.textContent = `Editar ${rec.points}PT - ${zoneName}`;
+            }
+            document.getElementById('sheet-subtitle').textContent = "Modificando registro existente";
+            document.getElementById('btn-save-batch').innerHTML = `
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                Actualizar Registro
+            `;
+            
+            bottomSheet.classList.add('open');
+            backdrop.classList.add('open');
+            isSheetOpen = true;
+            
+            document.querySelectorAll('.court-zone, .ft-zone-interactive').forEach(el => el.classList.remove('selected'));
+            if (zoneElement) zoneElement.classList.add('selected');
+        }
+
+        function resetModeSelection() {
+            pendingInput.mode2pt = 'Bandeja';
+            pendingInput.mode3pt = 'En estático';
+            customModeInput.value = '';
+            updateModeUI();
+        }
+
+        function updateModeUI() {
+            document.querySelectorAll('.mode-btn-2pt').forEach(btn => {
+                if(btn.dataset.mode === pendingInput.mode2pt) {
+                    btn.classList.add('bg-blue-500', 'text-white', 'border-blue-500');
+                    btn.classList.remove('text-slate-300', 'border-slate-600');
+                } else {
+                    btn.classList.remove('bg-blue-500', 'text-white', 'border-blue-500');
+                    btn.classList.add('text-slate-300', 'border-slate-600');
+                }
+            });
+
+            document.querySelectorAll('.mode-btn-3pt').forEach(btn => {
+                if(btn.dataset.mode === pendingInput.mode3pt) {
+                    btn.classList.add('bg-blue-500', 'text-white', 'border-blue-500');
+                    btn.classList.remove('text-slate-300', 'border-slate-600');
+                } else {
+                    btn.classList.remove('bg-blue-500', 'text-white', 'border-blue-500');
+                    btn.classList.add('text-slate-300', 'border-slate-600');
+                }
+            });
+
+            const mode2ptCont = document.getElementById('mode-2pt-container');
+            const mode3ptCont = document.getElementById('mode-3pt-container');
+            const customCont = document.getElementById('custom-mode-container');
+
+            if (pendingInput.points === 3) {
+                mode2ptCont.style.display = 'none';
+                mode3ptCont.style.display = 'block';
+                customCont.classList.toggle('hidden', pendingInput.mode3pt !== 'Otro');
+            } else if (pendingInput.points === 2) {
+                mode2ptCont.style.display = 'block';
+                if (pendingInput.mode2pt === 'Lanzamiento') {
+                    mode3ptCont.style.display = 'block';
+                    customCont.classList.toggle('hidden', pendingInput.mode3pt !== 'Otro');
+                } else if (pendingInput.mode2pt === 'Otro') {
+                    mode3ptCont.style.display = 'none';
+                    customCont.classList.remove('hidden');
+                } else {
+                    mode3ptCont.style.display = 'none';
+                    customCont.classList.add('hidden');
+                }
+            } else { // 1PT
+                mode2ptCont.style.display = 'none';
+                mode3ptCont.style.display = 'none';
+                customCont.classList.add('hidden');
+            }
+        }
+
+        function processBatchSave() {
+            if (inputTotal === 0) return;
+
+            // Determinar modo final para analítica
+            let finalMode = '';
+            if (pendingInput.points === 1) {
+                finalMode = 'Tiro Libre';
+            } else if (pendingInput.points === 3) {
+                finalMode = pendingInput.mode3pt;
+                if (finalMode === 'Otro') finalMode = customModeInput.value.trim() || 'Otro';
+            } else if (pendingInput.points === 2) {
+                finalMode = pendingInput.mode2pt;
+                if (finalMode === 'Lanzamiento') {
+                    let subMode = pendingInput.mode3pt;
+                    if (subMode === 'Otro') subMode = customModeInput.value.trim() || 'Otro';
+                    finalMode = `Lanzamiento (${subMode})`;
+                } else if (finalMode === 'Otro') {
+                    finalMode = customModeInput.value.trim() || 'Otro';
+                }
+            }
+
+            // Actualizar estructura de zonas para el mapa de calor
+            const zId = pendingInput.zoneId;
+            if (!currentSession.zones[zId]) {
+                currentSession.zones[zId] = { records: [] };
+            } else if (currentSession.zones[zId].total !== undefined && !currentSession.zones[zId].records) {
+                // Compatibilidad hacia atrás con sesiones viejas
+                let pts = zId.startsWith('z3') ? 3 : (zId.startsWith('z2') ? 2 : 1);
+                currentSession.zones[zId].records = [{
+                    mode: 'Desconocido',
+                    total: currentSession.zones[zId].total,
+                    made: currentSession.zones[zId].made,
+                    points: pts
+                }];
+                delete currentSession.zones[zId].total;
+                delete currentSession.zones[zId].made;
+            }
+
+            if (editingRecord) {
+                currentSession.zones[editingRecord.zoneId].records[editingRecord.index] = {
+                    mode: finalMode,
+                    total: inputTotal,
+                    made: inputMade,
+                    points: pendingInput.points
+                };
+                editingRecord = null;
+            } else {
+                currentSession.zones[zId].records.push({
+                    mode: finalMode,
+                    total: inputTotal,
+                    made: inputMade,
+                    points: pendingInput.points
+                });
+            }
+
+            // Actualizar Estadísticas Generales
+            currentSession.stats = calculateStats('Todos');
+
+            updateHeatMap('Todos');
+            renderStats('Todos');
+            renderEntryLog();
+            closeShotModal();
+        }
+
+        function calculateStats(filter) {
+            let st = { pts: 0, fga: 0, fgm: 0, pt2a: 0, pt2m: 0, pt3a: 0, pt3m: 0, fta: 0, ftm: 0 };
+            Object.keys(currentSession.zones).forEach(zoneId => {
+                const zData = currentSession.zones[zoneId];
+                let records = zData.records || [];
+                
+                // Compatibilidad hacia atrás
+                if (zData.total !== undefined && !zData.records) {
+                    let pts = zoneId.startsWith('z3') ? 3 : (zoneId.startsWith('z2') ? 2 : 1);
+                    records = [{ mode: 'Desconocido', total: zData.total, made: zData.made, points: pts }];
+                }
+
+                records.forEach(r => {
+                    if (filter === 'Todos' || r.mode === filter) {
+                        if (r.points === 1) {
+                            st.fta += r.total;
+                            st.ftm += r.made;
+                            st.pts += r.made * 1;
+                        } else {
+                            st.fga += r.total;
+                            st.fgm += r.made;
+                            st.pts += r.made * r.points;
+                            if (r.points === 2) {
+                                st.pt2a += r.total;
+                                st.pt2m += r.made;
+                            } else if (r.points === 3) {
+                                st.pt3a += r.total;
+                                st.pt3m += r.made;
+                            }
+                        }
+                    }
+                });
+            });
+            return st;
+        }
+
+        function populateFilter() {
+            const filterSelect = document.getElementById('shot-filter');
+            filterSelect.innerHTML = '<option value="Todos">Todos los lanzamientos</option>';
+            
+            const modes = new Set();
+            Object.keys(currentSession.zones).forEach(zoneId => {
+                 const zData = currentSession.zones[zoneId];
+                 let records = zData.records || [];
+                 if (zData.total !== undefined && !zData.records) {
+                    modes.add('Desconocido');
+                 } else {
+                     records.forEach(r => modes.add(r.mode));
+                 }
+            });
+
+            Array.from(modes).sort().forEach(mode => {
+                const opt = document.createElement('option');
+                opt.value = mode;
+                opt.textContent = mode;
+                filterSelect.appendChild(opt);
+            });
+        }
+
+        function updateHeatMap(filter = 'Todos') {
+            resetAllZones();
+            // Recorrer las zonas y aplicar color según porcentaje total de la sesión
+            Object.keys(currentSession.zones).forEach(zoneId => {
+                const zData = currentSession.zones[zoneId];
+                let records = zData.records || [];
+                
+                if (zData.total !== undefined && !zData.records) {
+                    let pts = zoneId.startsWith('z3') ? 3 : (zoneId.startsWith('z2') ? 2 : 1);
+                    records = [{ mode: 'Desconocido', total: zData.total, made: zData.made, points: pts }];
+                }
+
+                let total = 0;
+                let made = 0;
+                
+                records.forEach(r => {
+                    if (filter === 'Todos' || r.mode === filter) {
+                        total += r.total;
+                        made += r.made;
+                    }
+                });
+
+                const element = document.getElementById(zoneId);
+                const label = document.getElementById('label-' + zoneId);
+                
+                if (element && total > 0) {
+                    const pct = (made / total) * 100;
+                    let color = COLOR_RED; // < 40%
+                    
+                    if (pct > 50) {
+                        color = COLOR_GREEN; // > 50%
+                    } else if (pct >= 40) {
+                        color = COLOR_YELLOW; // 40-50%
+                    }
+                    
+                    element.style.fill = color;
+                    
+                    // Actualizar el texto del récord
+                    if (label) {
+                        label.textContent = `${made}/${total}`;
+                    }
+                }
+            });
+        }
+
+        function resetAllZones() {
+            document.querySelectorAll('.court-zone, .ft-zone-interactive').forEach(el => {
+                el.style.fill = COLOR_DEFAULT;
+            });
+            // Limpiar los textos del récord
+            document.querySelectorAll('text[id^="label-"]').forEach(el => {
+                el.textContent = '';
+            });
+        }
+
+        function renderStats(filter = 'Todos') {
+            const st = calculateStats(filter);
+            document.getElementById('stat-pts').textContent = st.pts;
+            const fgPct = st.fga > 0 ? Math.round((st.fgm / st.fga) * 100) : 0;
+            document.getElementById('stat-fgpct').textContent = `${fgPct}%`;
+            document.getElementById('stat-fg').textContent = `${st.fgm}/${st.fga}`;
+            document.getElementById('stat-2pt').textContent = `${st.pt2m}/${st.pt2a}`;
+            document.getElementById('stat-3pt').textContent = `${st.pt3m}/${st.pt3a}`;
+            document.getElementById('stat-ft').textContent = `${st.ftm}/${st.fta}`;
+        }
+
+        // --- EVENT LISTENERS ---
+        function setupEventListeners() {
+            // Nav
+            document.getElementById('btn-home-new').addEventListener('click', startNewSession);
+            document.getElementById('btn-home-history').addEventListener('click', showHistory);
+            document.getElementById('btn-back-home').addEventListener('click', showHome);
+            document.getElementById('btn-back-session').addEventListener('click', showHistory);
+            document.getElementById('btn-finish-session').addEventListener('click', finishSession);
+
+            // Exportar a PDF - Formato Solo Texto
+            document.getElementById('btn-share-session').addEventListener('click', async () => {
+                const btn = document.getElementById('btn-share-session');
+                const originalHTML = btn.innerHTML;
+                
+                try {
+                    // Mostrar estado de carga en el botón
+                    btn.innerHTML = `<svg class="w-6 h-6 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>`;
+                    btn.classList.add('pointer-events-none');
+                    
+                    const dateObj = new Date(currentSession.startTime);
+                    const dateStr = dateObj.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+                    const currentFilter = document.getElementById('shot-filter').value;
+                    
+                    // Agrupar datos para los desgloses en texto
+                    let summaryData = {};
+                    let zoneSummary = {};
+                    
+                    Object.keys(currentSession.zones).forEach(zId => {
+                        const records = currentSession.zones[zId].records || [];
+                        records.forEach(r => {
+                            if (currentFilter === 'Todos' || currentFilter === r.mode) {
+                                // Agrupar por tipo de tiro
+                                if (!summaryData[r.mode]) summaryData[r.mode] = { made: 0, total: 0 };
+                                summaryData[r.mode].made += r.made;
+                                summaryData[r.mode].total += r.total;
+                                
+                                // Agrupar por Zona
+                                if (!zoneSummary[zId]) {
+                                    const zoneEl = document.getElementById(zId);
+                                    const zoneName = zoneEl ? zoneEl.getAttribute('data-name') : 'Zona Desconocida';
+                                    zoneSummary[zId] = { name: zoneName, made: 0, total: 0 };
+                                }
+                                zoneSummary[zId].made += r.made;
+                                zoneSummary[zId].total += r.total;
+                            }
+                        });
+                    });
+
+                    // Obtener estadísticas generales
+                    const st = calculateStats(currentFilter);
+                    const fgPct = st.fga > 0 ? Math.round((st.fgm / st.fga) * 100) : 0;
+                    const pt2Pct = st.pt2a > 0 ? Math.round((st.pt2m / st.pt2a) * 100) : 0;
+                    const pt3Pct = st.pt3a > 0 ? Math.round((st.pt3m / st.pt3a) * 100) : 0;
+                    const ftPct = st.fta > 0 ? Math.round((st.ftm / st.fta) * 100) : 0;
+
+                    // Crear documento PDF de texto nativo
+                    const { jsPDF } = window.jspdf;
+                    const pdf = new jsPDF();
+                    
+                    let yPos = 20;
+                    const margin = 20;
+                    const lineHeight = 8;
+                    
+                    // Función auxiliar para crear nuevas páginas si el texto es muy largo
+                    const checkPageBreak = (neededSpace) => {
+                        if (yPos + neededSpace > 280) {
+                            pdf.addPage();
+                            yPos = 20;
+                        }
+                    };
+
+                    // TÍTULO
+                    pdf.setFont("helvetica", "bold");
+                    pdf.setFontSize(22);
+                    pdf.setTextColor(15, 23, 42); // Color oscuro
+                    pdf.text("Hoop Tracker - Reporte de Sesión", margin, yPos);
+                    yPos += 12;
+                    
+                    // METADATOS
+                    pdf.setFontSize(12);
+                    pdf.setFont("helvetica", "normal");
+                    pdf.setTextColor(100, 116, 139); // Color grisáceo
+                    pdf.text(`Fecha: ${dateStr}`, margin, yPos);
+                    yPos += lineHeight;
+                    if (currentFilter !== 'Todos') {
+                        pdf.text(`Filtro Activo: ${currentFilter}`, margin, yPos);
+                        yPos += lineHeight;
+                    }
+                    yPos += 6; // Espacio extra
+                    
+                    // ESTADÍSTICAS GENERALES
+                    checkPageBreak(50);
+                    pdf.setFont("helvetica", "bold");
+                    pdf.setFontSize(14);
+                    pdf.setTextColor(15, 23, 42);
+                    pdf.text("ESTADÍSTICAS GENERALES", margin, yPos);
+                    yPos += lineHeight;
+                    
+                    pdf.setFont("helvetica", "normal");
+                    pdf.setFontSize(12);
+                    pdf.text(`Puntos Totales: ${st.pts}`, margin, yPos); yPos += lineHeight;
+                    pdf.text(`Eficacia General: ${fgPct}% (${st.fgm}/${st.fga})`, margin, yPos); yPos += lineHeight;
+                    pdf.text(`Tiros de 2 Puntos: ${pt2Pct}% (${st.pt2m}/${st.pt2a})`, margin, yPos); yPos += lineHeight;
+                    pdf.text(`Tiros de 3 Puntos: ${pt3Pct}% (${st.pt3m}/${st.pt3a})`, margin, yPos); yPos += lineHeight;
+                    pdf.text(`Tiros Libres: ${ftPct}% (${st.ftm}/${st.fta})`, margin, yPos);
+                    yPos += 12;
+                    
+                    // TIPOS DE LANZAMIENTOS
+                    checkPageBreak(30);
+                    pdf.setFont("helvetica", "bold");
+                    pdf.setFontSize(14);
+                    pdf.text("TIPOS DE LANZAMIENTOS", margin, yPos);
+                    yPos += lineHeight;
+                    
+                    pdf.setFont("helvetica", "normal");
+                    pdf.setFontSize(12);
+                    
+                    const shotTypesCount = Object.keys(summaryData).length;
+                    if (shotTypesCount === 0) {
+                        pdf.setTextColor(100, 116, 139);
+                        pdf.text("No hay tipos de tiro registrados.", margin, yPos);
+                        yPos += lineHeight;
+                    } else {
+                        pdf.setTextColor(15, 23, 42);
+                        for (let mode in summaryData) {
+                            checkPageBreak(lineHeight);
+                            const s = summaryData[mode];
+                            const pct = s.total > 0 ? Math.round((s.made/s.total)*100) : 0;
+                            pdf.text(`• ${mode}: ${s.made}/${s.total} (${pct}%)`, margin, yPos);
+                            yPos += lineHeight;
+                        }
+                    }
+                    yPos += 6;
+
+                    // RENDIMIENTO POR ZONAS
+                    checkPageBreak(30);
+                    pdf.setFont("helvetica", "bold");
+                    pdf.setFontSize(14);
+                    pdf.text("RENDIMIENTO POR ZONAS", margin, yPos);
+                    yPos += lineHeight;
+                    
+                    pdf.setFont("helvetica", "normal");
+                    pdf.setFontSize(12);
+                    
+                    const zonesCount = Object.keys(zoneSummary).length;
+                    if (zonesCount === 0) {
+                        pdf.setTextColor(100, 116, 139);
+                        pdf.text("No hay zonas registradas.", margin, yPos);
+                        yPos += lineHeight;
+                    } else {
+                        pdf.setTextColor(15, 23, 42);
+                        for (let zId in zoneSummary) {
+                            checkPageBreak(lineHeight);
+                            const z = zoneSummary[zId];
+                            if (z.total > 0) { // Solo mostrar zonas con intentos
+                                const pct = Math.round((z.made/z.total)*100);
+                                pdf.text(`• ${z.name}: ${z.made}/${z.total} (${pct}%)`, margin, yPos);
+                                yPos += lineHeight;
+                            }
+                        }
+                    }
+
+                    // Guardar archivo PDF
+                    const dateStrFile = new Date(currentSession.startTime).toISOString().split('T')[0];
+                    let filterVal = currentFilter === 'Todos' ? 'General' : currentFilter.replace(/[^a-z0-9]/gi, '_');
+                    
+                    pdf.save(`HoopTracker_Reporte_${dateStrFile}_${filterVal}.pdf`);
+                    
+                } catch (error) {
+                    console.error("Error al generar el PDF de texto", error);
+                } finally {
+                    btn.innerHTML = originalHTML;
+                    btn.classList.remove('pointer-events-none');
+                }
+            });
+
+            // Interacciones Cancha
+            document.querySelectorAll('.court-zone, .ft-zone-interactive').forEach(zone => {
+                zone.addEventListener('pointerdown', (e) => {
+                    e.preventDefault(); e.stopPropagation();
+                    if (isSheetOpen || isReadOnly) return;
+                    openShotModal(zone.id, zone.getAttribute('data-name'), parseInt(zone.getAttribute('data-pts')));
+                });
+            });
+
+            // Modos de Tiro
+            document.querySelectorAll('.mode-btn-2pt').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    pendingInput.mode2pt = e.target.dataset.mode;
+                    updateModeUI();
+                    if (pendingInput.mode2pt === 'Otro') customModeInput.focus();
+                });
+            });
+
+            document.querySelectorAll('.mode-btn-3pt').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    pendingInput.mode3pt = e.target.dataset.mode;
+                    updateModeUI();
+                    if (pendingInput.mode3pt === 'Otro') customModeInput.focus();
+                });
+            });
+
+            // Reglas Matemáticas para los botones Total/Convertidos
+            // Total [+] -> Sube total
+            document.getElementById('btn-plus-total').addEventListener('click', () => { 
+                inputTotal++; 
+                updateCountersUI(); 
+            });
+            // Total [-] -> Baja total. Si Total == Convertidos, baja convertidos.
+            document.getElementById('btn-minus-total').addEventListener('click', () => { 
+                if (inputTotal > 0) {
+                    if (inputTotal === inputMade) inputMade--; // Fuerza a bajar made para mantener made <= total
+                    inputTotal--; 
+                    updateCountersUI(); 
+                }
+            });
+            // Convertidos [+] -> Sube convertidos. Si Convertidos == Total, sube total automáticamente
+            document.getElementById('btn-plus-made').addEventListener('click', () => { 
+                if (inputMade === inputTotal) inputTotal++; // Auto-incrementa total
+                inputMade++; 
+                updateCountersUI(); 
+            });
+            // Convertidos [-] -> Sube convertidos.
+            document.getElementById('btn-minus-made').addEventListener('click', () => { 
+                if(inputMade > 0) inputMade--; 
+                updateCountersUI(); 
+            });
+
+            // Modal Actions
+            document.getElementById('btn-save-batch').addEventListener('click', processBatchSave);
+            document.getElementById('btn-cancel').addEventListener('click', closeShotModal);
+            
+            // Side Panel Actions
+            document.getElementById('btn-toggle-summary').addEventListener('click', openSidePanel);
+            document.getElementById('btn-close-side').addEventListener('click', closeSidePanel);
+            
+            // Backdrop Click handles both Modals
+            backdrop.addEventListener('click', () => {
+                if (isSheetOpen) closeShotModal();
+                closeSidePanel();
+            });
+            
+            // Filter
+            document.getElementById('shot-filter').addEventListener('change', (e) => {
+                updateHeatMap(e.target.value);
+                renderStats(e.target.value);
+            });
+        }
+
+        // Boot
+        initApp();
+    </script>
+</body>
+</html>
