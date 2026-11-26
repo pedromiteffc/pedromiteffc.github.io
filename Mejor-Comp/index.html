@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Votación Mejor Compañero</title>
+  <style>
+    :root {
+      --bg: #f4f6fa;
+      --surface: #ffffff;
+      --surface-soft: #eef2f8;
+      --primary: #0050B8;
+      --primary-hover: #003d8f;
+      --primary-light: #e8f0fe;
+      --success: #116b37;
+      --success-bg: #e6f4ec;
+      --warning: #9a5b00;
+      --warning-bg: #fef4e4;
+      --danger: #c62828;
+      --danger-bg: #fdecea;
+      --text-main: #111827;
+      --text-muted: #6b7280;
+      --border: #e5e7eb;
+      --shadow-sm: 0 2px 8px rgba(17, 24, 39, 0.05);
+      --shadow-md: 0 8px 24px rgba(17, 24, 39, 0.08);
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: var(--primary);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+    }
+
+    .brand-text h1 {
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .brand-text span {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .btn-header {
+      background: var(--surface-soft);
+      color: var(--text-main);
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-header:hover {
+      background: #e2e8f2;
+    }
+
+    .btn-header.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    /* Main Container */
+    main {
+      flex: 1;
+      width: 100%;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 24px 16px 48px;
+    }
+
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid rgba(229, 231, 235, 0.7);
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .section-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+
+    /* Stepper / Back bar */
+    .top-nav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      gap: 10px;
+    }
+
+    .btn-back {
+      background: none;
+      border: none;
+      color: var(--primary);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 0;
+    }
+
+    .badge-step {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 999px;
+    }
+
+    /* Category Grid */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+    }
+
+    .category-card {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .category-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .category-card h3 {
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .category-meta {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* Player Selection List */
+    .player-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 12px;
+    }
+
+    .player-btn {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 15px 16px;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .player-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .player-btn:disabled {
+      background: #f9fafb;
+      border-color: #eceef2;
+      cursor: not-allowed;
+      opacity: 0.72;
+    }
+
+    .player-btn-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .status-pill {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 9px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .pill-done {
+      background: var(--success-bg);
+      color: var(--success);
+    }
+
+    .pill-pending {
+      background: var(--warning-bg);
+      color: var(--warning);
+    }
+
+    .pill-vote {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    /* Buttons & Inputs */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 12px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+    }
+
+    .btn-success {
+      background: var(--success);
+      color: #fff;
+    }
+
+    .btn-success:hover {
+      background: #0d542b;
+    }
+
+    .btn-secondary {
+      background: var(--surface-soft);
+      color: var(--text-main);
+    }
+
+    .btn-secondary:hover {
+      background: #e2e8f2;
+    }
+
+    .btn-danger-soft {
+      background: var(--danger-bg);
+      color: var(--danger);
+    }
+
+    .btn-danger-soft:hover {
+      background: #fadbd8;
+    }
+
+    .btn-sm {
+      padding: 7px 11px;
+      font-size: 12px;
+      border-radius: 8px;
+    }
+
+    .btn-block {
+      width: 100%;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.15s;
+      background: #fff;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+      border-color: var(--primary);
+    }
+
+    /* Admin Controls */
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      background: var(--surface-soft);
+      padding: 5px;
+      border-radius: var(--radius-md);
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      background: transparent;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .tab-btn.active {
+      background: var(--surface);
+      color: var(--primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .add-form {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .progress-box {
+      background: var(--surface-soft);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .progress-track {
+      height: 10px;
+      background: #dce3ee;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--success);
+      border-radius: 999px;
+      transition: width 0.3s ease;
+    }
+
+    .filter-pills {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .filter-pill {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .filter-pill.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .admin-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .admin-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: #fff;
+      flex-wrap: wrap;
+    }
+
+    .admin-row-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .admin-row-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    /* Results Card */
+    .winner-banner {
+      background: linear-gradient(135deg, #0050B8 0%, #0e3efc 100%);
+      color: #fff;
+      border-radius: var(--radius-md);
+      padding: 22px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .winner-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.85;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .winner-name {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .winner-votes {
+      font-size: 14px;
+      opacity: 0.95;
+    }
+
+    .result-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      background: #fff;
+    }
+
+    .result-item.is-winner {
+      border: 2px solid var(--primary);
+      background: #f8fbff;
+    }
+
+    .result-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .result-rank-name {
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .voters-list {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .voters-list strong {
+      color: var(--text-main);
+    }
+
+    /* Modals */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(17, 24, 39, 0.55);
+      backdrop-filter: blur(3px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 50;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      width: 100%;
+      max-width: 440px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      animation: popIn 0.18s ease-out;
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .confirm-summary {
+      background: var(--surface-soft);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin: 16px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .confirm-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+    }
+
+    .confirm-row span {
+      color: var(--text-muted);
+    }
+
+    .confirm-row strong {
+      color: var(--text-main);
+      font-size: 15px;
+    }
+
+    .alert-box {
+      background: var(--warning-bg);
+      color: var(--warning);
+      font-size: 13px;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 18px;
+      line-height: 1.4;
+      font-weight: 500;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .modal-actions .btn {
+      flex: 1;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 32px 16px;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .success-screen {
+      text-align: center;
+      padding: 20px 10px;
+    }
+
+    .success-check {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--success-bg);
+      color: var(--success);
+      font-size: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      font-weight: bold;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 520px) {
+      .add-form {
+        flex-direction: column;
+      }
+      .card {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="brand" id="btn-go-home">
+        <div class="brand-icon">★</div>
+        <div class="brand-text">
+          <h1>Mejor Compañero</h1>
+          <span>Votación Oficial por Categoría</span>
+        </div>
+      </div>
+      <button type="button" class="btn-header" id="btn-toggle-admin">Panel Admin</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==================== VISTA VOTACIÓN ==================== -->
+    <section id="view-voter">
+      <!-- Paso 1: Elegir Categoría -->
+      <div id="step-category" class="card">
+        <h2 class="section-title">Elegí tu categoría</h2>
+        <p class="section-subtitle">Seleccioná la categoría en la que jugás para emitir tu voto.</p>
+        <div class="category-grid" id="voter-category-list"></div>
+      </div>
+
+      <!-- Paso 2: Elegir Quién Sos -->
+      <div id="step-voter" class="card hidden">
+        <div class="top-nav-bar">
+          <button type="button" class="btn-back" id="back-to-categories">← Cambiar categoría</button>
+          <span class="badge-step" id="badge-cat-voter"></span>
+        </div>
+        <h2 class="section-title">¿Quién sos?</h2>
+        <p class="section-subtitle">Buscá tu nombre en la lista. Cada jugador puede votar una sola vez.</p>
+        <div class="player-grid" id="voter-who-list"></div>
+      </div>
+
+      <!-- Paso 3: Elegir a Quién Votar -->
+      <div id="step-candidate" class="card hidden">
+        <div class="top-nav-bar">
+          <button type="button" class="btn-back" id="back-to-voters">← Cambiar mi nombre</button>
+          <span class="badge-step" id="badge-voter-name"></span>
+        </div>
+        <h2 class="section-title">¿A quién votás como Mejor Compañero?</h2>
+        <p class="section-subtitle">Elegí a un compañero de tu equipo. Antes de guardar vas a poder confirmar tu elección.</p>
+        <div class="player-grid" id="voter-candidate-list"></div>
+      </div>
+
+      <!-- Paso 4: Pantalla de Éxito -->
+      <div id="step-success" class="card hidden">
+        <div class="success-screen">
+          <div class="success-check">✓</div>
+          <h2 class="section-title">¡Tu voto fue registrado!</h2>
+          <p class="section-subtitle" id="success-message">
+            Gracias por participar. Tu voto ya quedó guardado y no puede modificarse.
+          </p>
+          <button type="button" class="btn btn-primary" id="btn-next-voter">Listo, siguiente compañero</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VISTA ADMIN ==================== -->
+    <section id="view-admin" class="hidden">
+      <div class="card">
+        <div class="top-nav-bar">
+          <div>
+            <h2 class="section-title" style="margin-bottom:2px;">Administración</h2>
+            <p class="section-subtitle" style="margin-bottom:0;">Gestioná los planteles, controlá quién falta votar y mirá los resultados.</p>
+          </div>
+          <button type="button" class="btn btn-secondary btn-sm" id="btn-logout-admin">Cerrar sesión</button>
+        </div>
+
+        <div class="tabs" id="admin-tabs">
+          <button type="button" class="tab-btn active" data-cat="Pre-Mini">Pre-Mini</button>
+          <button type="button" class="tab-btn" data-cat="Mini">Mini</button>
+          <button type="button" class="tab-btn" data-cat="U13">U13</button>
+        </div>
+
+        <!-- Formulario Agregar Jugador -->
+        <form class="add-form" id="form-add-player" autocomplete="off">
+          <input type="text" id="input-player-name" placeholder="Nombre y apellido del jugador..." autocomplete="off" required />
+          <button type="submit" class="btn btn-primary">Agregar jugador</button>
+        </form>
+
+        <!-- Progreso de Votación -->
+        <div class="progress-box">
+          <div class="progress-header">
+            <span id="admin-progress-text">Votaron 0 de 0 jugadores</span>
+            <span id="admin-progress-pct">0%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="admin-progress-bar" style="width: 0%;"></div>
+          </div>
+
+          <!-- Botón visible siempre que haya jugadores cargados -->
+          <div id="admin-results-cta" class="hidden" style="margin-top: 14px;">
+            <button type="button" class="btn btn-primary btn-block" id="btn-show-results">
+              📊 Ver Recuento de Votos
+            </button>
+          </div>
+        </div>
+
+        <!-- Filtros de estado -->
+        <div class="filter-pills" id="admin-filters">
+          <button type="button" class="filter-pill active" data-filter="all">Todos</button>
+          <button type="button" class="filter-pill" data-filter="pending">Faltan votar</button>
+          <button type="button" class="filter-pill" data-filter="voted">Ya votaron</button>
+        </div>
+
+        <!-- Lista de jugadores -->
+        <div class="admin-list" id="admin-player-list"></div>
+
+        <!-- Reset de categoría -->
+        <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end;">
+          <button type="button" class="btn btn-danger-soft btn-sm" id="btn-reset-category">
+            Reiniciar votos de esta categoría
+          </button>
+        </div>
+      </div>
+
+      <!-- Panel de Resultados -->
+      <div class="card hidden" id="admin-results-panel">
+        <div class="top-nav-bar">
+          <h2 class="section-title" id="results-title" style="margin-bottom:0;">Resultados</h2>
+          <button type="button" class="btn btn-secondary btn-sm" id="btn-close-results">Ocultar resultados</button>
+        </div>
+        <p class="section-subtitle" id="results-subtitle">Recuento y detalle de quién votó a cada compañero.</p>
+        <div id="results-content"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== MODAL CONFIRMACIÓN DE VOTO ==================== -->
+  <div class="modal-backdrop" id="modal-confirm">
+    <div class="modal-box">
+      <h3 class="section-title">Confirmá tu voto</h3>
+      <p class="section-subtitle" style="margin-bottom: 0;">Verificá los datos antes de finalizar:</p>
+
+      <div class="confirm-summary">
+        <div class="confirm-row">
+          <span>Categoría:</span>
+          <strong id="confirm-cat"></strong>
+        </div>
+        <div class="confirm-row">
+          <span>Tu nombre:</span>
+          <strong id="confirm-voter"></strong>
+        </div>
+        <div class="confirm-row">
+          <span>Votás como Mejor Compañero a:</span>
+          <strong id="confirm-candidate" style="color: var(--primary);"></strong>
+        </div>
+      </div>
+
+      <div class="alert-box">
+        ⚠️ Atención: Una vez que confirmes, tu voto queda registrado definitivamente y <strong>no se puede cambiar</strong>.
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary" id="btn-cancel-vote">Volver / Cambiar</button>
+        <button type="button" class="btn btn-success" id="btn-confirm-vote">Confirmar Voto</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL PIN ADMIN ==================== -->
+  <div class="modal-backdrop" id="modal-pin">
+    <div class="modal-box">
+      <h3 class="section-title">Acceso Administrador</h3>
+      <p class="section-subtitle">Ingresá el PIN del entrenador para gestionar jugadores y ver el estado de la votación.</p>
+      <form id="form-pin" autocomplete="off">
+        <input type="password" id="input-pin" placeholder="PIN (por defecto: 2026)" autocomplete="off" inputmode="numeric" required style="margin-bottom: 14px;" />
+        <p id="pin-error" class="hidden" style="color: var(--danger); font-size: 13px; margin-bottom: 12px; font-weight: 600;">
+          PIN incorrecto. Intentá nuevamente.
+        </p>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" id="btn-cancel-pin">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Ingresar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL EDITAR JUGADOR ==================== -->
+  <div class="modal-backdrop" id="modal-edit">
+    <div class="modal-box">
+      <h3 class="section-title">Modificar jugador</h3>
+      <p class="section-subtitle">Editá el nombre del jugador. Su estado de votación se mantiene intacto.</p>
+      <form id="form-edit-player" autocomplete="off">
+        <input type="text" id="input-edit-name" autocomplete="off" required style="margin-bottom: 16px;" />
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" id="btn-cancel-edit">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Guardar cambios</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Configuración
+    const ADMIN_PIN = "2026";
+    const STORAGE_KEY = "mejor_companero_data_v1";
+    const CATEGORIES = ["Pre-Mini", "Mini", "U13"];
+
+    // Estado persistente
+    let data = loadData();
+
+    // Estado de navegación
+    let currentView = "voter"; // 'voter' | 'admin'
+    let selectedCategory = null;
+    let selectedVoterId = null;
+    let selectedCandidateId = null;
+
+    let adminCategory = "Pre-Mini";
+    let adminFilter = "all"; // 'all' | 'pending' | 'voted'
+    let editingPlayerId = null;
+
+    function loadData() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          CATEGORIES.forEach(cat => {
+            if (!Array.isArray(parsed[cat])) parsed[cat] = [];
+          });
+          return parsed;
+        }
+      } catch (e) {
+        console.error("Error leyendo localStorage", e);
+      }
+      return {
+        "Pre-Mini": [],
+        "Mini": [],
+        "U13": []
+      };
+    }
+
+    function saveData() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
+
+    function generateId() {
+      return "p_" + Date.now().toString(36) + "_" + Math.random().toString(36).slice(2, 7);
+    }
+
+    function escapeHtml(str) {
+      const div = document.createElement("div");
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    // ==================== NAVEGACIÓN PRINCIPAL ====================
+    const viewVoter = document.getElementById("view-voter");
+    const viewAdmin = document.getElementById("view-admin");
+    const btnToggleAdmin = document.getElementById("btn-toggle-admin");
+
+    function switchView(view) {
+      currentView = view;
+      if (view === "voter") {
+        viewVoter.classList.remove("hidden");
+        viewAdmin.classList.add("hidden");
+        btnToggleAdmin.textContent = "Panel Admin";
+        btnToggleAdmin.classList.remove("active");
+        resetVoterFlow();
+      } else {
+        viewVoter.classList.add("hidden");
+        viewAdmin.classList.remove("hidden");
+        btnToggleAdmin.textContent = "Volver a Votación";
+        btnToggleAdmin.classList.add("active");
+        document.getElementById("admin-results-panel").classList.add("hidden");
+        renderAdmin();
+      }
+    }
+
+    document.getElementById("btn-go-home").addEventListener("click", () => switchView("voter"));
+
+    btnToggleAdmin.addEventListener("click", () => {
+      if (currentView === "admin") {
+        switchView("voter");
+        return;
+      }
+      if (sessionStorage.getItem("mc_admin_auth") === "1") {
+        switchView("admin");
+      } else {
+        document.getElementById("input-pin").value = "";
+        document.getElementById("pin-error").classList.add("hidden");
+        document.getElementById("modal-pin").classList.add("open");
+        setTimeout(() => document.getElementById("input-pin").focus(), 50);
+      }
+    });
+
+    // Autenticación PIN Admin
+    document.getElementById("form-pin").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const val = document.getElementById("input-pin").value.trim();
+      if (val === ADMIN_PIN) {
+        sessionStorage.setItem("mc_admin_auth", "1");
+        document.getElementById("modal-pin").classList.remove("open");
+        switchView("admin");
+      } else {
+        document.getElementById("pin-error").classList.remove("hidden");
+      }
+    });
+
+    document.getElementById("btn-cancel-pin").addEventListener("click", () => {
+      document.getElementById("modal-pin").classList.remove("open");
+    });
+
+    document.getElementById("btn-logout-admin").addEventListener("click", () => {
+      sessionStorage.removeItem("mc_admin_auth");
+      switchView("voter");
+    });
+
+    // ==================== FLUJO DE VOTACIÓN ====================
+    const stepCategory = document.getElementById("step-category");
+    const stepVoter = document.getElementById("step-voter");
+    const stepCandidate = document.getElementById("step-candidate");
+    const stepSuccess = document.getElementById("step-success");
+
+    function showVoterStep(stepEl) {
+      [stepCategory, stepVoter, stepCandidate, stepSuccess].forEach(el => el.classList.add("hidden"));
+      stepEl.classList.remove("hidden");
+    }
+
+    function resetVoterFlow() {
+      selectedCategory = null;
+      selectedVoterId = null;
+      selectedCandidateId = null;
+      renderCategoryCards();
+      showVoterStep(stepCategory);
+    }
+
+    function renderCategoryCards() {
+      const container = document.getElementById("voter-category-list");
+      container.innerHTML = "";
+
+      CATEGORIES.forEach(cat => {
+        const players = data[cat];
+        const total = players.length;
+        const voted = players.filter(p => p.votedFor !== null).length;
+
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "category-card";
+        btn.innerHTML = `
+          <h3>${escapeHtml(cat)}</h3>
+          <span class="category-meta">${total === 0 ? "Sin jugadores cargados" : `${voted} de ${total} ya votaron`}</span>
+        `;
+        btn.addEventListener("click", () => selectCategory(cat));
+        container.appendChild(btn);
+      });
+    }
+
+    function selectCategory(cat) {
+      selectedCategory = cat;
+      selectedVoterId = null;
+      selectedCandidateId = null;
+      document.getElementById("badge-cat-voter").textContent = cat;
+      renderVoterSelection();
+      showVoterStep(stepVoter);
+    }
+
+    function renderVoterSelection() {
+      const container = document.getElementById("voter-who-list");
+      const players = data[selectedCategory];
+
+      if (players.length < 2) {
+        container.innerHTML = `<div class="empty-state" style="grid-column:1/-1;">
+          Todavía no hay suficientes jugadores cargados en <strong>${escapeHtml(selectedCategory)}</strong> para iniciar la votación (se necesitan al menos 2).
+        </div>`;
+        return;
+      }
+
+      container.innerHTML = "";
+      const sorted = [...players].sort((a, b) => a.name.localeCompare(b.name, "es"));
+
+      sorted.forEach(player => {
+        const alreadyVoted = player.votedFor !== null;
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "player-btn";
+        btn.disabled = alreadyVoted;
+        btn.innerHTML = `
+          <span class="player-btn-name">${escapeHtml(player.name)}</span>
+          <span class="status-pill ${alreadyVoted ? "pill-done" : "pill-vote"}">
+            ${alreadyVoted ? "Ya votó ✓" : "Votar →"}
+          </span>
+        `;
+        if (!alreadyVoted) {
+          btn.addEventListener("click", () => selectVoter(player.id));
+        }
+        container.appendChild(btn);
+      });
+    }
+
+    function selectVoter(voterId) {
+      selectedVoterId = voterId;
+      const voter = data[selectedCategory].find(p => p.id === voterId);
+      if (!voter || voter.votedFor !== null) return;
+
+      document.getElementById("badge-voter-name").textContent = `${selectedCategory} • ${voter.name}`;
+      renderCandidateSelection();
+      showVoterStep(stepCandidate);
+    }
+
+    function renderCandidateSelection() {
+      const container = document.getElementById("voter-candidate-list");
+      const candidates = data[selectedCategory]
+        .filter(p => p.id !== selectedVoterId)
+        .sort((a, b) => a.name.localeCompare(b.name, "es"));
+
+      container.innerHTML = "";
+      candidates.forEach(cand => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "player-btn";
+        btn.innerHTML = `
+          <span class="player-btn-name">${escapeHtml(cand.name)}</span>
+          <span class="status-pill pill-vote">Elegir</span>
+        `;
+        btn.addEventListener("click", () => openConfirmModal(cand.id));
+        container.appendChild(btn);
+      });
+    }
+
+    function openConfirmModal(candidateId) {
+      selectedCandidateId = candidateId;
+      const voter = data[selectedCategory].find(p => p.id === selectedVoterId);
+      const candidate = data[selectedCategory].find(p => p.id === selectedCandidateId);
+      if (!voter || !candidate) return;
+
+      document.getElementById("confirm-cat").textContent = selectedCategory;
+      document.getElementById("confirm-voter").textContent = voter.name;
+      document.getElementById("confirm-candidate").textContent = candidate.name;
+      document.getElementById("modal-confirm").classList.add("open");
+    }
+
+    document.getElementById("btn-cancel-vote").addEventListener("click", () => {
+      document.getElementById("modal-confirm").classList.remove("open");
+      selectedCandidateId = null;
+    });
+
+    document.getElementById("btn-confirm-vote").addEventListener("click", () => {
+      const players = data[selectedCategory];
+      const voter = players.find(p => p.id === selectedVoterId);
+      const candidate = players.find(p => p.id === selectedCandidateId);
+
+      // Verificación estricta de voto único e inmodificable
+      if (!voter || !candidate || voter.votedFor !== null) {
+        document.getElementById("modal-confirm").classList.remove("open");
+        resetVoterFlow();
+        return;
+      }
+
+      voter.votedFor = candidate.id;
+      saveData();
+
+      document.getElementById("modal-confirm").classList.remove("open");
+      document.getElementById("success-message").textContent =
+        `¡Gracias, ${voter.name}! Tu voto ya quedó registrado y no puede modificarse.`;
+      showVoterStep(stepSuccess);
+    });
+
+    document.getElementById("back-to-categories").addEventListener("click", resetVoterFlow);
+    document.getElementById("back-to-voters").addEventListener("click", () => {
+      selectedVoterId = null;
+      renderVoterSelection();
+      showVoterStep(stepVoter);
+    });
+    document.getElementById("btn-next-voter").addEventListener("click", () => {
+      selectedVoterId = null;
+      selectedCandidateId = null;
+      renderVoterSelection();
+      showVoterStep(stepVoter);
+    });
+
+    // ==================== PANEL ADMINISTRADOR ====================
+    document.getElementById("admin-tabs").addEventListener("click", (e) => {
+      const btn = e.target.closest(".tab-btn");
+      if (!btn) return;
+      adminCategory = btn.dataset.cat;
+      document.querySelectorAll(".tab-btn").forEach(b => b.classList.toggle("active", b === btn));
+      document.getElementById("admin-results-panel").classList.add("hidden");
+      renderAdmin();
+    });
+
+    document.getElementById("admin-filters").addEventListener("click", (e) => {
+      const btn = e.target.closest(".filter-pill");
+      if (!btn) return;
+      adminFilter = btn.dataset.filter;
+      document.querySelectorAll(".filter-pill").forEach(b => b.classList.toggle("active", b === btn));
+      renderAdminList();
+    });
+
+    // Agregar jugador
+    document.getElementById("form-add-player").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const input = document.getElementById("input-player-name");
+      const name = input.value.trim();
+      if (!name) return;
+
+      const exists = data[adminCategory].some(p => p.name.toLowerCase() === name.toLowerCase());
+      if (exists) {
+        alert("Ya existe un jugador con ese nombre en " + adminCategory + ".");
+        return;
+      }
+
+      data[adminCategory].push({
+        id: generateId(),
+        name: name,
+        votedFor: null
+      });
+      saveData();
+      input.value = "";
+      document.getElementById("admin-results-panel").classList.add("hidden");
+      renderAdmin();
+    });
+
+    function renderAdmin() {
+      const players = data[adminCategory];
+      const total = players.length;
+      const votedCount = players.filter(p => p.votedFor !== null).length;
+      const pct = total === 0 ? 0 : Math.round((votedCount / total) * 100);
+
+      document.getElementById("admin-progress-text").textContent =
+        `Votaron ${votedCount} de ${total} jugadores`;
+      document.getElementById("admin-progress-pct").textContent = `${pct}%`;
+      document.getElementById("admin-progress-bar").style.width = `${pct}%`;
+
+      // Mostrar el botón siempre que haya jugadores cargados en la categoría
+      const ctaBox = document.getElementById("admin-results-cta");
+      const btnResults = document.getElementById("btn-show-results");
+
+      if (total > 0) {
+        ctaBox.classList.remove("hidden");
+        if (total >= 2 && votedCount === total) {
+          btnResults.className = "btn btn-success btn-block";
+          btnResults.textContent = "🏆 ¡Votaron todos! Ver Recuento de Votos";
+        } else {
+          btnResults.className = "btn btn-primary btn-block";
+          btnResults.textContent = `📊 Ver Recuento de Votos (${votedCount} de ${total})`;
+        }
+      } else {
+        ctaBox.classList.add("hidden");
+        document.getElementById("admin-results-panel").classList.add("hidden");
+      }
+
+      renderAdminList();
+    }
+
+    function renderAdminList() {
+      const container = document.getElementById("admin-player-list");
+      let players = [...data[adminCategory]].sort((a, b) => a.name.localeCompare(b.name, "es"));
+
+      if (adminFilter === "pending") {
+        players = players.filter(p => p.votedFor === null);
+      } else if (adminFilter === "voted") {
+        players = players.filter(p => p.votedFor !== null);
+      }
+
+      if (players.length === 0) {
+        container.innerHTML = `<div class="empty-state">No hay jugadores para mostrar en esta vista.</div>`;
+        return;
+      }
+
+      container.innerHTML = "";
+      players.forEach(player => {
+        const hasVoted = player.votedFor !== null;
+        const row = document.createElement("div");
+        row.className = "admin-row";
+        row.innerHTML = `
+          <div class="admin-row-info">
+            <strong style="font-size: 15px;">${escapeHtml(player.name)}</strong>
+            <span class="status-pill ${hasVoted ? "pill-done" : "pill-pending"}">
+              ${hasVoted ? "✅ Ya votó" : "⏳ Falta votar"}
+            </span>
+          </div>
+          <div class="admin-row-actions">
+            <button type="button" class="btn btn-secondary btn-sm btn-edit" data-id="${player.id}">Modificar</button>
+            <button type="button" class="btn btn-danger-soft btn-sm btn-delete" data-id="${player.id}">Eliminar</button>
+          </div>
+        `;
+        container.appendChild(row);
+      });
+    }
+
+    // Delegación Editar / Eliminar en Admin
+    document.getElementById("admin-player-list").addEventListener("click", (e) => {
+      const editBtn = e.target.closest(".btn-edit");
+      const delBtn = e.target.closest(".btn-delete");
+
+      if (editBtn) {
+        const id = editBtn.dataset.id;
+        const player = data[adminCategory].find(p => p.id === id);
+        if (!player) return;
+        editingPlayerId = id;
+        document.getElementById("input-edit-name").value = player.name;
+        document.getElementById("modal-edit").classList.add("open");
+        setTimeout(() => document.getElementById("input-edit-name").focus(), 50);
+      }
+
+      if (delBtn) {
+        const id = delBtn.dataset.id;
+        const player = data[adminCategory].find(p => p.id === id);
+        if (!player) return;
+        if (!confirm(`¿Seguro que querés eliminar a "${player.name}" de ${adminCategory}?`)) return;
+
+        data[adminCategory] = data[adminCategory]
+          .filter(p => p.id !== id)
+          .map(p => (p.votedFor === id ? { ...p, votedFor: null } : p));
+
+        saveData();
+        document.getElementById("admin-results-panel").classList.add("hidden");
+        renderAdmin();
+      }
+    });
+
+    // Guardar edición
+    document.getElementById("form-edit-player").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const newName = document.getElementById("input-edit-name").value.trim();
+      if (!newName || !editingPlayerId) return;
+
+      const player = data[adminCategory].find(p => p.id === editingPlayerId);
+      if (player) {
+        player.name = newName;
+        saveData();
+      }
+      editingPlayerId = null;
+      document.getElementById("modal-edit").classList.remove("open");
+      document.getElementById("admin-results-panel").classList.add("hidden");
+      renderAdmin();
+    });
+
+    document.getElementById("btn-cancel-edit").addEventListener("click", () => {
+      editingPlayerId = null;
+      document.getElementById("modal-edit").classList.remove("open");
+    });
+
+    // Reiniciar votos de la categoría
+    document.getElementById("btn-reset-category").addEventListener("click", () => {
+      if (data[adminCategory].length === 0) return;
+      if (!confirm(`¿Reiniciar TODOS los votos de ${adminCategory}? Los jugadores seguirán cargados, pero deberán votar de nuevo.`)) return;
+
+      data[adminCategory].forEach(p => { p.votedFor = null; });
+      saveData();
+      document.getElementById("admin-results-panel").classList.add("hidden");
+      renderAdmin();
+    });
+
+    // ==================== RECUENTO DE VOTOS Y DETALLE ====================
+    document.getElementById("btn-show-results").addEventListener("click", () => {
+      const players = data[adminCategory];
+      const total = players.length;
+      const votedCount = players.filter(p => p.votedFor !== null).length;
+      const isComplete = total >= 2 && votedCount === total;
+
+      const resultsPanel = document.getElementById("admin-results-panel");
+      const resultsContent = document.getElementById("results-content");
+      document.getElementById("results-title").textContent = `Recuento de Votos • ${adminCategory}`;
+      document.getElementById("results-subtitle").textContent = isComplete
+        ? `Recuento definitivo (${votedCount} de ${total} votos emitidos) y detalle de quién votó a cada compañero.`
+        : `Recuento parcial (${votedCount} de ${total} votos emitidos hasta el momento) y detalle de quién votó a cada compañero.`;
+
+      const tally = players.map(candidate => {
+        const voters = players
+          .filter(voter => voter.votedFor === candidate.id)
+          .map(voter => voter.name)
+          .sort((a, b) => a.localeCompare(b, "es"));
+
+        return {
+          id: candidate.id,
+          name: candidate.name,
+          count: voters.length,
+          voters: voters
+        };
+      });
+
+      tally.sort((a, b) => b.count - a.count || a.name.localeCompare(b.name, "es"));
+
+      const maxVotes = tally.length > 0 ? tally[0].count : 0;
+      const winners = tally.filter(item => item.count === maxVotes && maxVotes > 0);
+
+      let html = "";
+      if (winners.length === 1) {
+        const label = isComplete
+          ? `🏆 Mejor Compañero • ${escapeHtml(adminCategory)}`
+          : `🏆 Liderando parcialmente • ${escapeHtml(adminCategory)}`;
+        html += `
+          <div class="winner-banner">
+            <div class="winner-label">${label}</div>
+            <div class="winner-name">${escapeHtml(winners[0].name)}</div>
+            <div class="winner-votes">${winners[0].count} ${winners[0].count === 1 ? "voto" : "votos"}</div>
+          </div>
+        `;
+      } else if (winners.length > 1) {
+        const names = winners.map(w => escapeHtml(w.name)).join(" & ");
+        const label = isComplete
+          ? `🏆 Empate en el 1.° Puesto • ${escapeHtml(adminCategory)}`
+          : `🏆 Empate parcial en el 1.° Puesto • ${escapeHtml(adminCategory)}`;
+        html += `
+          <div class="winner-banner">
+            <div class="winner-label">${label}</div>
+            <div class="winner-name">${names}</div>
+            <div class="winner-votes">${maxVotes} ${maxVotes === 1 ? "voto" : "votos"} cada uno</div>
+          </div>
+        `;
+      }
+
+      tally.forEach((item, index) => {
+        const isWinner = item.count === maxVotes && maxVotes > 0;
+        const votersText = item.voters.length > 0
+          ? item.voters.map(v => escapeHtml(v)).join(", ")
+          : "Ningún voto recibido";
+
+        html += `
+          <div class="result-item ${isWinner ? "is-winner" : ""}">
+            <div class="result-item-header">
+              <span class="result-rank-name">${index + 1}. ${escapeHtml(item.name)}</span>
+              <span class="status-pill ${isWinner ? "pill-done" : "pill-vote"}">
+                ${item.count} ${item.count === 1 ? "voto" : "votos"}
+              </span>
+            </div>
+            <div class="voters-list">
+              <strong>Lo votaron:</strong> ${votersText}
+            </div>
+          </div>
+        `;
+      });
+
+      resultsContent.innerHTML = html;
+      resultsPanel.classList.remove("hidden");
+      resultsPanel.scrollIntoView({ behavior: "smooth" });
+    });
+
+    document.getElementById("btn-close-results").addEventListener("click", () => {
+      document.getElementById("admin-results-panel").classList.add("hidden");
+    });
+
+    // Inicializar
+    resetVoterFlow();
+  </script>
+</body>
+</html>
